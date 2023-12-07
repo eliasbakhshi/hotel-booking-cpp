@@ -361,3 +361,21 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+
+
+# Build results icecream
+hotel-booking-cpp/[Dd]ebug/
+hotel-booking-cpp/[Dd]ebugPublic/
+hotel-booking-cpp/[Rr]elease/
+hotel-booking-cpp/[Rr]eleases/
+hotel-booking-cpp/x64/
+hotel-booking-cpp/x86/
+hotel-booking-cpp/[Ww][Ii][Nn]32/
+hotel-booking-cpp/[Aa][Rr][Mm]/
+hotel-booking-cpp/[Aa][Rr][Mm]64/
+hotel-booking-cpp/bld/
+hotel-booking-cpp/[Bb]in/
+hotel-booking-cpp/[Oo]bj/
+hotel-booking-cpp/[Ll]og/
+hotel-booking-cpp/[Ll]ogs/
