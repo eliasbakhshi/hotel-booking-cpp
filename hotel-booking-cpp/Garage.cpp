@@ -8,10 +8,10 @@ void Garage::setPlaceNum(int placeNum) {
 	this->placeNum = placeNum;
 }
 
-int Garage::getFloor() {
+int Hotel::getFloor() {
 	return this->floor;
 }
 
-void Garage::setFloor(int floor) {
+void Hotel::setFloor(int floor) {
 	this->floor = floor;
 }
