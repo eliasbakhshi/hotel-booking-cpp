@@ -4,6 +4,7 @@
 class Hotel {
 private:
 
+
 };
 
 #endif
