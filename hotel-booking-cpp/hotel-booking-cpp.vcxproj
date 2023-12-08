@@ -131,11 +131,14 @@
     <ClCompile Include="Guest.cpp" />
     <ClCompile Include="Hotel.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Room.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Garage.h" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="Hotel.h" />
+    <ClInclude Include="Headers.h" />
+    <ClInclude Include="Room.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
