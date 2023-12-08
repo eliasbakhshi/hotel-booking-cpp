@@ -2,6 +2,7 @@
 #define HOTEL_H
 
 class Hotel {
+private:
 
 };
 
