@@ -136,6 +136,7 @@
     <ClInclude Include="Garage.h" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="Hotel.h" />
+    <ClInclude Include="Headers.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
