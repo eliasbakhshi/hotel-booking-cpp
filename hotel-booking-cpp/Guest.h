@@ -32,7 +32,7 @@ public:
 	int getOutDate();
 	void setOutDate(int newOutDate);
 
-	bool editGuest(int id, string firstName, string lastName = "", string email, int phone = 0);
+	bool editGuest(int id, string firstName, string lastName = "", string email = "", int phone = 0);
 	bool removeGuest(int id);
 
 	bool createReservation(string bookingNum = "", string roomNum = "", int floorNum = 0, int inDate = 0, int outDate = 0);
