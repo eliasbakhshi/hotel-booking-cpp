@@ -1,9 +1,13 @@
 #pragma once
 class Guest {
 	string firstName, lastName, email, bookingNum, roomNum;
-	int phone, floorNum, inDate, outDate;
+	int id, phone, floorNum, inDate, outDate;
 
-	Guest();
+	int getLastId(string filename);
+	void expand();
+
+public:
+	Guest(string firstName = "", string lastName = "", string email = "", int phone = 0);
 	Guest(const Guest& other);
 	~Guest();
 
@@ -28,7 +32,12 @@ class Guest {
 	int getOutDate();
 	void setOutDate(int newOutDate);
 
-	bool createBooking();
+	bool editGuest(int id, string firstName, string lastName = "", string email, int phone = 0);
+	bool removeGuest(int id);
+
+	bool createReservation(string bookingNum = "", string roomNum = "", int floorNum = 0, int inDate = 0, int outDate = 0);
+	bool editReservation(int id, string bookingNum = "", string roomNum = "", int floorNum = 0, int inDate = 0, int outDate = 0);
+	bool removeReservation(int id);
 
 
 };

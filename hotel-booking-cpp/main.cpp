@@ -10,7 +10,6 @@ void menu() {
 	cin >> yesOrNo;
 	 
 	if (yesOrNo == "Y" || yesOrNo == "y") {
-
 		exit(0);
 	}
 
