@@ -1,6 +1,10 @@
 #pragma once
 #include "ManageInputs.h"
 
+ManageInputs::ManageInputs() {}
+
+ManageInputs::~ManageInputs() {}
+
 string ManageInputs::get_string(string message, bool acceptEmptyString) {
     string theInput;
     cout << message;

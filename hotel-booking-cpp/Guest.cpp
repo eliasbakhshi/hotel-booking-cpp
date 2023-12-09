@@ -1,13 +1,18 @@
 #include "Headers.h"
 #include "Guest.h"
+#include "FileManager.h"
 
-int Guest::getLastId(string filename) {
-	return 0;
-}
+FileManager fm;
 
 void Guest::expand() {}
 
-Guest::Guest(string firstName, string lastName, string email, int phone) {}
+Guest::Guest(string email, string lastName, string firstName, int phone) {
+	this->id = fm.getLastId("guests.txt");
+	this->email = email;
+	this->lastName = lastName;
+	this->firstName = firstName;
+	this->phone = phone;
+}
 Guest::Guest(const Guest& other) {}
 Guest::~Guest() {}
 void Guest::operator=(const Guest& other) {}
@@ -84,7 +89,7 @@ void Guest::setOutDate(int outDate) {
 	this->outDate = outDate;
 }
 
-bool Guest::editGuest(int id, string firstName, string lastName, string email, int phone) {
+bool Guest::editGuest(int id, string firstName, string email, string lastName, int phone) {
 	return false;
 }
 

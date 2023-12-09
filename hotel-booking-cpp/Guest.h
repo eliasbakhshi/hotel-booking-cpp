@@ -3,11 +3,10 @@ class Guest {
 	string firstName, lastName, email, bookingNum, roomNum;
 	int id, phone, floorNum, inDate, outDate;
 
-	int getLastId(string filename);
 	void expand();
 
 public:
-	Guest(string firstName = "", string lastName = "", string email = "", int phone = 0);
+	Guest(string email, string firstName = "", string lastName = "", int phone = 0);
 	Guest(const Guest& other);
 	~Guest();
 
@@ -32,7 +31,7 @@ public:
 	int getOutDate();
 	void setOutDate(int newOutDate);
 
-	bool editGuest(int id, string firstName, string lastName = "", string email, int phone = 0);
+	bool editGuest(int id, string firstName, string email, string lastName = "", int phone = 0);
 	bool removeGuest(int id);
 
 	bool createReservation(string bookingNum = "", string roomNum = "", int floorNum = 0, int inDate = 0, int outDate = 0);

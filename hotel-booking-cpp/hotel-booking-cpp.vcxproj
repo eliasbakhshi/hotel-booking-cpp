@@ -127,20 +127,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Garage.cpp" />
     <ClCompile Include="Guest.cpp" />
     <ClCompile Include="Hotel.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ManageInputs.cpp" />
+    <ClCompile Include="ManageString.cpp" />
     <ClCompile Include="Room.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Garage.h" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="Hotel.h" />
     <ClInclude Include="Headers.h" />
+    <ClInclude Include="ManageInputs.h" />
+    <ClInclude Include="ManageString.h" />
     <ClInclude Include="Room.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="guests.txt" />
+    <Text Include="hotels.txt" />
+    <Text Include="reservations.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
