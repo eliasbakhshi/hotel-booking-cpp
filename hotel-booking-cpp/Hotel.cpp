@@ -1,22 +1,22 @@
 #include "Hotel.h"
 
 Hotel::Hotel() {
-	this->roomNr = 0;
+	this->number = 0;
 	this->floor = 0;
 }
 
 Hotel::Hotel(int roomNr, int floor) {
-	this->roomNr = roomNr;
+	this->number = roomNr;
 	this->floor = floor;
 }
 
 Hotel::~Hotel() {
 }
 
-int Hotel::getRoom() {
-	return this->roomNr;
+int Hotel::getNumber() {
+	return this->number;
 }
 
-void Hotel::setRoom(int roomNr) {
-	this->roomNr = roomNr;
+void Hotel::setNumber(int number) {
+	this->number = number;
 }
