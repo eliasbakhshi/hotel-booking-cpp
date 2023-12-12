@@ -4,8 +4,6 @@
 
 
 class FileManager {
-	string color = "";
-
 public:
 
 	bool saveToFile(string filename, Guest &info);
