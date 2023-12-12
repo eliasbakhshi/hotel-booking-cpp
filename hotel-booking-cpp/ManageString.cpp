@@ -1,6 +1,10 @@
 #pragma once
 #include "ManageString.h"
 
+ManageString::ManageString() {}
+
+ManageString::~ManageString() {}
+
 //check if number or string
 bool ManageString::is_number(string str) {
 	if (str == "") return false;
@@ -9,6 +13,8 @@ bool ManageString::is_number(string str) {
 			return false;
 	return true;
 }
+
+
 
 // Split the string according to the character
 string* ManageString::split(string str, char ch) {

@@ -43,17 +43,15 @@ int* FileManager::countFilerows(string filename) {
 	return 0;
 }
 
-bool FileManager::saveToFile(string filename, string names[], float scores[], int length) {
+bool FileManager::saveToFile(string filename, Guest& info) {
 	ofstream of(filename);
-	string test, test2;
 	if (of.is_open()) {
-		string word;
-		for (int i = 0; i < length; i++) {
-			of << names[i] << '|' << scores[i] << endl;
-		}
+		of << info.getEmail() + '|';
 		return true;
 	}
 	return false;
 }
 
-
+int FileManager::getLastId(string filename) {
+	return 0;
+}
