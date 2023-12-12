@@ -13,6 +13,14 @@ Hotel::Hotel(int roomNr, int floor) {
 Hotel::~Hotel() {
 }
 
+int Hotel::getId() {
+	return this->id;
+}
+
+void Hotel::setId(int id) {
+	this->id = id;
+}
+
 int Hotel::getNumber() {
 	return this->number;
 }

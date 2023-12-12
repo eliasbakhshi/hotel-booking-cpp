@@ -1,5 +1,13 @@
 #include "Garage.h"
 
+int Garage::getId() {
+	return this->id;
+}
+
+void Garage::setId(int id) {
+	this->id = id;
+}
+
 int Garage::getPlaceNum() {
 	return this->placeNum;
 }

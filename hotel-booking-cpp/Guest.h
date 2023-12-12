@@ -22,6 +22,8 @@ public:
 	void setBookingNum(string newBookingNum);
 	string getRoomNum();
 	void setRoomNum(string newRoomNum);
+	int getId();
+	void setId(int id);
 	int getPhone();
 	void setPhone(int newPhone);
 	int getFloorNum();

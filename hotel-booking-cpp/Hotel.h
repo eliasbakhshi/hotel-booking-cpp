@@ -14,6 +14,9 @@ public:
 	Hotel();
 	Hotel(int roomNr, int floor);
 	virtual ~Hotel();
+
+	int getId();
+	void setId(int id);
 	int getNumber();
 	void setNumber(int roomNr);
 

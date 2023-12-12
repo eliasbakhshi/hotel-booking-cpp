@@ -57,6 +57,14 @@ void Guest::setRoomNum(string roomNum) {
 	this->roomNum = roomNum;
 }
 
+int Guest::getId() {
+	return this->id;
+}
+
+void Guest::setId(int id) {
+	this->id = id;
+}
+
 int Guest::getPhone() {
 	return phone;
 }
