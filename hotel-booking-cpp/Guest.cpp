@@ -6,14 +6,13 @@ FileManager fm;
 
 void Guest::expand() {}
 
-Guest::Guest(string email, string lastName, string firstName, int phone) {
-	this->id = fm.getLastId("guests.txt");
-	this->email = email;
-	this->lastName = lastName;
-	this->firstName = firstName;
-	this->phone = phone;
+
+Guest::Guest(string email, string firstName, string lastName, int phone) : email(email), firstName(firstName), lastName(lastName), phone(phone) {
+	//this->id = fm.getLastId("guests.txt");
 }
-Guest::Guest(const Guest& other) {}
+
+Guest::Guest(const Guest& other) : id(other.id), email(other.email), firstName(other.firstName),
+lastName(other.lastName), phone(other.phone) {}
 Guest::~Guest() {}
 void Guest::operator=(const Guest& other) {}
 

@@ -6,10 +6,11 @@
 
 
 int main() {
-	FileManager fm;
-	Guest g1("ljlökj@gmail.com");
+	FileManager fm("guests.txt");
+	Guest g1("ljgmail221.com");
 
-	fm.saveToFile("guests.txt", g1);
+	fm.insert(g1);
+	cout << fm.getLastId();
 	menu();
 
 

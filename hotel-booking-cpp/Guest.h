@@ -1,12 +1,14 @@
 #pragma once
+#include "Headers.h"
+
 class Guest {
 	string firstName, lastName, email, bookingNum, roomNum;
-	int id, phone, floorNum, inDate, outDate;
+	int id = 1, phone, floorNum, inDate, outDate;
 
 	void expand();
 
 public:
-	Guest(string email, string firstName = "", string lastName = "", int phone = 0);
+	Guest(string email = "", string firstName = "", string lastName = "", int phone = 0);
 	Guest(const Guest& other);
 	~Guest();
 

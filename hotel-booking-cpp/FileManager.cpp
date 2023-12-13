@@ -1,11 +1,35 @@
 #pragma once
 #include "FileManager.h"
 
-string* FileManager::readFile(string filename) {
+ManageString ms;
+
+FileManager::FileManager(string filename) {
+	this->filename = filename;
+}
+
+FileManager::~FileManager() {}
+
+
+
+bool FileManager::insert(Guest& info, string filename) {
+	if (filename != "")
+		this->filename = filename;
+	ofstream of(this->filename, ios::app);
+	if (of.is_open()) {
+		//of.seekp(-1, ios::end);
+		of << '\n' << this->getLastId() + 1 << '|' << info.getFirstName() << '|' << info.getLastName() << '|' << info.getPhone();
+		return true;
+	}
+	return false;
+}
+
+string* FileManager::select(string filename) {
+	if (filename != "")
+		this->filename = filename;
 	int rowCount = 0;
 	string rowContent;
 
-	ifstream inStream(filename);
+	ifstream inStream(this->filename);
 	if (inStream.is_open()) {
 		while (getline(inStream, rowContent)) { // Get the amount of rows.
 			if (!rowContent.empty()) {
@@ -24,34 +48,48 @@ string* FileManager::readFile(string filename) {
 	} else {
 		string* message = new string[1]{ "Could not read the file." };
 		return message;
-
 	}
 }
 
-int* FileManager::countFilerows(string filename) {
+bool FileManager::update(Guest& info, string filename) {
+	if (filename != "")
+		this->filename = filename;
+	return false;
+}
+
+bool FileManager::remove(int id, string filename) {
+	if (filename != "")
+		this->filename = filename;
+	return false;
+}
+
+int FileManager::countRows(string filename) {
+	if (filename != "")
+		this->filename = filename;
 	int* rowNums = new int(0);
 	string tempInput;
-	ifstream theFile(filename);
+	ifstream theFile(this->filename);
 	if (theFile.is_open()) {
 		while (getline(theFile, tempInput)) {
 			if (!tempInput.empty())
 				*rowNums = *rowNums + 1;
 		}
 		theFile.close();
-		return rowNums;
+		return *rowNums;
 	}
 	return 0;
 }
-
-bool FileManager::saveToFile(string filename, Guest& info) {
-	ofstream of(filename);
-	if (of.is_open()) {
-		of << info.getEmail() + '|';
-		return true;
-	}
-	return false;
-}
-
 int FileManager::getLastId(string filename) {
+	if (filename != "")
+		this->filename = filename;
+	string tempInput;
+	string* tempList;
+	ifstream theFile(this->filename);
+	if (theFile.is_open()) {
+		while (getline(theFile, tempInput)){}
+		tempList = ms.split(tempInput, '|');
+		theFile.close();
+		return stoi(tempList[0]);
+	}
 	return 0;
 }
