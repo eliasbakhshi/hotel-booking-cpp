@@ -8,5 +8,7 @@ protected:
 public:
 	ManageString();
 	~ManageString();
-	string* split(string str, char ch = ' ');
+	//vector<string> split(string str, char ch = ' ');
+	vector<string> split(string str, string seperator);
+
 };

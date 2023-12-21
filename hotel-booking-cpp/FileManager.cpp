@@ -16,39 +16,34 @@ bool FileManager::insert(Guest& info, string filename) {
 		this->filename = filename;
 	ofstream of(this->filename, ios::app);
 	if (of.is_open()) {
-		//of.seekp(-1, ios::end);
 		of << '\n' << this->getLastId() + 1 << '|' << info.getFirstName() << '|' << info.getLastName() << '|' << info.getPhone();
 		return true;
 	}
 	return false;
 }
 
-string* FileManager::select(string filename) {
+vector<string> FileManager::select(int id, string filename) {
 	if (filename != "")
 		this->filename = filename;
-	int rowCount = 0;
 	string rowContent;
 
+	vector<string> tempArray;
 	ifstream inStream(this->filename);
 	if (inStream.is_open()) {
 		while (getline(inStream, rowContent)) { // Get the amount of rows.
 			if (!rowContent.empty()) {
-				rowCount++;
+				if (id != 0) {
+					tempArray.push_back(rowContent);
+				} else { // the the row with the given id
+					//ms.split(rowContent);
+				}
 			}
 		}
-		inStream.clear();
-		inStream.seekg(0, ios_base::beg);
-
-		string* tempArray = new string[rowCount];
-		for (int i = 0; i < rowCount; i++) {
-			getline(inStream, tempArray[i]);
-		}
 		inStream.close();
-		return tempArray;
 	} else {
-		string* message = new string[1]{ "Could not read the file." };
-		return message;
+		tempArray.push_back("Could not read the file.");
 	}
+	return tempArray;
 }
 
 bool FileManager::update(Guest& info, string filename) {
@@ -60,22 +55,54 @@ bool FileManager::update(Guest& info, string filename) {
 bool FileManager::remove(int id, string filename) {
 	if (filename != "")
 		this->filename = filename;
-	return false;
+	// Get lines as a vector
+	vector<string> lines;
+	string tempInput;
+	bool deleted = false;
+	ifstream iFile(this->filename);
+	if (iFile.is_open()) {
+		while (getline(iFile, tempInput)) {
+			if (!tempInput.empty()) {
+				lines.push_back(tempInput);
+			}
+		}
+		iFile.close();
+	}
+	// Replace the info back but with out the row that we wanted
+	ofstream oFile(this->filename);
+	if (oFile.is_open()) {
+		vector<string> cols;
+		for (int i = 0; i < lines.size(); i++) {
+			cols = ms.split(lines[i], "|");
+			cout << typeid((cols)[0]).name() << endl;
+			if (stoi(cols[0]) != id) {
+
+			}
+			cout << lines[i];
+		}
+	}
+
+
+
+	deleted = true;
+
+
+	return deleted;
 }
 
 int FileManager::countRows(string filename) {
 	if (filename != "")
 		this->filename = filename;
-	int* rowNums = new int(0);
+	int rowNums = 0;
 	string tempInput;
 	ifstream theFile(this->filename);
 	if (theFile.is_open()) {
 		while (getline(theFile, tempInput)) {
 			if (!tempInput.empty())
-				*rowNums = *rowNums + 1;
+				rowNums = rowNums + 1;
 		}
 		theFile.close();
-		return *rowNums;
+		return rowNums;
 	}
 	return 0;
 }
@@ -83,13 +110,14 @@ int FileManager::getLastId(string filename) {
 	if (filename != "")
 		this->filename = filename;
 	string tempInput;
-	string* tempList;
+	vector<string> tempList;
 	ifstream theFile(this->filename);
 	if (theFile.is_open()) {
-		while (getline(theFile, tempInput)){}
-		tempList = ms.split(tempInput, '|');
+		while (getline(theFile, tempInput)) {}
+		tempList = ms.split(tempInput, "|");
 		theFile.close();
-		return stoi(tempList[0]);
+		if (tempList[0] != "")
+			return stoi(tempList[0]);
 	}
 	return 0;
 }

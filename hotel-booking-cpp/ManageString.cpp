@@ -17,27 +17,17 @@ bool ManageString::is_number(string str) {
 
 
 // Split the string according to the character
-string* ManageString::split(string str, char ch) {
-	int count = 1;
-	string tempStr = "";
-	string* splited = nullptr;
-	// Count have many of char exists in the string
-	for (int i = 0; i < str.size(); i++) {
-		if (str[i] == ch) count++;
+vector<string> ManageString::split(string str, string seperator) {
+	size_t pos_start = 0, pos_end, delim_len = seperator.length();
+	string tempStr;
+	vector<string> splited;
+
+	while ((pos_end = str.find(seperator, pos_start)) != string::npos) {
+		tempStr = str.substr(pos_start, pos_end - pos_start);
+		pos_start = pos_end + delim_len;
+		splited.push_back(tempStr);
 	}
 
-	splited = new string[count];
-	if (count == 1) {
-		splited[0] = str;
-	} else {
-		int j = 0;
-		for (int i = 0; i < str.size(); i++) {
-			if (str[i] != ch) {
-				splited[j] += str[i];
-			} else {
-				j++;
-			}
-		}
-	}
+	splited.push_back(str.substr(pos_start));
 	return splited;
 }
