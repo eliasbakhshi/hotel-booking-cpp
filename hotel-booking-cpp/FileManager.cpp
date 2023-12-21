@@ -30,12 +30,16 @@ vector<string> FileManager::select(int id, string filename) {
 	vector<string> tempArray;
 	ifstream inStream(this->filename);
 	if (inStream.is_open()) {
-		while (getline(inStream, rowContent)) { // Get the amount of rows.
+		while (getline(inStream, rowContent)) {
 			if (!rowContent.empty()) {
-				if (id != 0) {
+				if (id == 0) { // Return all the rows
 					tempArray.push_back(rowContent);
 				} else { // the the row with the given id
-					//ms.split(rowContent);
+					tempArray = ms.split(rowContent, "|");
+					if (stoi(tempArray[0]) == id) {
+						inStream.close();
+						return tempArray;
+					}
 				}
 			}
 		}

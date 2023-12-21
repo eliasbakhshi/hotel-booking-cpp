@@ -8,7 +8,6 @@ protected:
 public:
 	ManageString();
 	~ManageString();
-	//vector<string> split(string str, char ch = ' ');
-	vector<string> split(string str, string seperator);
+	vector<string> split(string str, string seperator = " ");
 
 };
