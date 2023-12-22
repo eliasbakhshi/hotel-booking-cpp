@@ -19,7 +19,7 @@ int main() {
 	int id = fm.insert(g1);
 	cout << "the id. " << id << endl;
 	bool deleted = fm.remove(8);
-	bool updated = fm.update(id, g2);
+	bool updated = fm.update(13);
 	cout << deleted;
 	vector<string> test2 = fm.select(9);
 	for (int i = 0; i < test2.size(); i++) {
