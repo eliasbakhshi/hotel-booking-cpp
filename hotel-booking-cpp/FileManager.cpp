@@ -36,9 +36,9 @@ vector<string> FileManager::select(int id, string filename) {
 				if (id == 0) { // Return all the rows
 					tempArray.push_back(rowContent);
 				} else { // the the row with the given id
-					tempArray = ms.split(rowContent, "|");
-					if (stoi(tempArray[0]) == id) {
+					if (stoi(ms.split(rowContent, "|")[0]) == id) {
 						inStream.close();
+						tempArray.push_back(rowContent);
 						return tempArray;
 					}
 				}
@@ -73,7 +73,7 @@ bool FileManager::update(int id, Guest& info, string filename) {
 		for (int i = 0; i < lines.size(); i++) {
 			if (stoi(ms.split(lines[i], "|")[0]) != id) {
 				oFile << lines[i] << endl;
-			} else {
+			} else { // Write it in the file.
 				oFile << id << '|' << info.getFirstName() << '|' << info.getLastName() << '|' << info.getEmail() << '|' << info.getPhone() << endl;
 				updated = true;
 			}
@@ -110,7 +110,7 @@ bool FileManager::update(int id, string email, string firstName, string lastName
 				if (lastName == "") lastName = line[2];
 				if (email == "") email = line[3];
 				if (phone == 0) phone = stoi(line[4]);
-
+				// Write it in the file.
 				oFile << id << '|' << firstName << '|' << lastName << '|' << email << '|' << to_string(phone) << endl;
 				updated = true;
 			}

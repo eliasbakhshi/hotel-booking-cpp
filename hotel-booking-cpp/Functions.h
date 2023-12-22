@@ -4,3 +4,4 @@
 string bookingNumGenerator();
 int getInfo();
 void menu();
+void test();

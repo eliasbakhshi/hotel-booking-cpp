@@ -1,4 +1,7 @@
 #include "Functions.h"
+#include "Guest.h"
+#include "ManageInputs.h"
+#include "FileManager.h"
 
 string bookingNumGenerator() {
 	const char characters[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -115,4 +118,31 @@ void menu() {
 	else {
 		MessageBoxW(NULL, L"Please double check your input", L"Error!", MB_OK | MB_ICONERROR);
 	}
+}
+
+void test() {
+
+	FileManager fm("guests.txt");
+	ManageString ms;
+	string tt = "ölijl ök kjpoij";
+	vector<string> test = ms.split(tt, " ");
+	for (int i = 0; i < test.size(); i++) {
+		cout << test[i] << endl;
+	}
+
+	Guest g1("ljgmail221.com");
+	Guest g2("hhhggfgfgrerer.com");
+	int id = fm.insert(g1);
+	cout << "the id. " << id << endl;
+	bool deleted = fm.remove(8);
+	bool updated = fm.update(13);
+	cout << deleted;
+	vector<string> test2 = fm.select(9);
+	for (int i = 0; i < test2.size(); i++) {
+		cout << test2[i] << endl;
+	}
+
+	//cout << fm.getLastId();
+	//cout << fm.countRows();
+	//cout << fm.remove(1);
 }
