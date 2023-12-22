@@ -11,15 +11,16 @@ FileManager::~FileManager() {}
 
 
 
-bool FileManager::insert(Guest& info, string filename) {
+int FileManager::insert(Guest& info, string filename) {
 	if (filename != "")
 		this->filename = filename;
 	ofstream of(this->filename, ios::app);
 	if (of.is_open()) {
-		of << '\n' << this->getLastId() + 1 << '|' << info.getFirstName() << '|' << info.getLastName() << '|' << info.getEmail() << '|' << info.getPhone();
-		return true;
+		int id = this->getLastId() + 1;
+		of << '\n' << id << '|' << info.getFirstName() << '|' << info.getLastName() << '|' << info.getEmail() << '|' << info.getPhone();
+		return id;
 	}
-	return false;
+	return 0;
 }
 
 vector<string> FileManager::select(int id, string filename) {
@@ -50,10 +51,35 @@ vector<string> FileManager::select(int id, string filename) {
 	return tempArray;
 }
 
-bool FileManager::update(Guest& info, string filename) {
+bool FileManager::update(int id, Guest& info, string filename) {
 	if (filename != "")
 		this->filename = filename;
-	return false;
+	// Get lines as a vector
+	vector<string> lines;
+	string tempInput;
+	bool updated = false;
+	ifstream iFile(this->filename);
+	if (iFile.is_open()) {
+		while (getline(iFile, tempInput)) {
+			if (!tempInput.empty()) {
+				lines.push_back(tempInput);
+			}
+		}
+		iFile.close();
+	}
+	// Replace the info back but with out the row that we wanted
+	ofstream oFile(this->filename);
+	if (oFile.is_open()) {
+		for (int i = 0; i < lines.size(); i++) {
+			if (stoi(ms.split(lines[i], "|")[0]) != id) {
+				oFile << lines[i] << endl;
+			} else {
+				oFile << id << '|' << info.getFirstName() << '|' << info.getLastName() << '|' << info.getEmail() << '|' << info.getPhone() << endl;
+				updated = true;
+			}
+		}
+	}
+	return updated;
 }
 
 bool FileManager::remove(int id, string filename) {
