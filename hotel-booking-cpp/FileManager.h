@@ -13,7 +13,7 @@ public:
 	vector<string> select(int id = 0, string filename = "");
 	bool update(Guest& info, string filename = "");
 	bool remove(int id, string filename = "");
-	int countRows(string filename = "");
+	//int countRows(string filename = "");
 	int getLastId(string filename = "");
 };
 

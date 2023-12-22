@@ -11,12 +11,14 @@ int main() {
 	string tt = "ölijl ök kjpoij";
 	vector<string> test = ms.split(tt, " ");
 	for (int i = 0; i < test.size(); i++) {
-	cout << test[i] << endl;
+		cout << test[i] << endl;
 	}
 
 	Guest g1("ljgmail221.com");
 	fm.insert(g1);
-	vector<string> test2 = fm.select(7);
+	bool deleted = fm.remove(8);
+	cout << deleted;
+	vector<string> test2 = fm.select(9);
 	for (int i = 0; i < test2.size(); i++) {
 		cout << test2[i] << endl;
 	}
