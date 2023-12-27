@@ -1,5 +1,8 @@
 #pragma once
 #include "Headers.h"
+#include "Guest.h"
+#include "Hotel.h"
+#include "Booking.h"
 
 
 class ManageString {
@@ -9,5 +12,7 @@ public:
 	ManageString();
 	~ManageString();
 	vector<string> split(string str, string seperator = " ");
+	//string guestToS(Guest& info);
+	//string hotelToS(Booking& info);
 
 };

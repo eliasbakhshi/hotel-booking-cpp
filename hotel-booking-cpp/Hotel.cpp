@@ -1,12 +1,12 @@
 #include "Hotel.h"
 
 Hotel::Hotel() {
-	this->number = 0;
+	this->phone = "";
 	this->floor = 0;
 }
 
 Hotel::Hotel(int roomNr, int floor) {
-	this->number = roomNr;
+	this->phone = roomNr;
 	this->floor = floor;
 }
 
@@ -21,10 +21,14 @@ void Hotel::setId(int id) {
 	this->id = id;
 }
 
-int Hotel::getNumber() {
-	return this->number;
+string Hotel::getPhone() {
+	return this->phone;
 }
 
-void Hotel::setNumber(int number) {
-	this->number = number;
+void Hotel::setPhone(string number) {
+	this->phone = number;
+}
+
+string Hotel::toString() {
+	return string();
 }

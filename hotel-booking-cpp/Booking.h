@@ -1,19 +1,19 @@
 #pragma once
 #include "Headers.h";
+#include "Building.h";
 
-class Booking {
-	string roomNum;
-	int id = 1, floorNum, inDate, outDate;
+class Booking: public Building {
+	int id = 1, inDate, outDate;
 
 public:
 	Booking();
 	~Booking();
-	string getRoomNum();
-	void setRoomNum(string newRoomNum);
+	//string getRoomNum();
+	//void setRoomNum(string newRoomNum);
 	int getId();
 	void setId(int id);
-	int getFloorNum();
-	void setFloorNum(int newFloorNum);
+	//int getFloorNum();
+	//void setFloorNum(int newFloorNum);
 	int getInDate();
 	void setInDate(int newInDate);
 	int getOutDate();

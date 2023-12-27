@@ -23,3 +23,12 @@ int Hotel::getFloor() {
 void Hotel::setFloor(int floor) {
 	this->floor = floor;
 }
+
+string Hotel::getName() {
+	return this->name;
+}
+
+void Hotel::setName(string name) {
+	this->name = name;
+}
+

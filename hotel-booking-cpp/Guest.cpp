@@ -7,7 +7,7 @@ FileManager fm;
 void Guest::expand() {}
 
 
-Guest::Guest(string email, string firstName, string lastName, int phone) : email(email), firstName(firstName), lastName(lastName), phone(phone) {
+Guest::Guest(string email, string firstName, string lastName, string phone) : email(email), firstName(firstName), lastName(lastName), phone(phone) {
 	//this->id = fm.getLastId("guests.txt");
 }
 
@@ -56,7 +56,7 @@ void Guest::setPhone(string phone) {
 	this->phone = phone;
 }
 
-bool Guest::editGuest(int id, string firstName, string email, string lastName, int phone) {
+bool Guest::editGuest(int id, string firstName, string email, string lastName, string phone) {
 	return false;
 }
 

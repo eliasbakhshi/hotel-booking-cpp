@@ -23,7 +23,7 @@ int getInfo() {
 	string firstName;
 	string lastName;
 	string mailAddr;
-	int phoneNum;
+	string phoneNum;
 	string bookingNum = bookingNumGenerator();
 
 	cout << "First name: "; cin >> firstName;
@@ -38,8 +38,8 @@ int getInfo() {
 	cout << "\nPhone number: "; cin >> phoneNum;
 	guest.setPhone(phoneNum);
 
-	guest.setBookingNum(bookingNum);
-	cout << bookingNum << endl;
+	/*guest.setBookingNum(bookingNum);
+	cout << bookingNum << endl;*/
 
 	return 1;
 }
@@ -132,10 +132,10 @@ void test() {
 
 	Guest g1("ljgmail221.com");
 	Guest g2("hhhggfgfgrerer.com");
-	int id = fm.insert(g1);
+	int id = fm.insert(ms.guestToS(g1));
 	cout << "the id. " << id << endl;
 	bool deleted = fm.remove(8);
-	bool updated = fm.update(13);
+	bool updated = fm.update(13, ms.guestToS(g2));
 	cout << deleted;
 	vector<string> test2 = fm.select(9);
 	for (int i = 0; i < test2.size(); i++) {

@@ -2,13 +2,13 @@
 #include "Headers.h"
 
 class Guest {
-	string firstName, lastName, email, roomNum, phone;
+	string firstName, lastName, email, phone;
 	int id = 1;
 
 	void expand();
 
 public:
-	Guest(string email = "", string firstName = "", string lastName = "", int phone = 0);
+	Guest(string email = "", string firstName = "", string lastName = "", string phone = 0);
 	Guest(const Guest& other);
 	~Guest();
 
@@ -25,7 +25,7 @@ public:
 	string getPhone();
 	void setPhone(string newPhone);
 
-	bool editGuest(int id, string firstName, string email, string lastName = "", int phone = 0);
+	bool editGuest(int id, string firstName, string email, string lastName = "", string phone = 0);
 	bool removeGuest(int id);
 
 

@@ -31,3 +31,11 @@ vector<string> ManageString::split(string str, string seperator) {
 	splited.push_back(str.substr(pos_start));
 	return splited;
 }
+
+//string guestToS(Guest& info) {
+//	return to_string(info.getId()) + " | " + info.getFirstName() + " | " + info.getLastName() + " | " + info.getEmail() + " | " + info.getPhone();
+//}
+//
+//string hotelToS(Booking& info) {
+//	return to_string(info.getId()) + " | " + info.getRoomNum() + " | " + to_string(info.getFloorNum()) + " | " + to_string(info.getInDate()) + " | " + to_string(info.getOutDate());
+//}

@@ -3,12 +3,12 @@
 Booking::Booking() {}
 
 Booking::~Booking() {}
-
-string Booking::getRoomNum() {
-	return string();
-}
-
-void Booking::setRoomNum(string newRoomNum) {}
+//
+//string Booking::getRoomNum() {
+//	return string();
+//}
+//
+//void Booking::setRoomNum(string newRoomNum) {}
 
 int Booking::getId() {
 	return this->id;
@@ -18,21 +18,21 @@ void Booking::setId(int id) {
 	this->id = id;
 }
 
-int Booking::getFloorNum() {
-	return floorNum;
-}
-
-void Booking::setFloorNum(int floorNum) {
-	this->floorNum = floorNum;
-}
-
-string Booking::getRoomNum() {
-	return roomNum;
-}
-
-void Booking::setRoomNum(string roomNum) {
-	this->roomNum = roomNum;
-}
+//int Booking::getFloorNum() {
+//	return floorNum;
+//}
+//
+//void Booking::setFloorNum(int floorNum) {
+//	this->floorNum = floorNum;
+//}
+//
+//string Booking::getRoomNum() {
+//	return roomNum;
+//}
+//
+//void Booking::setRoomNum(string roomNum) {
+//	this->roomNum = roomNum;
+//}
 
 int Booking::getInDate() {
 	return inDate;
