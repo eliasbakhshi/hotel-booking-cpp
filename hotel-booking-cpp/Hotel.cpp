@@ -1,5 +1,8 @@
 #include "Hotel.h"
 
+FileManager fmHotel;
+ManageString msHotel;
+
 Hotel::Hotel(string name, string city, string country) {
     this->name = name;
     this->city = city;

@@ -2,6 +2,8 @@
 #define HOTEL_H
 
 #include "Headers.h"
+#include "FileManager.h"
+#include "ManageString.h"
 #include "Room.h"
 
 class Hotel {
@@ -23,6 +25,7 @@ public:
 
 	void addRoom(Room room);
 	void showRooms();
+
 
 };
 

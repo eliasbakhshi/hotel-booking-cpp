@@ -1,6 +1,7 @@
 #include "Functions.h"
 #include "Guest.h"
 #include "ManageInputs.h"
+#include "ManageString.h"
 #include "FileManager.h"
 
 string bookingNumGenerator() {
@@ -44,6 +45,17 @@ int getInfo() {
 	return 1;
 }
 
+void showHotels() {
+	FileManager fm;
+	ManageString ms;
+	fm.setFilename("hotels.txt");
+	vector<string> hotels = fm.selectAll();
+	for (int i = 0; i < hotels.size(); i++) {
+		vector<string> line = ms.split(hotels[i], "|");
+		cout << line[0] << ": " << line[1] << ", " << line[2] << ", " << line[3] << ". \n";
+	}
+}
+
 void menu() {
 	string menuOption = "";
 
@@ -70,7 +82,8 @@ void menu() {
 		if (GetUserNameA(userName, &size)) {
 			cout << "\nWELCOME " << userName << "!\n" << endl;
 		}
-		hotels[0] = "1) Grand Hotel - Stockholm, Sweden";
+		showHotels();
+		/*hotels[0] = "1) Grand Hotel - Stockholm, Sweden";
 		hotels[1] = "2) Hotel California - Zurich, Switzerland";
 		hotels[2] = "3) Four Seasons Hotel - Kuala Lumpur, Malaysia";
 		hotels[3] = "4) Boston Harbor - Boston, Massachussets, USA";
@@ -83,7 +96,7 @@ void menu() {
 
 		for (int i = 0; i < 10; i++) {
 			cout << hotels[i] << endl;
-		}
+		}*/
 		cout << "\nPlease choose the hotel of your choice: ";
 		cin >> whichHotel; cin.ignore();
 

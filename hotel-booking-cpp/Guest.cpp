@@ -1,6 +1,6 @@
 #include "Guest.h"
 
-FileManager fm;
+FileManager fmGuest;
 
 void Guest::expand() {}
 
