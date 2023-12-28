@@ -1,1 +1,10 @@
-1|Grand Hotel|Sweden|Stockholm
+1|Grand Hotel|Sweden|Stockholm|
+2|Hotel California|Switzerland|Zurich
+3|Four Seasons Hotel|Malaysia|Kuala Lumpur
+4|Boston Harbor|USA|Boston, Massachussets
+5|Espinas Palace|Iran|Tehran
+6|Burj al-Arab Jumeirah|UAE|Dubai
+7|Hilton Kyiv|Ukraine|Kyiv
+8|Four Seasons Hotel|Russia|Moscow
+9|Capella|Singapore|Singapore
+10|Aman|Japan|Tokyo

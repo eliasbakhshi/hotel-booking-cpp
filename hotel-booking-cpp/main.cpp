@@ -9,10 +9,10 @@
 
 
 int main() {
+	Guest guest;
+	menu(guest);
 
-	menu();
-
-	Hotel hotel;
+	//Hotel hotel;
 	/*FileManager fm;
 	ManageString ms;
 	fm.setFilename("hotels.txt");

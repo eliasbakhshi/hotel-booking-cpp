@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MANAGESTRING_H
+#define MANAGESTRING_H
+
 #include "Headers.h"
 #include "Guest.h"
 #include "Hotel.h"
@@ -11,7 +13,9 @@ public:
 	ManageString();
 	~ManageString();
 	vector<string> split(string str, string seperator = " ");
-	//string guestToS(Guest& info);
+	//string guestToS(const Guest& info);
 	//string hotelToS(Booking& info);
 
 };
+
+#endif

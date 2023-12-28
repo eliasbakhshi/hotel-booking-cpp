@@ -4,6 +4,9 @@
 #include "ManageString.h"
 #include "FileManager.h"
 
+bool isLoggedIn = false;
+
+
 string bookingNumGenerator() {
 	const char characters[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	const int numCharacters = 8;
@@ -18,14 +21,12 @@ string bookingNumGenerator() {
 	return randomString;
 }
 
-int getInfo() {
-	bool allGood = false;
-	Guest guest;
-	string firstName;
-	string lastName;
-	string mailAddr;
-	string phoneNum;
+void getInfo() {
+	Guest guest("", "", "", "", "");
+	string firstName, lastName, mailAddr, phoneNum;
 	string bookingNum = bookingNumGenerator();
+
+	ManageString ms;
 
 	cout << "First name: "; cin >> firstName;
 	guest.setFirstName(firstName);
@@ -39,10 +40,11 @@ int getInfo() {
 	cout << "\nPhone number: "; cin >> phoneNum;
 	guest.setPhone(phoneNum);
 
-	/*guest.setBookingNum(bookingNum);
-	cout << bookingNum << endl;*/
+	guest.setBookingNum(bookingNum);
+	cout << bookingNum << endl;
 
-	return 1;
+	/*string test = ms.guestToS(guest);
+	cout << test << endl;*/
 }
 
 void showHotels() {
@@ -52,11 +54,12 @@ void showHotels() {
 	vector<string> hotels = fm.selectAll();
 	for (int i = 0; i < hotels.size(); i++) {
 		vector<string> line = ms.split(hotels[i], "|");
-		cout << line[0] << ": " << line[1] << ", " << line[2] << ", " << line[3] << ". \n";
+		cout << line[0] << ") " << line[1] << " - " << line[2] << ", " << line[3] << "\n";
 	}
 }
 
-void menu() {
+void menu(Guest& guest) {
+	
 	string menuOption = "";
 
 	cout << "------------------------" << endl;
@@ -69,44 +72,23 @@ void menu() {
 	cout << "3) Login" << endl;
 	cout << "q) Quit" << endl;
 	cout << "--> "; cin >> menuOption; cin.ignore();
+	system("cls");
+
+	cout << "Welcome " + guest.getFirstName() << "!\n" << endl;
 
 	if (menuOption == "1") {
-		
-		string hotels[10];
+
 		int whichHotel;
 		int normalOrVip;
-		string wantsGarage = "";
-		CHAR userName[MAX_PATH];
-		DWORD size = sizeof(userName) / sizeof(userName[0]);
-
-		if (GetUserNameA(userName, &size)) {
-			cout << "\nWELCOME " << userName << "!\n" << endl;
-		}
+		
 		showHotels();
-		/*hotels[0] = "1) Grand Hotel - Stockholm, Sweden";
-		hotels[1] = "2) Hotel California - Zurich, Switzerland";
-		hotels[2] = "3) Four Seasons Hotel - Kuala Lumpur, Malaysia";
-		hotels[3] = "4) Boston Harbor - Boston, Massachussets, USA";
-		hotels[4] = "5) Espinas Palace - Tehran, Iran";
-		hotels[5] = "6) Burj al-Arab Jumeirah - Dubai, UAE";
-		hotels[6] = "7) Hilton Kyiv - Kyiv, Ukraine";
-		hotels[7] = "8) Four Seasons Hotel - Moscow, Russia";
-		hotels[8] = "9) Capella - Singapore";
-		hotels[9]  = "10) Aman - Tokyo, Japan";
-
-		for (int i = 0; i < 10; i++) {
-			cout << hotels[i] << endl;
-		}*/
 		cout << "\nPlease choose the hotel of your choice: ";
 		cin >> whichHotel; cin.ignore();
 
 		cout << "\nChoose the package of your choice: " << endl;
-		cout << "1) Normal: 22 sqm room + Breakfast included" << endl;
-		cout << "2) VIP: 43 sqm room + Breakfast and dinner included + Access to Spa and Swimming pool" << endl;
+		cout << "1) Normal: Breakfast included" << endl;
+		cout << "2) VIP: Breakfast and dinner included + Access to Spa and Swimming pool" << endl;
 		cin >> normalOrVip; cin.ignore();
-
-		cout << "\nWill you need a parking space? (Y/N) ";
-		cin >> wantsGarage; cin.ignore();
 
 		cout << "Perfect! You will be redirected to the sign-up page in no time.\nPlease be patient...";
 		Sleep(5000);
@@ -116,11 +98,26 @@ void menu() {
 	}
 
 	else if (menuOption == "2") {
-
+		getInfo();
 	}
 
 	else if (menuOption == "3") {
+		string email;
+		FileManager fm;
+		ManageString ms;
 
+		cout << "Enter you mail address: "; getline(cin, email);
+		fm.setFilename("guests.txt");
+		vector<string> guests = fm.selectAll();
+		for (int i = 0; i < guests.size(); i++) {
+			vector<string> line = ms.split(guests[i], "|");
+			if (email == line[3]) {
+				isLoggedIn = true;
+				Guest guest(line[0], line[1], line[2], line[3], line[4]);
+				system("cls");
+				menu(guest);
+			}
+		}
 	}
 
 	else if (menuOption == "q") {

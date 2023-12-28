@@ -2,7 +2,7 @@
 #include "Guest.h"
 
 string bookingNumGenerator();
-int getInfo();
+void getInfo();
 void showHotels();
-void menu();
+void menu(Guest& guest);
 void test();

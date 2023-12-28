@@ -1,1 +1,2 @@
+id|userId|roomId|spaId
 10|||ljgmail221.com|0
