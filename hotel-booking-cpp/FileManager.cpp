@@ -41,15 +41,33 @@ vector<string> FileManager::select(int id, string filename) {
 	ifstream inStream(this->filename);
 	if (inStream.is_open()) {
 		while (getline(inStream, rowContent)) {
+			if (!rowContent.empty()) {// the the row with the given id
+				if (stoi(ms.split(rowContent, "|")[0]) == id) {
+					inStream.close();
+					tempArray.push_back(rowContent);
+					return tempArray;
+				}
+			}
+		}
+		inStream.close();
+	} else {
+		tempArray.push_back("Could not read the file.");
+	}
+	return tempArray;
+}
+
+vector<string> FileManager::selectAll(int id, string filename) {
+	if (filename != "")
+		this->filename = filename;
+	string rowContent;
+
+	vector<string> tempArray;
+	ifstream inStream(this->filename);
+	if (inStream.is_open()) {
+		while (getline(inStream, rowContent)) {
 			if (!rowContent.empty()) {
 				if (id == 0) { // Return all the rows
 					tempArray.push_back(rowContent);
-				} else { // the the row with the given id
-					if (stoi(ms.split(rowContent, "|")[0]) == id) {
-						inStream.close();
-						tempArray.push_back(rowContent);
-						return tempArray;
-					}
 				}
 			}
 		}
