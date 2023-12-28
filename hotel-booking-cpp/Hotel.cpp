@@ -1,34 +1,51 @@
 #include "Hotel.h"
 
-Hotel::Hotel() {
-	this->phone = "";
-	this->floor = 0;
+Hotel::Hotel(string name, string city, string country) {
+    this->name = name;
+    this->city = city;
+    this->country = country;
 }
 
-Hotel::Hotel(int roomNr, int floor) {
-	this->phone = roomNr;
-	this->floor = floor;
+Hotel::Hotel() {
+    this->name = "";
+    this->city = "";
+    this->country = "";
 }
 
 Hotel::~Hotel() {
 }
 
-int Hotel::getId() {
-	return this->id;
+void Hotel::setName(string name) {
+    this->name = name;
 }
 
-void Hotel::setId(int id) {
-	this->id = id;
+void Hotel::setCity(string city) {
+    this->city = city;
 }
 
-string Hotel::getPhone() {
-	return this->phone;
+void Hotel::setCountry(string country) {
+    this->country = country;
 }
 
-void Hotel::setPhone(string number) {
-	this->phone = number;
+string Hotel::getName() {
+    return this->name;
 }
 
-string Hotel::toString() {
-	return string();
+string Hotel::getCity() {
+    return this->city;
+}
+
+string Hotel::getCountry() {
+    return this->country;
+}
+
+void Hotel::addRoom(Room room) {
+    rooms.push_back(room);
+}
+
+void Hotel::showRooms()  {
+    for (int i = 0; i < rooms.size(); i++) {
+        string theAvailibility = to_string(rooms[i].getIsAvailable()) = "1" ? "available" : "is not available";
+        cout << "The room number is: " + to_string(rooms[i].getRoomNum()) + " and the room is " + theAvailibility + ".\n";
+    }
 }

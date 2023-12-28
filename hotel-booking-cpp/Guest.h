@@ -1,5 +1,6 @@
 #pragma once
 #include "Headers.h"
+#include "FileManager.h"
 
 class Guest {
 	string firstName, lastName, email, phone;

@@ -24,13 +24,7 @@
     <ClCompile Include="Functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Garage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Guest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hotel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ManageInputs.cpp">
@@ -39,13 +33,16 @@
     <ClCompile Include="ManageString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NormalRoom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Room.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Booking.cpp">
+    <ClCompile Include="Hotel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Building.cpp">
+    <ClCompile Include="Spa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,13 +53,7 @@
     <ClInclude Include="Functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Garage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Guest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hotel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers.h">
@@ -74,13 +65,19 @@
     <ClInclude Include="ManageString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VipRoom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalRoom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Room.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Booking.h">
+    <ClInclude Include="Spa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Building.h">
+    <ClInclude Include="Hotel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -92,6 +89,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="reservations.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="rooms.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

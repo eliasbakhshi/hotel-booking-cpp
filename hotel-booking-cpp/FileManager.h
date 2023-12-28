@@ -9,6 +9,8 @@ class FileManager {
 public:
 	FileManager(string filename = "");
 	~FileManager();
+	void setFilename(string filename);
+	string getFilename();
 	int insert(string info, string filename = "");
 	vector<string> select(int id = 0, string filename = "");
 	bool update(int id, string info, string filename = "");

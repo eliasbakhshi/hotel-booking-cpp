@@ -9,6 +9,14 @@ FileManager::FileManager(string filename) {
 
 FileManager::~FileManager() {}
 
+void FileManager::setFilename(string filename) {
+	this->filename = filename;
+}
+
+string FileManager::getFilename() {
+	return this->filename;
+}
+
 
 
 

@@ -2,7 +2,6 @@
 #include "Headers.h"
 #include "Guest.h"
 #include "Hotel.h"
-#include "Booking.h"
 
 
 class ManageString {

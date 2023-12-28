@@ -1,28 +1,29 @@
 #ifndef HOTEL_H
 #define HOTEL_H
+
 #include "Headers.h"
-#include "Building.h"
+#include "Room.h"
 
-class Hotel : public Building {
+class Hotel {
 private:
-	int stars, floor;
-	string name, phone, roomNum;
+	string name, city, country;
+	int nrOfRooms;
+	vector<Room> rooms;
+
 public:
+	Hotel(string name, string city, string country);
 	Hotel();
-	Hotel(int roomNr, int floor);
 	~Hotel();
-
-	int getId();
-	void setId(int id);
-	int getFloor();
-	void setFloor(int floor);
-	string getName();
 	void setName(string name);
-	string getPhone();
-	void setPhone(string roomNr);
-	string toString() override;
+	void setCity(string city);
+	void setCountry(string country);
+	string getName();
+	string getCity();
+	string getCountry();
+
+	void addRoom(Room room);
+	void showRooms();
+
 };
-
-
 
 #endif

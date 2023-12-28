@@ -1,9 +1,21 @@
 #ifndef ROOM_H
 #define ROOM_H
-#include "hotel.h"
 
-class Room : public Hotel{
-
+class Room {
+private:
+	int roomNum;
+	int floor;
+	bool isAvailable;
+public:
+	Room();
+	Room(int roomNum, bool isAvailable);
+	virtual ~Room();
+	void setRoomNum(int roomNum);
+	void setFloor(int floor);
+	void setIsAvailable(bool isAvailable);
+	int getFloor();
+	int getRoomNum();
+	bool getIsAvailable();
 };
 
 #endif
