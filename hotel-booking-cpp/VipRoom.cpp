@@ -8,6 +8,10 @@ VipRoom::VipRoom(int roomNum, bool isAvailable)
 VipRoom::VipRoom() {
 }
 
+VipRoom::~VipRoom() {
+	delete[] this->meals;
+}
+
 void VipRoom::chooseRoomSize(int roomSize) {
 	if (roomSize < 80) {
 		this->roomSize = roomSize;

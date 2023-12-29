@@ -12,6 +12,7 @@ private:
 public:
 	VipRoom(int roomNum, bool isAvailable = true);
 	VipRoom();
+	~VipRoom();
 	void chooseRoomSize(int roomSize);
 	void whatMeals(int numOfMeals);
 };
