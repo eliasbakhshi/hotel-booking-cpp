@@ -59,7 +59,7 @@ void showHotels() {
 }
 
 void menu(Guest& guest) {
-	
+
 	string menuOption = "";
 
 	cout << "------------------------" << endl;
@@ -80,7 +80,7 @@ void menu(Guest& guest) {
 
 		int whichHotel;
 		int normalOrVip;
-		
+
 		showHotels();
 		cout << "\nPlease choose the hotel of your choice: ";
 		cin >> whichHotel; cin.ignore();
@@ -108,15 +108,16 @@ void menu(Guest& guest) {
 
 		cout << "Enter you mail address: "; getline(cin, email);
 		fm.setFilename("guests.txt");
-		vector<string> guests = fm.selectAll();
-		for (int i = 0; i < guests.size(); i++) {
-			vector<string> line = ms.split(guests[i], "|");
-			if (email == line[3]) {
-				isLoggedIn = true;
-				Guest guest(line[0], line[1], line[2], line[3], line[4]);
-				system("cls");
-				menu(guest);
-			}
+		vector<string> theGuest = fm.selectByIndex(email, 3);
+		if (email == theGuest[3]) {
+			isLoggedIn = true;
+			guest.setId(stoi(theGuest[0]));
+			guest.setFirstName(theGuest[1]);
+			guest.setLastName(theGuest[2]);
+			guest.setEmail(theGuest[3]);
+			guest.setPhone(theGuest[4]);
+			system("cls");
+			menu(guest);
 		}
 	}
 

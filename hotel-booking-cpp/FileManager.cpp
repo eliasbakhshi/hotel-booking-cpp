@@ -32,7 +32,7 @@ int FileManager::insert(string info, string filename) {
 	return 0;
 }
 
-vector<string> FileManager::select(int id, string filename) {
+vector<string> FileManager::select(string id, string filename) {
 	if (filename != "")
 		this->filename = filename;
 	string rowContent;
@@ -42,7 +42,7 @@ vector<string> FileManager::select(int id, string filename) {
 	if (inStream.is_open()) {
 		while (getline(inStream, rowContent)) {
 			if (!rowContent.empty()) {// the the row with the given id
-				if (stoi(ms.split(rowContent, "|")[0]) == id) {
+				if (ms.split(rowContent, "|")[0] == id) {
 					inStream.close();
 					tempArray.push_back(rowContent);
 					return tempArray;
@@ -54,6 +54,30 @@ vector<string> FileManager::select(int id, string filename) {
 		tempArray.push_back("Could not read the file.");
 	}
 	return tempArray;
+}
+
+vector<string> FileManager::selectByIndex(string value, int index, string filename) {
+	if (filename != "")
+		this->filename = filename;
+	string rowContent;
+
+	vector<string> tempArray, theArray;
+	ifstream inStream(this->filename);
+	if (inStream.is_open()) {
+		while (getline(inStream, rowContent)) {
+			if (!rowContent.empty()) {// the the row with the given value
+				tempArray = ms.split(rowContent, "|");
+				if (tempArray[index] == value) {
+					inStream.close();
+					return tempArray;
+				}
+			}
+		}
+		inStream.close();
+	} else {
+		theArray.push_back("Could not read the file.");
+	}
+	return theArray;
 }
 
 vector<string> FileManager::selectAll(int id, string filename) {
@@ -76,6 +100,30 @@ vector<string> FileManager::selectAll(int id, string filename) {
 		tempArray.push_back("Could not read the file.");
 	}
 	return tempArray;
+}
+
+vector<string> FileManager::selectAllByIndex(string value, int index, string filename) {
+	if (filename != "")
+		this->filename = filename;
+	string rowContent;
+
+	vector<string> tempArray, theArray;
+	ifstream inStream(this->filename);
+	if (inStream.is_open()) {
+		while (getline(inStream, rowContent)) {
+			if (!rowContent.empty()) {// the the row with the given value
+				tempArray = ms.split(rowContent, "|");
+				if (tempArray[index] == value) {
+					theArray.push_back(rowContent);
+				}
+			}
+		}
+		return theArray;
+		inStream.close();
+	} else {
+		theArray.push_back("Could not read the file.");
+	}
+	return theArray;
 }
 
 bool FileManager::update(int id, string infoRow, string filename) {
