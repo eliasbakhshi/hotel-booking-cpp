@@ -74,6 +74,7 @@ vector<string> FileManager::selectByIndex(string value, int index, string filena
 			}
 		}
 		inStream.close();
+		theArray.push_back("");
 	} else {
 		theArray.push_back("Could not read the file.");
 	}

@@ -58,6 +58,29 @@ void showHotels() {
 	}
 }
 
+void showLogin(Guest& guest) {
+	string email;
+	FileManager fm;
+	ManageInputs mi;
+
+	fm.setFilename("guests.txt");
+	email = mi.get_string("Please enter your email: ");
+	vector<string> theGuest = fm.selectByIndex(email, 3);
+	if (theGuest.size() > 3 && email == theGuest[3]) {
+		isLoggedIn = true;
+		guest.setId(stoi(theGuest[0]));
+		guest.setFirstName(theGuest[1]);
+		guest.setLastName(theGuest[2]);
+		guest.setEmail(theGuest[3]);
+		guest.setPhone(theGuest[4]);
+		system("cls");
+		menu(guest);
+	} else {
+		cout << "\nThis email is not correct.";
+		showLogin(guest);
+	}
+}
+
 void menu(Guest& guest) {
 
 	string menuOption = "";
@@ -74,9 +97,8 @@ void menu(Guest& guest) {
 	cout << "--> "; cin >> menuOption; cin.ignore();
 	system("cls");
 
-	cout << "Welcome " + guest.getFirstName() << "!\n" << endl;
-
 	if (menuOption == "1") {
+		cout << "Welcome " + guest.getFirstName() << "!\n" << endl;
 
 		int whichHotel;
 		int normalOrVip;
@@ -104,12 +126,12 @@ void menu(Guest& guest) {
 	else if (menuOption == "3") {
 		string email;
 		FileManager fm;
-		ManageString ms;
+		ManageInputs mi;
 
-		cout << "Enter you mail address: "; getline(cin, email);
 		fm.setFilename("guests.txt");
+		email = mi.get_string("Please enter your email: ");
 		vector<string> theGuest = fm.selectByIndex(email, 3);
-		if (email == theGuest[3]) {
+		if (theGuest.size() > 3 && email == theGuest[3]) {
 			isLoggedIn = true;
 			guest.setId(stoi(theGuest[0]));
 			guest.setFirstName(theGuest[1]);
@@ -118,6 +140,9 @@ void menu(Guest& guest) {
 			guest.setPhone(theGuest[4]);
 			system("cls");
 			menu(guest);
+		} else {
+			cout << "\nThis email is not correct.";
+			showLogin(guest);
 		}
 	}
 
