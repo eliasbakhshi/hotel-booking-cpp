@@ -13,6 +13,6 @@ public:
 	void setIsVip(bool isVip);
 	bool getIsVip();
 
-	string printRoomInfo() override;
+	string getRoomInfo() override;
 };
 

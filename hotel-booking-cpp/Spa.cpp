@@ -32,6 +32,6 @@ bool Spa::getIsVip() {
 	return this->isVip;
 }
 
-string Spa::printRoomInfo() {
-	return string();
+string Spa::getRoomInfo() {
+	return to_string(this->getId()) + ") Type: Spa, Number: " + to_string(this->getNumber()) + ", Size: " + to_string(this->getSize()) + "sqm";
 }

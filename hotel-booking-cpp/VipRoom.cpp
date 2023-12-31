@@ -1,13 +1,13 @@
 #pragma once
 #include "VipRoom.h"
 
-VipRoom::VipRoom(int roomNum, bool isAvailable)
-	:Room(roomNum, isAvailable) 
+VipRoom::VipRoom(int id, int number, int size, bool isAvailable)
+	:Room(id, number, size, isAvailable) 
 {
 }
 
 VipRoom::VipRoom() {
-	this->roomSize = 46;
+	this->setSize(46);
 	this->numOfMeals = 3;
 }
 
@@ -15,10 +15,10 @@ VipRoom::~VipRoom() {
 	delete[] this->meals;
 }
 
-void VipRoom::chooseRoomSize(int roomSize) {
+void VipRoom::chooseSize(int size) {
 	try {
-		if (roomSize < 80) {
-			this->roomSize = roomSize;
+		if (size < 80) {
+			this->setSize(size);
 		}
 		else {
 			throw out_of_range("The max size of the room is 80 sqm!");
@@ -55,14 +55,13 @@ void VipRoom::whatMeals(int numOfMeals) {
 }
 
 
-string VipRoom::printRoomInfo() {
-	string mealsString = "";
+string VipRoom::getRoomInfo() {
+	return to_string(this->getId()) + ") Type: VIP, Number: " + to_string(this->getNumber()) + ", Size: " + to_string(this->getSize()) + "sqm";
+	/*string mealsString = "";
 	for (int i = 0; i < numOfMeals; i++) {
 		mealsString += meals[i] + " ";
-	}
-	return "The number of this VIP room is: " + to_string(this->getRoomNum()) +
-		"\nThe room size is: " + to_string(this->roomSize) + "sqm\n" + 
-		"The meals included are: " + mealsString;
+	}*/
+			//", meals included are: " + mealsString + ".";
 }
 
 

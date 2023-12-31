@@ -1,16 +1,12 @@
 #pragma once
 #include "NormalRoom.h"
 
-NormalRoom::NormalRoom(int roomNum, bool isAvailable)
-	:Room(roomNum, isAvailable)
+NormalRoom::NormalRoom(int id, int roomNum, int size, bool isAvailable)
+	:Room(id, roomNum, size, isAvailable)
 {
 }
 
 NormalRoom::NormalRoom() {
-}
-
-int NormalRoom::getRoomSize() {
-	return this->roomSize;
 }
 
 void NormalRoom::enterMinibarContent() {
@@ -32,9 +28,9 @@ void NormalRoom::enterMinibarContent() {
     }
 }
 
-string NormalRoom::printRoomInfo() {
-	return string();
-	//string minibarString = "";
+string NormalRoom::getRoomInfo() {
+    return to_string(this->getId()) + ") Type: Normal, Number: " + to_string(this->getNumber()) + ", Size: " + to_string(this->getSize()) + "sqm";
+    //string minibarString = "";
 	//for (int i = 0; i < 3; i++) {
 	//	minibarString += minibar[i] + " ";
 	//}

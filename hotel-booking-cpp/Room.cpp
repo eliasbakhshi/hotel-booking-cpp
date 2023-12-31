@@ -2,20 +2,24 @@
 #include "Room.h"
 
 Room::Room() {
-    this->roomNum = 0;
-    this->isAvailable = false;
+    this->number = 0;
+    this->number = number;
+    this->size = size;
+    this->isAvailable = isAvailable;
 }
 
-Room::Room(int roomNum, bool isAvailable) {
-    this->roomNum = roomNum;
-    this->isAvailable = isAvailable;
+Room::Room(int id, int number, int size, bool isAvailable): id(id), number(number), size(size), isAvailable(isAvailable) {
 }
 
 Room::~Room() {
 }
 
-void Room::setRoomNum(int roomNum) {
-    this->roomNum = roomNum;
+void Room::setId(int id) {
+    this->id = id;
+}
+
+void Room::setNumber(int number) {
+    this->number = number;
 }
 
 void Room::setFloor(int floor) {
@@ -26,12 +30,24 @@ void Room::setIsAvailable(bool isAvailable) {
     this->isAvailable = isAvailable;
 }
 
+void Room::setSize(int size) {
+    this->size = size;
+}
+
+int Room::getId() {
+    return this->id;
+}
+
 int Room::getFloor() {
     return this->floor;
 }
 
-int Room::getRoomNum() {
-    return this->roomNum;
+int Room::getNumber() {
+    return this->number;
+}
+
+int Room::getSize() {
+    return this->size;
 }
 
 bool Room::getIsAvailable() {

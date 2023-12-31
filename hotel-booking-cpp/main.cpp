@@ -23,8 +23,8 @@ int main() {
 		vector<string> line = ms.split(hotels[i], "|");
 		cout << line[0] << ": " << line[1] << ", " << line[2] << ", " << line[3] << ". \n";
 	}*/
-	NormalRoom* norm1 = new NormalRoom(15, true);
-	hotel.addRoom(norm1);
+	//NormalRoom* norm1 = new NormalRoom(15, 22, true);
+	hotel.addRoom(36,22, true);
 	hotel.showRooms();
 
 	return 0;

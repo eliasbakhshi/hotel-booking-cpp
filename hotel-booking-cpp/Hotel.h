@@ -4,14 +4,17 @@
 #include "ManageString.h"
 #include "VipRoom.h"
 #include "NormalRoom.h"
+#include "Spa.h"
 #include "Guest.h"
+
+class Guest;
 
 class Hotel {
 private:
 	string name, city, country;
 	int nrOfRooms;
 	vector<Room*> rooms;
-	//Guest* guest;
+	vector<Guest*> guests;
 
 public:
 	Hotel(string name, string city, string country);
@@ -20,14 +23,14 @@ public:
 	void setName(string name);
 	void setCity(string city);
 	void setCountry(string country);
-	//void setGuest(Guest* guest);
+	void addGuest(Guest* guest);
 	string getName();
 	string getCity();
 	string getCountry();
-	//Guest *getGuest();
-
-	void addRoom(Room* room);
+	vector<Guest*> getGuests();
+	void addRoom(int roomNum, int size, bool isAvailable);
 	void showRooms();
+	void showGuests();
 
 
 };
