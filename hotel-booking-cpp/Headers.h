@@ -5,7 +5,8 @@
 #include <Windows.h>
 #include <vector>
 #include <memory>
-
+#include <functional>
+#include <random>
 using namespace std;
 
 // strcuts

@@ -1,5 +1,5 @@
-#ifndef ROOM_H
-#define ROOM_H
+#pragma once
+#include "Headers.h"
 
 class Room {
 private:
@@ -19,5 +19,3 @@ public:
 
 	virtual string printRoomInfo() = 0;
 };
-
-#endif

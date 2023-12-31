@@ -1,3 +1,4 @@
+#pragma once
 #include "NormalRoom.h"
 
 NormalRoom::NormalRoom(int roomNum, bool isAvailable)
@@ -23,11 +24,12 @@ void NormalRoom::enterMinibarContent(string item1, string item2, string item3) {
 }
 
 string NormalRoom::printRoomInfo() {
-	string minibarString = "";
-	for (int i = 0; i < 3; i++) {
-		minibarString += minibar[i] + " ";
-	}
-	return "The number of this normal room is: " + to_string(getRoomNum()) +
-		"The size of the room is: " + to_string(getRoomSize()) + 
-		"The items in the minibar are: " + minibarString;
+	return string();
+	//string minibarString = "";
+	//for (int i = 0; i < 3; i++) {
+	//	minibarString += minibar[i] + " ";
+	//}
+	//return "The number of this normal room is: " + to_string(getRoomNum()) +
+	//	"The size of the room is: " + to_string(getRoomSize()) + 
+	//	"The items in the minibar are: " + minibarString;
 }

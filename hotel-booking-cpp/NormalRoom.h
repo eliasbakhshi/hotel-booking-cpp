@@ -1,8 +1,7 @@
-#ifndef NORMALROOM_H
-#define NORMALROOM_H
+#pragma once
 
-#include "Room.h"
 #include "Headers.h"
+#include "Room.h"
 
 class NormalRoom : public Room{
 private:
@@ -17,4 +16,3 @@ public:
 	string printRoomInfo() override;
 };
 
-#endif

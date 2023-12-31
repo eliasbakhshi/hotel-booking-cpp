@@ -1,6 +1,4 @@
-#ifndef MANAGESTRING_H
-#define MANAGESTRING_H
-
+#pragma once
 #include "Headers.h"
 #include "Guest.h"
 #include "Hotel.h"
@@ -16,4 +14,3 @@ public:
 
 };
 
-#endif

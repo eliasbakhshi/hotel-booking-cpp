@@ -1,6 +1,4 @@
-#ifndef SPA_H
-#define SPA_H
-
+#pragma once
 #include "Room.h"
 #include "Headers.h"
 
@@ -18,4 +16,3 @@ public:
 	string printRoomInfo() override;
 };
 
-#endif

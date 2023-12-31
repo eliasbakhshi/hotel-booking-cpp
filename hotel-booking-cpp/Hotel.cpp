@@ -1,3 +1,4 @@
+#pragma once
 #include "Hotel.h"
 
 FileManager fmHotel;
@@ -16,6 +17,9 @@ Hotel::Hotel() {
 }
 
 Hotel::~Hotel() {
+    for (Room* room : rooms) {
+        delete room;
+    }
 }
 
 void Hotel::setName(string name) {
@@ -30,6 +34,10 @@ void Hotel::setCountry(string country) {
     this->country = country;
 }
 
+//void Hotel::setGuest(Guest* guest) {
+//    this->guest = guest;
+//}
+
 string Hotel::getName() {
     return this->name;
 }
@@ -42,17 +50,18 @@ string Hotel::getCountry() {
     return this->country;
 }
 
-void Hotel::addVipRoom(VipRoom room) {
+//Guest* Hotel::getGuest() {
+//    return this->guest;
+//}
+
+void Hotel::addRoom(Room * room) {
     rooms.push_back(room);
 }
 
-void Hotel::addNormalRoom(NormalRoom room) {
-    rooms.push_back(room);
-}
 
 void Hotel::showRooms()  {
-    for (int i = 0; i < rooms.size(); i++) {
-        string theAvailibility = to_string(rooms[i].getIsAvailable()) = "1" ? "available" : "is not available";
-        cout << "The room number is: " + to_string(rooms[i].getRoomNum()) + " and the room is " + theAvailibility + ".\n";
+    for (Room* room : rooms) {
+        string theAvailibility = to_string(room->getIsAvailable()) = "1" ? "available" : "is not available";
+        cout << "The room number is: " + to_string(room->getRoomNum()) + " and the room is " + theAvailibility + ".\n";
     }
 }

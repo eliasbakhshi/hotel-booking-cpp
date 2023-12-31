@@ -9,10 +9,12 @@
 
 
 int main() {
-	Guest guest;
-	menu(guest);
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	//Hotel hotel;
+	Guest guest;
+	//menu(guest);
+
+	Hotel hotel;
 	/*FileManager fm;
 	ManageString ms;
 	fm.setFilename("hotels.txt");
@@ -21,9 +23,9 @@ int main() {
 		vector<string> line = ms.split(hotels[i], "|");
 		cout << line[0] << ": " << line[1] << ", " << line[2] << ", " << line[3] << ". \n";
 	}*/
-	//NormalRoom* norm1 = new NormalRoom(12, true);
-	//hotel.addRoom(*norm1);
-	//hotel.showRooms();
+	NormalRoom* norm1 = new NormalRoom(15, true);
+	hotel.addRoom(norm1);
+	hotel.showRooms();
 
 	return 0;
 }

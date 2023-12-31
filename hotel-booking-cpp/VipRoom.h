@@ -1,8 +1,6 @@
-#ifndef VIPROOM_H
-#define VIPROOM_H
-
-#include "Room.h"
+#pragma once
 #include "Headers.h"
+#include "Room.h"
 
 class VipRoom : public Room {
 private:
@@ -19,4 +17,3 @@ public:
 	string printRoomInfo() override;
 };
 
-#endif

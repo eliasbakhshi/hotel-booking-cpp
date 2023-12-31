@@ -1,8 +1,10 @@
+#pragma once
 #include "Functions.h"
 #include "Guest.h"
 #include "ManageString.h"
 #include "ManageInputs.h"
 #include "FileManager.h"
+
 
 bool isLoggedIn = false;
 FileManager fmFunc;
@@ -10,18 +12,21 @@ ManageString msFunc;
 ManageInputs miFunc;
 
 string bookingNumGenerator() {
-	const char characters[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	const int numCharacters = 8;
+	random_device rd;
+	mt19937 gen(rd());
+	const string characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-	srand(time(0));
+	auto randomChar = [&]() -> char {
+		uniform_int_distribution<> dis(0, characters.size() - 1);
+		return characters[dis(gen)];
+		};
+
 	string randomString;
+	generate_n(back_inserter(randomString), 8, randomChar);
 
-	for (int i = 0; i < 8; ++i) {
-		int randomIndex = rand() % numCharacters;
-		randomString += characters;
-	}
 	return randomString;
 }
+
 void registerGuest(Guest& guest) {
 	fmFunc.setFilename("guests.txt");
 	guest.setId(fmFunc.getLastId() + 1);
@@ -34,6 +39,7 @@ void registerGuest(Guest& guest) {
 		guest.getLastName() + "|" + guest.getEmail() + "|" + guest.getPhone();
 	fmFunc.insert(info);
 }
+
 void getInfo() {
 	Guest guest("", "", "", "", "");
 	string firstName, lastName, mailAddr, phoneNum;
@@ -119,7 +125,8 @@ void menu(Guest& guest) {
 		Reservation reservation;
 		cout << "Welcome " + guest.getFirstName() << "!\n" << endl;
 
-		int normalOrVip, menuChoise;
+		//int normalOrVip;
+		int menuChoise;
 		showHotels();
 		menuChoise = miFunc.get_int("Please choose the hotel of your choice: ");
 		system("cls");

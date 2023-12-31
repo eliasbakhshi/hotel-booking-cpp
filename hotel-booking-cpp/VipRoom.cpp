@@ -1,3 +1,4 @@
+#pragma once
 #include "VipRoom.h"
 
 VipRoom::VipRoom(int roomNum, bool isAvailable)
@@ -51,3 +52,5 @@ string VipRoom::printRoomInfo() {
 		"\nThe room size is: " + to_string(this->roomSize) + "sqm\n" + 
 		"The meals included are: " + mealsString;
 }
+
+
