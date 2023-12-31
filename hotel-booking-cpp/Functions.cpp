@@ -1,11 +1,13 @@
 #include "Functions.h"
 #include "Guest.h"
-#include "ManageInputs.h"
 #include "ManageString.h"
+#include "ManageInputs.h"
 #include "FileManager.h"
 
 bool isLoggedIn = false;
-
+FileManager fmFunc;
+ManageString msFunc;
+ManageInputs miFunc;
 
 string bookingNumGenerator() {
 	const char characters[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -20,7 +22,18 @@ string bookingNumGenerator() {
 	}
 	return randomString;
 }
-
+void registerGuest(Guest& guest) {
+	fmFunc.setFilename("guests.txt");
+	guest.setId(fmFunc.getLastId() + 1);
+	guest.setFirstName(miFunc.get_string("First name: "));
+	guest.setLastName(miFunc.get_string("nLast name: "));
+	guest.setEmail(miFunc.get_string("Email address: "));
+	guest.setPhone(miFunc.get_string("Phone number: "));
+	// Save it in the database.
+	string info = "\n" + to_string(guest.getId()) + "|" + guest.getFirstName() + "|" +
+		guest.getLastName() + "|" + guest.getEmail() + "|" + guest.getPhone();
+	fmFunc.insert(info);
+}
 void getInfo() {
 	Guest guest("", "", "", "", "");
 	string firstName, lastName, mailAddr, phoneNum;
@@ -48,24 +61,29 @@ void getInfo() {
 }
 
 void showHotels() {
-	FileManager fm;
-	ManageString ms;
-	fm.setFilename("hotels.txt");
-	vector<string> hotels = fm.selectAll();
+	fmFunc.setFilename("hotels.txt");
+	vector<string> hotels = fmFunc.selectAll();
 	for (int i = 0; i < hotels.size(); i++) {
-		vector<string> line = ms.split(hotels[i], "|");
+		vector<string> line = msFunc.split(hotels[i], "|");
 		cout << line[0] << ") " << line[1] << " - " << line[2] << ", " << line[3] << "\n";
+	}
+}
+
+void showRooms(int hotelId) {
+	fmFunc.setFilename("rooms.txt");
+	vector<string> romms = fmFunc.selectAllByIndex(to_string(hotelId), 4);
+	for (int i = 0; i < romms.size(); i++) {
+		vector<string> line = msFunc.split(romms[i], "|");
+		cout << line[0] << ") Number: " << line[1] << ", floor: " << line[2] << ", size: " << line[3] << "\n";
 	}
 }
 
 void showLogin(Guest& guest) {
 	string email;
-	FileManager fm;
-	ManageInputs mi;
 
-	fm.setFilename("guests.txt");
-	email = mi.get_string("Please enter your email: ");
-	vector<string> theGuest = fm.selectByIndex(email, 3);
+	fmFunc.setFilename("guests.txt");
+	email = miFunc.get_string("Please enter your email: ");
+	vector<string> theGuest = fmFunc.selectByIndex(email, 3);
 	if (theGuest.size() > 3 && email == theGuest[3]) {
 		isLoggedIn = true;
 		guest.setId(stoi(theGuest[0]));
@@ -98,24 +116,40 @@ void menu(Guest& guest) {
 	system("cls");
 
 	if (menuOption == "1") {
+		Reservation reservation;
 		cout << "Welcome " + guest.getFirstName() << "!\n" << endl;
 
-		int whichHotel;
-		int normalOrVip;
-
+		int normalOrVip, menuChoise;
 		showHotels();
-		cout << "\nPlease choose the hotel of your choice: ";
-		cin >> whichHotel; cin.ignore();
-
-		cout << "\nChoose the package of your choice: " << endl;
+		menuChoise = miFunc.get_int("Please choose the hotel of your choice: ");
+		system("cls");
+		showRooms(menuChoise);
+		menuChoise = miFunc.get_int("Choose the rooms that you want: ");
+		reservation.roomId = menuChoise;
+		system("cls");
 		cout << "1) Normal: Breakfast included" << endl;
 		cout << "2) VIP: Breakfast and dinner included + Access to Spa and Swimming pool" << endl;
-		cin >> normalOrVip; cin.ignore();
-
-		cout << "Perfect! You will be redirected to the sign-up page in no time.\nPlease be patient...";
-		Sleep(5000);
+		menuChoise = miFunc.get_int("Choose the package of your choice: ");
+		reservation.optionId = menuChoise;
+		// Guest will be navigated to the registration if guest is not registered.
+		if (guest.getEmail() == "") {
+			// Redirect to reservation 
+			cout << "Perfect! You will be redirected to the sign-up page in no time.\nPlease be patient...";
+			Sleep(1000);
+			system("cls");
+			registerGuest(guest);
+		}
+		// Redirect to reservation page
+		cout << "Perfect! You will be redirected to the confirmation page in no time.\nPlease be patient...";
+		Sleep(1000);
 		system("cls");
-		getInfo();
+		fmFunc.setFilename("reservations.txt");
+		reservation.id = fmFunc.getLastId() + 1;
+		// Save to reservation table
+		string theReservation = "\n" + to_string(reservation.id) + "|" + to_string(guest.getId()) + "|" + to_string(reservation.roomId) + "|" + to_string(reservation.optionId);
+		fmFunc.insert(theReservation);
+		// Show the reservation info
+		cout << "You have booked a room in hotel ";
 
 	}
 
@@ -125,12 +159,10 @@ void menu(Guest& guest) {
 
 	else if (menuOption == "3") {
 		string email;
-		FileManager fm;
-		ManageInputs mi;
 
-		fm.setFilename("guests.txt");
-		email = mi.get_string("Please enter your email: ");
-		vector<string> theGuest = fm.selectByIndex(email, 3);
+		fmFunc.setFilename("guests.txt");
+		email = miFunc.get_string("Please enter your email: ");
+		vector<string> theGuest = fmFunc.selectByIndex(email, 3);
 		if (theGuest.size() > 3 && email == theGuest[3]) {
 			isLoggedIn = true;
 			guest.setId(stoi(theGuest[0]));

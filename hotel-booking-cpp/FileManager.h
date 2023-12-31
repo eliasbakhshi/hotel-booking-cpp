@@ -14,7 +14,7 @@ public:
 	int insert(string info, string filename = "");
 	vector<string> select(string value, string filename = "");
 	vector<string> selectByIndex(string value, int index, string filename = "");
-	vector<string> selectAll(int id = 0, string filename = "");
+	vector<string> selectAll(string filename = "");
 	vector<string> selectAllByIndex(string value, int index, string filename = "");
 	bool update(int id, string info, string filename = "");
 	bool remove(int id, string filename = "");

@@ -17,9 +17,6 @@ string FileManager::getFilename() {
 	return this->filename;
 }
 
-
-
-
 int FileManager::insert(string info, string filename) {
 	if (filename != "")
 		this->filename = filename;
@@ -81,7 +78,7 @@ vector<string> FileManager::selectByIndex(string value, int index, string filena
 	return theArray;
 }
 
-vector<string> FileManager::selectAll(int id, string filename) {
+vector<string> FileManager::selectAll(string filename) {
 	if (filename != "")
 		this->filename = filename;
 	string rowContent;
@@ -90,10 +87,8 @@ vector<string> FileManager::selectAll(int id, string filename) {
 	ifstream inStream(this->filename);
 	if (inStream.is_open()) {
 		while (getline(inStream, rowContent)) {
-			if (!rowContent.empty()) {
-				if (id == 0) { // Return all the rows
-					tempArray.push_back(rowContent);
-				}
+			if (!rowContent.empty()) { // Save all the rows
+				tempArray.push_back(rowContent);
 			}
 		}
 		inStream.close();
