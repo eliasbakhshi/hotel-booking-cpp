@@ -42,7 +42,11 @@ string Hotel::getCountry() {
     return this->country;
 }
 
-void Hotel::addRoom(Room room) {
+void Hotel::addVipRoom(VipRoom room) {
+    rooms.push_back(room);
+}
+
+void Hotel::addNormalRoom(NormalRoom room) {
     rooms.push_back(room);
 }
 

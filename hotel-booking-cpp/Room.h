@@ -16,6 +16,8 @@ public:
 	int getFloor();
 	int getRoomNum();
 	bool getIsAvailable();
+
+	virtual string printRoomInfo() = 0;
 };
 
 #endif

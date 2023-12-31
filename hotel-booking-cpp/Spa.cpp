@@ -31,3 +31,7 @@ void Spa::setIsVip(bool isVip) {
 bool Spa::getIsVip() {
 	return this->isVip;
 }
+
+string Spa::printRoomInfo() {
+	return string();
+}

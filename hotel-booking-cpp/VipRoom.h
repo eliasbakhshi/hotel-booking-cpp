@@ -15,6 +15,8 @@ public:
 	~VipRoom();
 	void chooseRoomSize(int roomSize);
 	void whatMeals(int numOfMeals);
+
+	string printRoomInfo() override;
 };
 
 #endif

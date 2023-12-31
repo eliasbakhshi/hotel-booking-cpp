@@ -13,6 +13,8 @@ public:
 	NormalRoom();
 	int getRoomSize();
 	void enterMinibarContent(string item1, string item2, string item3);
+
+	string printRoomInfo() override;
 };
 
 #endif

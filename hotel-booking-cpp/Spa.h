@@ -14,6 +14,8 @@ public:
 	int generateCustomEntryCode();
 	void setIsVip(bool isVip);
 	bool getIsVip();
+
+	string printRoomInfo() override;
 };
 
 #endif

@@ -41,3 +41,13 @@ void VipRoom::whatMeals(int numOfMeals) {
 		cout << "You can only choose a maximum number of 3 meals!" << endl;
 	}
 }
+
+string VipRoom::printRoomInfo() {
+	string mealsString = "";
+	for (int i = 0; i < numOfMeals; i++) {
+		mealsString += meals[i] + " ";
+	}
+	return "The number of this VIP room is: " + to_string(this->getRoomNum()) +
+		"\nThe room size is: " + to_string(this->roomSize) + "sqm\n" + 
+		"The meals included are: " + mealsString;
+}

@@ -4,7 +4,8 @@
 #include "Headers.h"
 #include "FileManager.h"
 #include "ManageString.h"
-#include "Room.h"
+#include "VipRoom.h"
+#include "NormalRoom.h"
 
 class Hotel {
 private:
@@ -23,7 +24,8 @@ public:
 	string getCity();
 	string getCountry();
 
-	void addRoom(Room room);
+	void addVipRoom(VipRoom room);
+	void addNormalRoom(NormalRoom room);
 	void showRooms();
 
 
