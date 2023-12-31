@@ -16,32 +16,44 @@ VipRoom::~VipRoom() {
 }
 
 void VipRoom::chooseRoomSize(int roomSize) {
-	if (roomSize < 80) {
-		this->roomSize = roomSize;
+	try {
+		if (roomSize < 80) {
+			this->roomSize = roomSize;
+		}
+		else {
+			throw out_of_range("The max size of the room is 80 sqm!");
+		}
 	}
-	else {
-		cout << "The max size of room is 80sqm!" << endl;
+	catch (out_of_range& exc) {
+		cerr << "Error: " << exc.what() << endl;
 	}
 }
 
 void VipRoom::whatMeals(int numOfMeals) {
-	this->numOfMeals = numOfMeals;
-	if (numOfMeals == 1) {
-		this->meals[0] = "Breakfast";
+	try {
+		this->numOfMeals = numOfMeals;
+
+		if (numOfMeals == 1) {
+			this->meals[0] = "Breakfast";
+		}
+		else if (numOfMeals == 2) {
+			this->meals[0] = "Breakfast";
+			this->meals[1] = "Lunch";
+		}
+		else if (numOfMeals == 3) {
+			this->meals[0] = "Breakfast";
+			this->meals[1] = "Lunch";
+			this->meals[2] = "Dinner";
+		}
+		else {
+			throw out_of_range("You can only choose a maximum number of 3 meals!");
+		}
 	}
-	else if (numOfMeals == 2) {
-		this->meals[0] = "Breakfast";
-		this->meals[1] = "Lunch";
-	}
-	else if (numOfMeals == 3) {
-		this->meals[0] = "Breakfast";
-		this->meals[1] = "Lunch";
-		this->meals[2] = "Dinner";
-	}
-	else {
-		cout << "You can only choose a maximum number of 3 meals!" << endl;
+	catch (out_of_range& exc) {
+		cerr << "Error: " << exc.what() << endl;
 	}
 }
+
 
 string VipRoom::printRoomInfo() {
 	string mealsString = "";

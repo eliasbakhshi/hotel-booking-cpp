@@ -11,7 +11,7 @@ public:
 	NormalRoom(int roomNum, bool isAvailable = true);
 	NormalRoom();
 	int getRoomSize();
-	void enterMinibarContent(string item1, string item2, string item3);
+	void enterMinibarContent();
 
 	string printRoomInfo() override;
 };

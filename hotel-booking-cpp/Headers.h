@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <vector>
 #include <memory>
+#include <stdexcept>
 #include <functional>
 #include <random>
 using namespace std;
