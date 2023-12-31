@@ -12,14 +12,23 @@ int NormalRoom::getRoomSize() {
 	return this->roomSize;
 }
 
-void NormalRoom::enterMinibarContent(string item1, string item2, string item3) {
-	minibar[0] = item1;
-	minibar[1] = item2;
-	minibar[2] = item3;
+void NormalRoom::enterMinibarContent() {
+    string whatsPresent[5]{ "Irish whiskey", "Festis hallon", "Peanuts", "Chips", "Absolut vodka" };
+    cout << "Choose three items to include in your minibar:\nIrish whiskey, Festis hallon, Peanuts, Chips, and Absolut vodka\n" << endl;
 
-	for (int i = 0; i < 3; i++) {
-		cout << minibar[i] << " " << endl;
-	}
+    try {
+        for (int i = 0; i < 3; i++) {
+            cout << "Item " << i + 1 << ": ";
+            cin >> this->minibar[i];
+
+            if (this->minibar[i] != whatsPresent[i]) {
+                throw out_of_range("Item is not in stock!");
+            }
+        }
+    }
+    catch (out_of_range& e) {
+        cerr << "Error: " << e.what() << endl;
+    }
 }
 
 string NormalRoom::printRoomInfo() {

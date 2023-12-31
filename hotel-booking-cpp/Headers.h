@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <vector>
 #include <memory>
+#include <stdexcept>
 
 using namespace std;
 
