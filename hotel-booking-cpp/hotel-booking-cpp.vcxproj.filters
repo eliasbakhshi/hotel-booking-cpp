@@ -45,6 +45,9 @@
     <ClCompile Include="Spa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VipRoom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileManager.h">
