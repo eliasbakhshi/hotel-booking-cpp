@@ -7,7 +7,7 @@
 class VipRoom : public Room {
 private:
 	int roomSize;
-	int numOfMeals = 3;
+	int numOfMeals;
 	string* meals = new string[numOfMeals];
 public:
 	VipRoom(int roomNum, bool isAvailable = true);
@@ -16,6 +16,5 @@ public:
 	void chooseRoomSize(int roomSize);
 	void whatMeals(int numOfMeals);
 };
-
 
 #endif

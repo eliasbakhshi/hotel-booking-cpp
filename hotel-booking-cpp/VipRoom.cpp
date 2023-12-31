@@ -6,6 +6,8 @@ VipRoom::VipRoom(int roomNum, bool isAvailable)
 }
 
 VipRoom::VipRoom() {
+	this->roomSize = 46;
+	this->numOfMeals = 3;
 }
 
 VipRoom::~VipRoom() {
