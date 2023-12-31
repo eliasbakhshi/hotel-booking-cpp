@@ -6,3 +6,8 @@
 #include <vector>
 
 using namespace std;
+
+// strcuts
+struct Reservation {
+	int id, roomId, optionId;
+};

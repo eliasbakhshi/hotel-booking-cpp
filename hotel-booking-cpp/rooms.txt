@@ -1,2 +1,2 @@
-
+id|number|floor|size|hotelId
 1|S23|26|120|1
