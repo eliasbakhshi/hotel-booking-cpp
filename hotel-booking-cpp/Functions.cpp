@@ -17,7 +17,7 @@ string bookingNumGenerator() {
 	const string characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 	auto randomChar = [&]() -> char {
-		uniform_int_distribution<> dis(0, characters.size() - 1);
+		uniform_int_distribution<size_t> dis(0, characters.size() - 1);
 		return characters[dis(gen)];
 		};
 
@@ -33,37 +33,12 @@ void registerGuest(Guest& guest) {
 	guest.setFirstName(miFunc.get_string("First name: "));
 	guest.setLastName(miFunc.get_string("Last name: "));
 	guest.setEmail(miFunc.get_string("Email address: "));
+	guest.setPassword(miFunc.get_string("Password: "));
 	guest.setPhone(miFunc.get_string("Phone number: "));
 	// Save it in the database.
 	string info = "\n" + to_string(guest.getId()) + "|" + guest.getFirstName() + "|" +
-		guest.getLastName() + "|" + guest.getEmail() + "|" + guest.getPhone();
+		guest.getLastName() + "|" + guest.getEmail() + "|" + guest.getPassword() + "|" + guest.getPhone();
 	fmFunc.insert(info);
-}
-
-void getInfo() {
-	Guest guest("", "", "", "", "");
-	string firstName, lastName, mailAddr, phoneNum;
-	string bookingNum = bookingNumGenerator();
-
-	ManageString ms;
-
-	cout << "First name: "; cin >> firstName;
-	guest.setFirstName(firstName);
-
-	cout << "\nLast name: "; cin >> lastName;
-	guest.setLastName(lastName);
-
-	cout << "\nEmail address: "; cin >> mailAddr;
-	guest.setEmail(mailAddr);
-
-	cout << "\nPhone number: "; cin >> phoneNum;
-	guest.setPhone(phoneNum);
-
-	guest.setBookingNum(bookingNum);
-	cout << bookingNum << endl;
-
-	/*string test = ms.guestToS(guest);
-	cout << test << endl;*/
 }
 
 void showHotels() {
@@ -96,7 +71,8 @@ void showLogin(Guest& guest) {
 		guest.setFirstName(theGuest[1]);
 		guest.setLastName(theGuest[2]);
 		guest.setEmail(theGuest[3]);
-		guest.setPhone(theGuest[4]);
+		guest.setPassword(theGuest[4]);
+		guest.setPhone(theGuest[5]);
 		system("cls");
 		menu(guest);
 	} else {
@@ -126,7 +102,10 @@ void menu(Guest& guest) {
 		Reservation reservation;
 		vector<string> theHotel, theRoom, options, theOption;
 		vector<vector<string>> allOptions;
-		int hotelNum, roomNum, optionNum;
+		VipRoom viproom;
+		NormalRoom normalroom;
+		string optionNum;
+		int hotelNum, roomNum;
 		cout << "Welcome " + guest.getFirstName() << "!\n" << endl;
 
 		showHotels();
@@ -177,15 +156,28 @@ void menu(Guest& guest) {
 		cout << "Your booking information:\n";
 		cout << "Type: " << theRoom[5] << " room\n";
 		cout << "Hotel: " << theHotel[1] << " in " << theHotel[2] << ", " << theHotel[3] << endl;
-		cout << "Addons:" << allOptions[optionNum - 1][2] << " on your booking.\n\n\n";
+		cout << "Address: " << theHotel[4] << endl;
+		//cout << "Addons: " << viproom.showMeals() << endl;
+		//cout << "Addons: " << allOptions[optionNum - 1][2] << " on your booking.\n";
+		if (theRoom[5] == "vip") {
+			Spa spa;
+			spa.setIsVip(true);
+			cout << "Your personal Spa entry code is: <" + to_string(spa.generateCustomEntryCode()) 
+				+ "> Do not lose it!\n";
+		}
+		guest.setBookingNum(bookingNumGenerator());
+		cout << "Your booking number is: " + guest.getBookingNum() + ". Do not lose it!\n";
 	}
 
 	else if (menuOption == "2") {
-		getInfo();
+		Guest guest;
+		registerGuest(guest);
+		isLoggedIn = true;
 	}
 
 	else if (menuOption == "3") {
 		string email;
+		string password;
 
 		fmFunc.setFilename("guests.txt");
 		email = miFunc.get_string("Please enter your email: ");
@@ -213,31 +205,4 @@ void menu(Guest& guest) {
 	else {
 		MessageBoxW(NULL, L"Please double check your input", L"Error!", MB_OK | MB_ICONERROR);
 	}
-}
-
-void test() {
-
-	//FileManager fm("guests.txt");
-	//ManageString ms;
-	//string tt = "ölijl ök kjpoij";
-	//vector<string> test = ms.split(tt, " ");
-	//for (int i = 0; i < test.size(); i++) {
-	//	cout << test[i] << endl;
-	//}
-
-	//Guest g1("ljgmail221.com");
-	//Guest g2("hhhggfgfgrerer.com");
-	//int id = fm.insert(ms.guestToS(g1));
-	//cout << "the id. " << id << endl;
-	//bool deleted = fm.remove(8);
-	//bool updated = fm.update(13, ms.guestToS(g2));
-	//cout << deleted;
-	//vector<string> test2 = fm.select(9);
-	//for (int i = 0; i < test2.size(); i++) {
-	//	cout << test2[i] << endl;
-	//}
-
-	//cout << fm.getLastId();
-	//cout << fm.countRows();
-	//cout << fm.remove(1);
 }

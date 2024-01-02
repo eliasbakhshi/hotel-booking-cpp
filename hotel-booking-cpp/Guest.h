@@ -3,7 +3,7 @@
 #include "FileManager.h"
 
 class Guest {
-	string firstName, lastName, email, phone, bookingNum;
+	string firstName, lastName, email, phone, bookingNum, password;
 	int id = 1;
 
 	void expand();
@@ -27,6 +27,8 @@ public:
 	void setPhone(string newPhone);
 	string getBookingNum() const;
 	void setBookingNum(string bookingNum);
+	string getPassword();
+	void setPassword(string password);
 
 
 	bool editGuest(int id, string firstName, string email, string lastName = "", string phone = 0);
