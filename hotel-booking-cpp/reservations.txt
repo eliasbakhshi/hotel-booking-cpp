@@ -1,3 +1,5 @@
 id|userId|roomId|optionId|dateIn|dateOut
 1|32|2|7|4|5
 2|33|2|7|2|2
+3|34|2|7|2|2
+4|35|2|7|2|2
