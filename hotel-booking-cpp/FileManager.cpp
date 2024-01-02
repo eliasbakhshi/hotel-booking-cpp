@@ -202,6 +202,7 @@ bool FileManager::remove(int id, string filename) {
 
 // Get the last ID in the file.
 int FileManager::getLastId(string filename) {
+	ManageString msFileManager;
 	if (filename != "")
 		this->filename = filename;
 	string tempInput;
@@ -214,7 +215,7 @@ int FileManager::getLastId(string filename) {
 			}
 		}
 		theFile.close();
-		if (tempList[0] != "")
+		if (tempList[0] != "" && msFileManager.is_number(tempList[0]))
 			return stoi(tempList[0]);
 	}
 	return 0;

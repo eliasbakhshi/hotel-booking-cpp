@@ -31,7 +31,7 @@ void registerGuest(Guest& guest) {
 	fmFunc.setFilename("guests.txt");
 	guest.setId(fmFunc.getLastId() + 1);
 	guest.setFirstName(miFunc.get_string("First name: "));
-	guest.setLastName(miFunc.get_string("nLast name: "));
+	guest.setLastName(miFunc.get_string("Last name: "));
 	guest.setEmail(miFunc.get_string("Email address: "));
 	guest.setPhone(miFunc.get_string("Phone number: "));
 	// Save it in the database.
@@ -106,6 +106,7 @@ void showLogin(Guest& guest) {
 }
 
 void menu(Guest& guest) {
+	// Outside of the numbers
 
 	string menuOption = "";
 
@@ -118,26 +119,25 @@ void menu(Guest& guest) {
 	cout << "2) Register" << endl;
 	cout << "3) Login" << endl;
 	cout << "q) Quit" << endl;
-	cout << "--> "; cin >> menuOption; cin.ignore();
+	cout << "\n--> "; cin >> menuOption; cin.ignore();
 	system("cls");
 
 	if (menuOption == "1") {
 		Reservation reservation;
-		vector<string> theRoom, options, theOption;
+		vector<string> theHotel, theRoom, options, theOption;
 		vector<vector<string>> allOptions;
+		int hotelNum, roomNum, optionNum;
 		cout << "Welcome " + guest.getFirstName() << "!\n" << endl;
 
-		//int normalOrVip;
-		int menuChoise;
 		showHotels();
-		menuChoise = miFunc.get_int("\n\nPlease choose the hotel of your choice: ");
+		hotelNum = miFunc.get_int("\n\nPlease choose the hotel of your choice: ");
 		system("cls");
-		showRooms(menuChoise);
-		menuChoise = miFunc.get_int("\n\nChoose the rooms that you want: ");
-		reservation.roomId = menuChoise;
+		showRooms(hotelNum);
+		roomNum = miFunc.get_int("\n\nChoose the rooms that you want: ");
+		reservation.roomId = roomNum;
 		system("cls");
 		// show info according to rooms type
-		theRoom = fmFunc.selectByIndex(to_string(menuChoise), 0, "rooms.txt");
+		theRoom = fmFunc.selectByIndex(to_string(roomNum), 0, "rooms.txt");
 		if (theRoom[5] == "normal") {
 			options = fmFunc.selectAllByIndex("normal", 1, "roomOptions.txt");
 		} else if (theRoom[5] == "vip") {
@@ -148,25 +148,36 @@ void menu(Guest& guest) {
 			allOptions.push_back(msFunc.split(options[i], "|"));
 			cout << i + 1 << ") " << allOptions[i][2] << ".\n";
 		}
-		menuChoise = miFunc.get_int("\n\nChoose the addon option for the room: ");
-		reservation.optionId = stoi(allOptions[menuChoise - 1][0]);
+		optionNum = miFunc.get_int("\n\nChoose the addon option for the room: ");
+		reservation.optionId = stoi(allOptions[optionNum - 1][0]);
+		// Get the dates
+		system("cls");
+		reservation.dateIn = miFunc.get_string("Check in date (yyyy/mm/dd): ");
+		reservation.dateOut = miFunc.get_string("Check out date (yyyy/mm/dd): ");
 		// Guest will be navigated to the registration if guest is not registered.
-		if (guest.getEmail() == "") {// Redirect to registration page			 
+		if (guest.getEmail() == "") {
 			cout << "Perfect! You will be redirected to the sign-up page in no time.\nPlease be patient...";
 			Sleep(1000);
 			system("cls");
 			registerGuest(guest);
 		}
 		// Redirect to reservation page
+		system("cls");
 		cout << "Perfect! You will be redirected to the confirmation page in no time.\nPlease be patient...";
 		Sleep(1000);
-		system("cls");
 		reservation.id = fmFunc.getLastId("reservations.txt") + 1;
 		// Save to reservation table
-		string theReservation = "\n" + to_string(reservation.id) + "|" + to_string(guest.getId()) + "|" + to_string(reservation.roomId) + "|" + to_string(reservation.optionId);
+		string theReservation = "\n" + to_string(reservation.id) + "|" + to_string(guest.getId()) + "|" + to_string(reservation.roomId) + "|" + to_string(reservation.optionId) + "|" + reservation.dateIn + "|" + reservation.dateOut;
 		fmFunc.insert(theReservation, "reservations.txt");
-		// Show the reservation info
-		cout << "You have booked a room in hotel ";
+		// Get the hotel info
+		theHotel = fmFunc.selectByIndex(to_string(hotelNum), 0, "hotels.txt");
+		system("cls");
+
+		// Show the reservation info in the confirmation page.
+		cout << "Your booking information:\n";
+		cout << "Type: " << theRoom[5] << " room\n";
+		cout << "Hotel: " << theHotel[1] << " in " << theHotel[2] << ", " << theHotel[3] << endl;
+		cout << "Addons:" << allOptions[optionNum - 1][2] << " on your booking.\n\n\n";
 	}
 
 	else if (menuOption == "2") {

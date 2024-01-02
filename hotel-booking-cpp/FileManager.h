@@ -1,9 +1,8 @@
 #pragma once
 #include "Headers.h"
-#include "Guest.h"
 #include "ManageString.h"
 
-class FileManager {
+class FileManager{
 	string filename;
 
 public:

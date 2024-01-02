@@ -10,7 +10,9 @@
 #include <random>
 using namespace std;
 
+
 // strcuts
 struct Reservation {
 	int id, roomId, optionId;
+	string dateIn, dateOut;
 };
