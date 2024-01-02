@@ -12,7 +12,7 @@ int main() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	Guest guest;
-	//menu(guest);
+	menu(guest);
 
 	Hotel hotel;
 	/*FileManager fm;

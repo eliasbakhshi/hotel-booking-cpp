@@ -77,10 +77,10 @@ void showHotels() {
 
 void showRooms(int hotelId) {
 	fmFunc.setFilename("rooms.txt");
-	vector<string> romms = fmFunc.selectAllByIndex(to_string(hotelId), 4);
-	for (int i = 0; i < romms.size(); i++) {
-		vector<string> line = msFunc.split(romms[i], "|");
-		cout << line[0] << ") Number: " << line[1] << ", floor: " << line[2] << ", size: " << line[3] << "\n";
+	vector<string> rooms = fmFunc.selectAllByIndex(to_string(hotelId), 4);
+	for (int i = 0; i < rooms.size(); i++) {
+		vector<string> line = msFunc.split(rooms[i], "|");
+		cout << line[0] << ") Type: " << line[5] << ", Number: " << line[1] << ", floor: " << line[2] << ", size: " << line[3] << "\n";
 	}
 }
 
@@ -123,24 +123,35 @@ void menu(Guest& guest) {
 
 	if (menuOption == "1") {
 		Reservation reservation;
+		vector<string> theRoom, options, theOption;
+		vector<vector<string>> allOptions;
 		cout << "Welcome " + guest.getFirstName() << "!\n" << endl;
 
 		//int normalOrVip;
 		int menuChoise;
 		showHotels();
-		menuChoise = miFunc.get_int("Please choose the hotel of your choice: ");
+		menuChoise = miFunc.get_int("\n\nPlease choose the hotel of your choice: ");
 		system("cls");
 		showRooms(menuChoise);
-		menuChoise = miFunc.get_int("Choose the rooms that you want: ");
+		menuChoise = miFunc.get_int("\n\nChoose the rooms that you want: ");
 		reservation.roomId = menuChoise;
 		system("cls");
-		cout << "1) Normal: Breakfast included" << endl;
-		cout << "2) VIP: Breakfast and dinner included + Access to Spa and Swimming pool" << endl;
-		menuChoise = miFunc.get_int("Choose the package of your choice: ");
-		reservation.optionId = menuChoise;
+		// show info according to rooms type
+		theRoom = fmFunc.selectByIndex(to_string(menuChoise), 0, "rooms.txt");
+		if (theRoom[5] == "normal") {
+			options = fmFunc.selectAllByIndex("normal", 1, "roomOptions.txt");
+		} else if (theRoom[5] == "vip") {
+			options = fmFunc.selectAllByIndex("vip", 1, "roomOptions.txt");
+		}
+		cout << "0) None" << ".\n";
+		for (int i = 0; i < options.size(); i++) {
+			allOptions.push_back(msFunc.split(options[i], "|"));
+			cout << i + 1 << ") " << allOptions[i][2] << ".\n";
+		}
+		menuChoise = miFunc.get_int("\n\nChoose the addon option for the room: ");
+		reservation.optionId = stoi(allOptions[menuChoise - 1][0]);
 		// Guest will be navigated to the registration if guest is not registered.
-		if (guest.getEmail() == "") {
-			// Redirect to reservation 
+		if (guest.getEmail() == "") {// Redirect to registration page			 
 			cout << "Perfect! You will be redirected to the sign-up page in no time.\nPlease be patient...";
 			Sleep(1000);
 			system("cls");
@@ -150,14 +161,12 @@ void menu(Guest& guest) {
 		cout << "Perfect! You will be redirected to the confirmation page in no time.\nPlease be patient...";
 		Sleep(1000);
 		system("cls");
-		fmFunc.setFilename("reservations.txt");
-		reservation.id = fmFunc.getLastId() + 1;
+		reservation.id = fmFunc.getLastId("reservations.txt") + 1;
 		// Save to reservation table
 		string theReservation = "\n" + to_string(reservation.id) + "|" + to_string(guest.getId()) + "|" + to_string(reservation.roomId) + "|" + to_string(reservation.optionId);
-		fmFunc.insert(theReservation);
+		fmFunc.insert(theReservation, "reservations.txt");
 		// Show the reservation info
 		cout << "You have booked a room in hotel ";
-
 	}
 
 	else if (menuOption == "2") {

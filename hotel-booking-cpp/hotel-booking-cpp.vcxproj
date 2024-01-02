@@ -158,6 +158,7 @@
     <Text Include="guests.txt" />
     <Text Include="hotels.txt" />
     <Text Include="reservations.txt" />
+    <Text Include="roomOptions.txt" />
     <Text Include="rooms.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

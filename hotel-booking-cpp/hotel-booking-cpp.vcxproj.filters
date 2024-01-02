@@ -97,5 +97,8 @@
     <Text Include="rooms.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="roomOptions.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

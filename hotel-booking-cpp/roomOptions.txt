@@ -1,0 +1,9 @@
+id|type|option
+1|normal|Irish whiskey
+2|normal|Festis hallon
+3|normal|Peanuts
+4|normal|Chips
+5|normal|Absolut vodka
+6|vip|Breakfast
+7|vip|Lunch
+8|vip|Dinner
