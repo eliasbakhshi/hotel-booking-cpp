@@ -1,4 +1,3 @@
-#pragma once
 #include "Headers.h"
 #include "Guest.h"
 #include "ManageInputs.h"
@@ -24,8 +23,13 @@ int main() {
 		cout << line[0] << ": " << line[1] << ", " << line[2] << ", " << line[3] << ". \n";
 	}*/
 	//NormalRoom* norm1 = new NormalRoom(15, 22, true);
-	hotel.addRoom(36,22, true);
+	hotel.addNormalRoom(36,22, true);
+	hotel.addNormalRoom(31, 44, true);
+	hotel.addGuest(guest);
+	hotel.addGuest(guest);
 	hotel.showRooms();
+	hotel.showGuests();
+	hotel.getGuests();
 
 	return 0;
 }
