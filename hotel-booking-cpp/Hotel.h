@@ -34,6 +34,7 @@ public:
 	void addVipRoom(int roomNum, int size, bool isAvailable);
 	void showRooms();
 	void showGuests() const;
+	bool removeGuest(int id);
 
 
 };

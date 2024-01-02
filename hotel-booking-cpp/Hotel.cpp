@@ -96,3 +96,17 @@ void Hotel::showGuests() const {
 		cout << guestPtr->getFirstName() << " " << guestPtr->getLastName() << endl;
 	}
 }
+
+bool Hotel::removeGuest(int id) {
+	bool isDeleted = false;
+
+	for (auto it = guests.begin(); it != guests.end(); ++it) {
+		if (id == (*it)->getId()) {
+			it = guests.erase(it);
+			isDeleted = true;
+			--it;
+			break;
+		}
+	}
+	return isDeleted;
+}

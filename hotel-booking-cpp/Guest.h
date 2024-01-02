@@ -30,11 +30,7 @@ public:
 	string getPassword();
 	void setPassword(string password);
 
-
 	bool editGuest(int id, string firstName, string email, string lastName = "", string phone = 0);
-	bool removeGuest(int id);
-
-
 
 };
 
