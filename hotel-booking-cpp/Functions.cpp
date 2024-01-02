@@ -7,7 +7,6 @@
 #include "FileManager.h"
 
 
-bool isLoggedIn = false;
 FileManager fmFunc;
 ManageString msFunc;
 ManageInputs miFunc;
@@ -98,6 +97,8 @@ void menu(Guest& guest) {
 		cout << "1) Book hotel" << endl;
 		cout << "2) Register" << endl;
 		cout << "3) Login" << endl;
+		if (guest.getEmail() != "")
+			cout << "3) logout" << endl;
 		cout << "q) Quit" << endl;
 		cout << "\n--> "; cin >> menuOption; cin.ignore();
 		system("cls");
@@ -106,7 +107,8 @@ void menu(Guest& guest) {
 			Reservation reservation;
 			vector<string> theHotel, theRoom, options, theOption;
 			vector<vector<string>> allOptions;
-			int hotelNum, roomNum, optionNum;
+			string optionNums, optionNum, comma;
+			int hotelNum, roomNum;
 			cout << "Welcome " + guest.getFirstName() << "!\n" << endl;
 
 			showHotels();
@@ -116,20 +118,29 @@ void menu(Guest& guest) {
 			roomNum = miFunc.get_int("\n\nChoose the rooms that you want: ");
 			reservation.roomId = roomNum;
 			system("cls");
-			// show info according to rooms type
+			// show options according to rooms type
 			theRoom = fmFunc.selectByIndex(to_string(roomNum), 0, "rooms.txt");
 			if (theRoom[5] == "normal") {
 				options = fmFunc.selectAllByIndex("normal", 1, "roomOptions.txt");
 			} else if (theRoom[5] == "vip") {
 				options = fmFunc.selectAllByIndex("vip", 1, "roomOptions.txt");
 			}
-			cout << "0) None" << ".\n";
-			for (int i = 0; i < options.size(); i++) {
-				allOptions.push_back(msFunc.split(options[i], "|"));
-				cout << i + 1 << ") " << allOptions[i][2] << ".\n";
+			while (true) {
+				cout << "0) None" << ".\n";
+				for (int i = 0; i < options.size(); i++) {
+					allOptions.push_back(msFunc.split(options[i], "|"));
+					cout << i + 1 << ") " << allOptions[i][2] << ".\n";
+				}
+				cout << "d) Done.";
+				optionNum = miFunc.get_string("\n\nChoose the addon option for the room: ");
+				if (optionNum != "0" && msFunc.is_number(optionNum)) {
+					optionNums += comma + allOptions[stoi(optionNum) - 1][0];
+					comma = ",";
+				} else if (optionNum == "d") {
+					break;
+				}
+				reservation.options = stoi(allOptions[stoi(optionNum) - 1][0]);
 			}
-			optionNum = miFunc.get_int("\n\nChoose the addon option for the room: ");
-			reservation.optionId = stoi(allOptions[optionNum - 1][0]);
 			// Get the dates
 			system("cls");
 			reservation.dateIn = miFunc.get_string("Check in date (yyyy/mm/dd): ");
@@ -147,7 +158,7 @@ void menu(Guest& guest) {
 			Sleep(1000);
 			reservation.id = fmFunc.getLastId("reservations.txt") + 1;
 			// Save to reservation table
-			string theReservation = "\n" + to_string(reservation.id) + "|" + to_string(guest.getId()) + "|" + to_string(reservation.roomId) + "|" + to_string(reservation.optionId) + "|" + reservation.dateIn + "|" + reservation.dateOut;
+			string theReservation = "\n" + to_string(reservation.id) + "|" + to_string(guest.getId()) + "|" + to_string(reservation.roomId) + "|" + reservation.options + "|" + reservation.dateIn + "|" + reservation.dateOut;
 			fmFunc.insert(theReservation, "reservations.txt");
 			// Get the hotel info
 			theHotel = fmFunc.selectByIndex(to_string(hotelNum), 0, "hotels.txt");
@@ -157,7 +168,7 @@ void menu(Guest& guest) {
 			cout << "Your booking information:\n";
 			cout << "Type: " << theRoom[5] << " room\n";
 			cout << "Hotel: " << theHotel[1] << " in " << theHotel[2] << ", " << theHotel[3] << endl;
-			cout << "Addons:" << allOptions[optionNum - 1][2] << " on your booking.\n\n\n";
+			cout << "Addons:" << allOptions[stoi(optionNum) - 1][2] << " on your booking.\n\n\n";
 		}
 
 		else if (menuOption == "2") {
@@ -198,14 +209,12 @@ void menu(Guest& guest) {
 			}
 			system("cls");
 			menu(guest);
-		}
+		} else if (menuOption == "4" && guest.getEmail() != "") {
 
-		else if (menuOption == "q") {
+		} else if (menuOption == "q") {
 			MessageBoxW(NULL, L"Welcome back later!", L"Fine!", MB_OK | MB_ICONINFORMATION);
 			break;
-		}
-
-		else {
+		} else {
 			MessageBoxW(NULL, L"Please double check your input", L"Error!", MB_OK | MB_ICONERROR);
 		}
 	}

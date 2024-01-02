@@ -3,7 +3,7 @@
 #include "Guest.h"
 
 string bookingNumGenerator();
-void registerGuest();
+void registerGuest(Guest& guest);
 void getInfo();
 void showHotels();
 void showRooms(int hotelId);
