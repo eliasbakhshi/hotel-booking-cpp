@@ -74,8 +74,3 @@ void Guest::setPassword(string password) {
 bool Guest::editGuest(int id, string firstName, string email, string lastName, string phone) {
 	return false;
 }
-
-bool Guest::removeGuest(int id) {
-	return false;
-}
-

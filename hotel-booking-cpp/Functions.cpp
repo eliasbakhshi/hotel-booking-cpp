@@ -1,4 +1,3 @@
-#pragma once
 #include "Headers.h"
 #include "Functions.h"
 #include "Guest.h"
@@ -6,6 +5,7 @@
 #include "ManageInputs.h"
 #include "FileManager.h"
 
+bool isLoggedIn = false;
 
 FileManager fmFunc;
 ManageString msFunc;
@@ -101,7 +101,8 @@ void menu(Guest& guest) {
 				theRoom = fmFunc.selectByIndex(to_string(roomNum), 0, "rooms.txt");
 				if (theRoom[5] == "normal") {
 					options = fmFunc.selectAllByIndex("normal", 1, "roomOptions.txt");
-				} else if (theRoom[5] == "vip") {
+				}
+				else if (theRoom[5] == "vip") {
 					options = fmFunc.selectAllByIndex("vip", 1, "roomOptions.txt");
 				}
 				while (true) {
@@ -115,7 +116,8 @@ void menu(Guest& guest) {
 					if (optionNum != "0" && msFunc.is_number(optionNum)) {
 						optionNums += comma + allOptions[stoi(optionNum) - 1][0];
 						comma = ",";
-					} else if (optionNum == "d") {
+					}
+					else if (optionNum == "d") {
 						break;
 					}
 					reservation.options = stoi(allOptions[stoi(optionNum) - 1][0]);
@@ -143,22 +145,22 @@ void menu(Guest& guest) {
 				theHotel = fmFunc.selectByIndex(to_string(hotelNum), 0, "hotels.txt");
 				system("cls");
 
-		// Show the reservation info in the confirmation page.
-		cout << "Your booking information:\n";
-		cout << "Type: " << theRoom[5] << " room\n";
-		cout << "Hotel: " << theHotel[1] << " in " << theHotel[2] << ", " << theHotel[3] << endl;
-		cout << "Address: " << theHotel[4] << endl;
-		//cout << "Addons: " << viproom.showMeals() << endl;
-		//cout << "Addons: " << allOptions[optionNum - 1][2] << " on your booking.\n";
-		if (theRoom[5] == "vip") {
-			Spa spa;
-			spa.setIsVip(true);
-			cout << "Your personal Spa entry code is: <" + to_string(spa.generateCustomEntryCode()) 
-				+ "> Do not lose it!\n";
-		}
-		guest.setBookingNum(bookingNumGenerator());
-		cout << "Your booking number is: " + guest.getBookingNum() + ". Do not lose it!\n";
-	}
+				// Show the reservation info in the confirmation page.
+				cout << "Your booking information:\n";
+				cout << "Type: " << theRoom[5] << " room\n";
+				cout << "Hotel: " << theHotel[1] << " in " << theHotel[2] << ", " << theHotel[3] << endl;
+				cout << "Address: " << theHotel[4] << endl;
+				//cout << "Addons: " << viproom.showMeals() << endl;
+				//cout << "Addons: " << allOptions[optionNum - 1][2] << " on your booking.\n";
+				if (theRoom[5] == "vip") {
+					Spa spa;
+					spa.setIsVip(true);
+					cout << "Your personal Spa entry code is: <" + to_string(spa.generateCustomEntryCode())
+						+ "> Do not lose it!\n";
+				}
+				guest.setBookingNum(bookingNumGenerator());
+				cout << "Your booking number is: " + guest.getBookingNum() + ". Do not lose it!\n";
+			}
 
 			else if (menuOption == "2") {
 				Guest guest;
@@ -178,7 +180,8 @@ void menu(Guest& guest) {
 					theGuest = fmFunc.selectByIndex(email, 3, "guests.txt");
 					if (theGuest.size() > 2 && email == theGuest[3] && theGuest[5] == password) {
 						break;
-					} else if (tried < tryTimes) {
+					}
+					else if (tried < tryTimes) {
 						system("cls");
 						tried++;
 						cout << "This email and password is not correct. Please try it again. You have " << tryTimes - tried << " try remains. \n\n";
@@ -194,19 +197,30 @@ void menu(Guest& guest) {
 					guest.setPhone(theGuest[4]);
 					cout << "You are logged in. You are going to be redirected to the menu.\nPlease wait...";
 					Sleep(1000);
-				} else {
+				}
+				else {
 					cout << "You could not log in. You are going to be redirected to the menu.\nPlease wait...";
 					Sleep(1000);
 				}
 				system("cls");
 				menu(guest);
-		} else if (menuOption == "4" && guest.getEmail() != "") {
-
-		} else if (menuOption == "q") {
-			MessageBoxW(NULL, L"Welcome back later!", L"Fine!", MB_OK | MB_ICONINFORMATION);
-			break;
-		} else {
-			MessageBoxW(NULL, L"Please double check your input", L"Error!", MB_OK | MB_ICONERROR);
+			}
+			else if (menuOption == "4" && guest.getEmail() != "") {
+				if (isLoggedIn == true) {
+					Hotel hotel;
+					int id = guest.getId();
+					hotel.removeGuest(id);
+					isLoggedIn = false;
+				}
+				else { cout << "You're not logged in!"; }
+			}
+			else if (menuOption == "q") {
+				MessageBoxW(NULL, L"Welcome back later!", L"Fine!", MB_OK | MB_ICONINFORMATION);
+				break;
+			}
+			else {
+				MessageBoxW(NULL, L"Please double check your input", L"Error!", MB_OK | MB_ICONERROR);
+			}
 		}
 	}
 }
