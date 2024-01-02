@@ -15,42 +15,27 @@ VipRoom::~VipRoom() {
 	delete[] this->meals;
 }
 
-void VipRoom::chooseSize(int size) {
-	try {
-		if (size < 80) {
-			this->setSize(size);
-		}
-		else {
-			throw out_of_range("The max size of the room is 80 sqm!");
-		}
+string VipRoom::showMeals() {
+	string content = "";
+	for (int i = 0; i < this->numOfMeals; i++) {
+		content += this->meals[i] + " ";
 	}
-	catch (out_of_range& exc) {
-		cerr << "Error: " << exc.what() << endl;
-	}
+	return content;
 }
 
 void VipRoom::whatMeals(int numOfMeals) {
-	try {
-		this->numOfMeals = numOfMeals;
-
-		if (numOfMeals == 1) {
-			this->meals[0] = "Breakfast";
-		}
-		else if (numOfMeals == 2) {
-			this->meals[0] = "Breakfast";
-			this->meals[1] = "Lunch";
-		}
-		else if (numOfMeals == 3) {
-			this->meals[0] = "Breakfast";
-			this->meals[1] = "Lunch";
-			this->meals[2] = "Dinner";
-		}
-		else {
-			throw out_of_range("You can only choose a maximum number of 3 meals!");
-		}
+	this->numOfMeals = numOfMeals;
+	if (numOfMeals == 1) {
+		meals[0] = "Breakfast";
 	}
-	catch (out_of_range& exc) {
-		cerr << "Error: " << exc.what() << endl;
+	else if(numOfMeals == 2) {
+		meals[0] = "Breakfast";
+		meals[1] = "Lunch";
+	}
+	else if (numOfMeals == 3) {
+		meals[0] = "Breakfast";
+		meals[1] = "Lunch";
+		meals[2] = "Dinner";
 	}
 }
 

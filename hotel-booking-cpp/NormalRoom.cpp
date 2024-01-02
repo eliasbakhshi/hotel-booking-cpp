@@ -11,7 +11,7 @@ NormalRoom::NormalRoom() {
 
 void NormalRoom::enterMinibarContent() {
     string whatsPresent[5]{ "Irish whiskey", "Festis hallon", "Peanuts", "Chips", "Absolut vodka" };
-    cout << "Choose three items to include in your minibar:\nIrish whiskey, Festis hallon, Peanuts, Chips, and Absolut vodka\n" << endl;
+    cout << "Choose three items to include in your minibar:\n" << endl;
 
     try {
         for (int i = 0; i < 3; i++) {

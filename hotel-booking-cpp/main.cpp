@@ -4,7 +4,7 @@
 #include "FileManager.h"
 #include "Functions.h"
 #include "NormalRoom.h"
-
+#include "VipRoom.h"
 
 
 int main() {
@@ -12,7 +12,9 @@ int main() {
 
 	Guest guest;
 	menu(guest);
-
+	VipRoom viproom;
+	viproom.whatMeals(2);
+	cout << viproom.showMeals() << endl;
 	Hotel hotel;
 	/*FileManager fm;
 	ManageString ms;

@@ -63,6 +63,14 @@ void Guest::setBookingNum(string bookingNum) {
 	this->bookingNum = bookingNum;
 }
 
+string Guest::getPassword() {
+	return this->password;
+}
+
+void Guest::setPassword(string password) {
+	this->password = password;
+}
+
 bool Guest::editGuest(int id, string firstName, string email, string lastName, string phone) {
 	return false;
 }
