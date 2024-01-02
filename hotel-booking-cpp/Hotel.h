@@ -28,7 +28,8 @@ public:
 	string getCity();
 	string getCountry();
 	vector<Guest*> getGuests();
-	void addRoom(int roomNum, int size, bool isAvailable);
+	void addNormalRoom(int roomNum, int size, bool isAvailable);
+	void addVipRoom(int roomNum, int size, bool isAvailable);
 	void showRooms();
 	void showGuests();
 

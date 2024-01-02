@@ -54,10 +54,16 @@ vector<Guest*> Hotel::getGuests() {
 	return this->guests;
 }
 
-void Hotel::addRoom(int number, int size, bool isAvailable) {
+void Hotel::addNormalRoom(int number, int size, bool isAvailable) {
 	fmHotel.setFilename("rooms.txt");
 	int theId = fmHotel.getLastId() + 1;
 	rooms.push_back(new NormalRoom(theId, number, size, isAvailable));
+}
+
+void Hotel::addVipRoom(int number, int size, bool isAvailable) {
+	fmHotel.setFilename("rooms.txt");
+	int theId = fmHotel.getLastId() + 1;
+	rooms.push_back(new VipRoom(theId, number, size, isAvailable));
 }
 
 
