@@ -1,4 +1,3 @@
-#pragma once
 #include "Headers.h"
 #include "Guest.h"
 #include "ManageInputs.h"
@@ -12,7 +11,7 @@ int main() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	Guest guest;
-	menu(guest);
+	//menu(guest);
 
 	Hotel hotel;
 	/*FileManager fm;
@@ -25,7 +24,12 @@ int main() {
 	}*/
 	//NormalRoom* norm1 = new NormalRoom(15, 22, true);
 	hotel.addNormalRoom(36,22, true);
+	hotel.addNormalRoom(31, 44, true);
+	hotel.addGuest(guest);
+	hotel.addGuest(guest);
 	hotel.showRooms();
+	hotel.showGuests();
+	hotel.getGuests();
 
 	return 0;
 }

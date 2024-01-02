@@ -1,4 +1,3 @@
-#pragma once
 #include "Hotel.h"
 
 FileManager fmHotel;
@@ -17,9 +16,6 @@ Hotel::Hotel() {
 }
 
 Hotel::~Hotel() {
-	for (Room* room : rooms) {
-		delete room;
-	}
 }
 
 void Hotel::setName(string name) {
@@ -34,9 +30,11 @@ void Hotel::setCountry(string country) {
 	this->country = country;
 }
 
-void Hotel::addGuest(Guest* guest) {
-	this->guests.push_back(guest);
+void Hotel::addGuest(Guest guest) {
+	unique_ptr<Guest> guestPtr = make_unique<Guest>(move(guest));
+	this->guests.push_back(move(guestPtr));
 }
+
 
 string Hotel::getName() {
 	return this->name;
@@ -50,26 +48,31 @@ string Hotel::getCountry() {
 	return this->country;
 }
 
-vector<Guest*> Hotel::getGuests() {
-	return this->guests;
+vector<unique_ptr<Guest>> Hotel::getGuests() {
+	return move(this->guests);
 }
+
+//vector<Guest*> Hotel::getGuests() {
+//	return this->guests;
+//}
 
 void Hotel::addNormalRoom(int number, int size, bool isAvailable) {
 	fmHotel.setFilename("rooms.txt");
 	int theId = fmHotel.getLastId() + 1;
-	rooms.push_back(new NormalRoom(theId, number, size, isAvailable));
+	rooms.push_back(make_unique<NormalRoom>(theId, number, size, isAvailable));
+	//rooms.push_back(new NormalRoom(theId, number, size, isAvailable));
 }
 
 void Hotel::addVipRoom(int number, int size, bool isAvailable) {
 	fmHotel.setFilename("rooms.txt");
 	int theId = fmHotel.getLastId() + 1;
-	rooms.push_back(new VipRoom(theId, number, size, isAvailable));
+	rooms.push_back(make_unique<VipRoom>(theId, number, size, isAvailable));
 }
 
 
 void Hotel::showRooms() {
 	for (int i = 0; i < rooms.size(); i++) {
-		cout << rooms[i]->getRoomInfo();
+		cout << rooms[i]->getRoomInfo() << endl;
 		/*NormalRoom* normalr = dynamic_cast<NormalRoom*>(&rooms[i]);
 		VipRoom* vipr = dynamic_cast<VipRoom*>(&rooms[i]);
 		Spa* spar = dynamic_cast<Spa*>(&rooms[i]);
@@ -88,10 +91,8 @@ void Hotel::showRooms() {
 
 }
 
-void Hotel::showGuests() {
-	for (Guest* guest : guests) {
-		cout << guest->getFirstName() << " " << guest->getLastName() << endl;
+void Hotel::showGuests() const {
+	for (const auto& guestPtr : guests) {
+		cout << guestPtr->getFirstName() << " " << guestPtr->getLastName() << endl;
 	}
 }
-
-
