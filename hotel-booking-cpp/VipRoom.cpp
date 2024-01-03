@@ -12,7 +12,6 @@ VipRoom::VipRoom() {
 }
 
 VipRoom::~VipRoom() {
-	delete[] this->meals;
 }
 
 string VipRoom::showMeals() {
