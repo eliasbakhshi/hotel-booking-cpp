@@ -12,6 +12,7 @@ Spa::~Spa() {
 }
 
 int Spa::generateCustomEntryCode() {
+	// Generates a custom entry code for the VIP users
 	int entryCode;
 	if (this->isVip == true) {
 		srand(time(0));
