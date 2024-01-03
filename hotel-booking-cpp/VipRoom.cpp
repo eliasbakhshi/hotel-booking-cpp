@@ -15,6 +15,7 @@ VipRoom::~VipRoom() {
 }
 
 string VipRoom::showMeals() {
+	// shows all the meals chosen by the VIP user
 	string content = "";
 	for (int i = 0; i < this->numOfMeals; i++) {
 		content += this->meals[i] + " ";
@@ -23,6 +24,7 @@ string VipRoom::showMeals() {
 }
 
 void VipRoom::whatMeals(int numOfMeals) {
+	// Lets the user choose what meals they want
 	this->numOfMeals = numOfMeals;
 	if (numOfMeals == 1) {
 		meals[0] = "Breakfast";
@@ -40,6 +42,7 @@ void VipRoom::whatMeals(int numOfMeals) {
 
 
 string VipRoom::getRoomInfo() {
+	// Prints out the room information(used in Hotel class)
 	return to_string(this->getId()) + ") Type: VIP, Number: " + to_string(this->getNumber()) + ", Size: " + to_string(this->getSize()) + "sqm";
 	/*string mealsString = "";
 	for (int i = 0; i < numOfMeals; i++) {

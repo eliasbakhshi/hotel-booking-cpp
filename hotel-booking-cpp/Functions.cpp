@@ -12,6 +12,7 @@ ManageString msFunc;
 ManageInputs miFunc;
 
 string bookingNumGenerator() {
+	// Generates a booking number of 8 characters including letters and numbers
 	random_device rd;
 	mt19937 gen(rd());
 	const string characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
