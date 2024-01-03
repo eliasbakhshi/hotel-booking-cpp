@@ -167,8 +167,9 @@ void menu(Guest& guest) {
 			guest.setBookingNum(bookingNumGenerator());
 			cout << "Your booking number is: " + guest.getBookingNum() + ". Do not lose it!\n";
 
-
-			// press enter to go to the menu
+			cout << "Press enter to continue...\n";
+			getchar();
+			system("cls");
 		}
 
 		else if (menuOption == "2") {
