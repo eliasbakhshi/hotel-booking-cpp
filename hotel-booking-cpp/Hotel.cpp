@@ -101,9 +101,9 @@ int Hotel::showOptions(int roomId) {
 	VipRoom* vipr = dynamic_cast<VipRoom*>(rooms[roomId].get());
 
 	if (normalr) {
-		cout << "The room number is: " + to_string(rooms[roomId]->getNumber()) + ".\n";
+		normalr->showMinibarContent();
 	} else if (vipr) {
-		cout << "The room number is: " + to_string(rooms[roomId]->getNumber()) + ".\n";
+		vipr->showMeals();
 	}
 
 	return 0;

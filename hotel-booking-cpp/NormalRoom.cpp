@@ -7,7 +7,7 @@ NormalRoom::NormalRoom(int id, int number, int floor, int size)
 NormalRoom::NormalRoom() {
 }
 
-void NormalRoom::enterMinibarContent() {
+void NormalRoom::showMinibarContent() {
     string whatsPresent[5]{ "Irish whiskey", "Festis hallon", "Peanuts", "Chips", "Absolut vodka" };
     cout << "Choose three items to include in your minibar:\n" << endl;
 

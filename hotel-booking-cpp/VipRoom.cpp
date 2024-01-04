@@ -9,16 +9,16 @@ VipRoom::VipRoom() {
 	this->numOfMeals = 3;
 }
 
-string VipRoom::showMeals() {
-	// shows all the meals chosen by the VIP user
-	string content = "";
-	for (int i = 0; i < this->numOfMeals; i++) {
-		content += this->meals[i] + " ";
-	}
-	return content;
-}
+//string VipRoom::showMeals() {
+//	// shows all the meals chosen by the VIP user
+//	string content = "";
+//	for (int i = 0; i < this->numOfMeals; i++) {
+//		content += this->meals[i] + " ";
+//	}
+//	return content;
+//}
 
-void VipRoom::whatMeals(int numOfMeals) {
+void VipRoom::showMeals() {
 	// Lets the user choose what meals they want
 	this->numOfMeals = numOfMeals;
 	if (numOfMeals == 1) {

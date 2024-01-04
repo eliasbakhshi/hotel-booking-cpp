@@ -9,8 +9,7 @@ private:
 public:
 	VipRoom(int id, int number, int floor, int size);
 	VipRoom();
-	void whatMeals(int numOfMeals);
-	string showMeals();
+	void showMeals();
 
 	string getRoomInfo() override;
 };
