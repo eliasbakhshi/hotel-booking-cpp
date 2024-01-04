@@ -6,7 +6,6 @@ VipRoom::VipRoom(int id, int number, int floor, int size)
 
 VipRoom::VipRoom() {
 	this->setSize(46);
-	this->numOfMeals = 3;
 }
 
 //string VipRoom::showMeals() {
@@ -18,18 +17,23 @@ VipRoom::VipRoom() {
 //	return content;
 //}
 
+void VipRoom::addMeals() {
+	int itemsChosen = 0;
+	string mealsPresent[3] = { "Breakfast", "Lunch", "Dinner" };
+	for (int i = 0; i < 3; i++) {
+		cout << i + 1 << ") " << mealsPresent[i] << "\n";
+	}
+	while (itemsChosen < 3) {
+		int itemNum = 0;
+		cout << "\nChoose three items to include in your minibar. Item " + to_string(itemsChosen + 1) + ": "; cin >> itemNum;
+		this->meals[itemsChosen] = mealsPresent[itemNum - 1];
+		itemsChosen++;
+	}
+}
+
 void VipRoom::showMeals() {
-	// Lets the user choose what meals they want
-	this->numOfMeals = numOfMeals;
-	if (numOfMeals == 1) {
-		meals[0] = "Breakfast";
-	} else if (numOfMeals == 2) {
-		meals[0] = "Breakfast";
-		meals[1] = "Lunch";
-	} else if (numOfMeals == 3) {
-		meals[0] = "Breakfast";
-		meals[1] = "Lunch";
-		meals[2] = "Dinner";
+	for (int i = 0; i < 3; i++) {
+		cout << this->meals[i] << endl;
 	}
 }
 

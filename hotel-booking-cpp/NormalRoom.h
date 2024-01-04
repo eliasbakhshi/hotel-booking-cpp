@@ -9,6 +9,7 @@ private:
 public:
 	NormalRoom(int id, int number, int floor, int size);
 	NormalRoom();
+	void addMinibarContent();
 	void showMinibarContent();
 
 	string getRoomInfo() override;

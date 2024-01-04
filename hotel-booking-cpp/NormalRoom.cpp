@@ -7,22 +7,23 @@ NormalRoom::NormalRoom(int id, int number, int floor, int size)
 NormalRoom::NormalRoom() {
 }
 
-void NormalRoom::showMinibarContent() {
+void NormalRoom::addMinibarContent() {
+    int itemsChosen = 0;
     string whatsPresent[5]{ "Irish whiskey", "Festis hallon", "Peanuts", "Chips", "Absolut vodka" };
-    cout << "Choose three items to include in your minibar:\n" << endl;
-
-    try {
-        for (int i = 0; i < 3; i++) {
-            cout << "Item " << i + 1 << ": ";
-            cin >> this->minibar[i];
-
-            if (this->minibar[i] != whatsPresent[i]) {
-                throw out_of_range("Item is not in stock!");
-            }
-        }
+    for (int i = 0; i < 5; i++) {
+        cout << i + 1 << ") " << whatsPresent[i] << "\n";
     }
-    catch (out_of_range& e) {
-        cerr << "Error: " << e.what() << endl;
+    while (itemsChosen < 3) {
+        int itemNum = 0;
+        cout << "\nChoose three items to include in your minibar. Item " + to_string(itemsChosen + 1) + ": "; cin >> itemNum;
+        this->minibar[itemsChosen] = whatsPresent[itemNum - 1];
+        itemsChosen++;
+    }
+}
+
+void NormalRoom::showMinibarContent() {
+    for (int i = 0; i < 3; i++) {
+        cout << this->minibar[i] << endl;
     }
 }
 
