@@ -4,15 +4,12 @@
 
 class VipRoom : public Room {
 private:
-	int numOfMeals;
+	int numOfMeals = 0;
 	string meals[3];
 public:
-	VipRoom(int id, int number, int size, bool isAvailable = true);
+	VipRoom(int id, int number, int floor, int size);
 	VipRoom();
-	~VipRoom();
-	void whatMeals(int numOfMeals);
-	string showMeals();
+	void showMeals();
 
 	string getRoomInfo() override;
 };
-

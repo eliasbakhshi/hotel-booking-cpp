@@ -9,13 +9,30 @@ Hotel::Hotel(string name, string city, string country) {
 	this->country = country;
 }
 
-Hotel::Hotel() {
-	this->name = "";
-	this->city = "";
-	this->country = "";
+Hotel::Hotel(int hotelId) {
+	this->hotelId = hotelId;
+	vector<string> theHotel = fmHotel.selectByIndex(to_string(hotelId), 0, "hotels.txt");
+
+	this->name = theHotel[1];
+	this->country = theHotel[2];
+	this->city = theHotel[3];
+	this->address = theHotel[4];
+
+	vector<string> rooms = fmHotel.selectAllByIndex(to_string(hotelId), 4, "rooms.txt");
+	for (int i = 0; i < rooms.size(); i++) {
+		vector<string> line = msHotel.split(rooms[i], "|");
+		if (line[5] == "normal") {
+			this->addNormalRoom(stoi(line[0]), stoi(line[1]), stoi(line[2]), stoi(line[3]));
+		} else if (line[5] == "vip") {
+			this->addVipRoom(stoi(line[0]), stoi(line[1]), stoi(line[2]), stoi(line[3]));
+		}
+	}
 }
 
-Hotel::~Hotel() {
+Hotel::~Hotel() {}
+
+void Hotel::setHotelId(int id) {
+	this->hotelId = hotelId;
 }
 
 void Hotel::setName(string name) {
@@ -30,11 +47,18 @@ void Hotel::setCountry(string country) {
 	this->country = country;
 }
 
+void Hotel::setAddress(string address) {
+	this->address = address;
+}
+
 void Hotel::addGuest(Guest guest) {
 	unique_ptr<Guest> guestPtr = make_unique<Guest>(move(guest));
 	this->guests.push_back(move(guestPtr));
 }
 
+int Hotel::getHotelId() {
+	return this->hotelId;
+}
 
 string Hotel::getName() {
 	return this->name;
@@ -48,47 +72,41 @@ string Hotel::getCountry() {
 	return this->country;
 }
 
+string Hotel::getAddress() {
+	return this->address;
+}
+
 vector<unique_ptr<Guest>> Hotel::getGuests() {
 	return move(this->guests);
 }
 
-//vector<Guest*> Hotel::getGuests() {
-//	return this->guests;
-//}
-
-void Hotel::addNormalRoom(int number, int size, bool isAvailable) {
-	fmHotel.setFilename("rooms.txt");
-	int theId = fmHotel.getLastId() + 1;
-	rooms.push_back(make_unique<NormalRoom>(theId, number, size, isAvailable));
-	//rooms.push_back(new NormalRoom(theId, number, size, isAvailable));
+void Hotel::addNormalRoom(int id, int roomNum, int floor, int size) {
+	rooms.push_back(make_unique<NormalRoom>(id, roomNum, floor, size));
 }
 
-void Hotel::addVipRoom(int number, int size, bool isAvailable) {
-	fmHotel.setFilename("rooms.txt");
-	int theId = fmHotel.getLastId() + 1;
-	rooms.push_back(make_unique<VipRoom>(theId, number, size, isAvailable));
+void Hotel::addVipRoom(int id, int roomNum, int floor, int size) {
+	rooms.push_back(make_unique<VipRoom>(id, roomNum, floor, size));
 }
 
 
-void Hotel::showRooms() {
+int Hotel::showRooms() {
 	for (int i = 0; i < rooms.size(); i++) {
 		cout << rooms[i]->getRoomInfo() << endl;
-		/*NormalRoom* normalr = dynamic_cast<NormalRoom*>(&rooms[i]);
-		VipRoom* vipr = dynamic_cast<VipRoom*>(&rooms[i]);
-		Spa* spar = dynamic_cast<Spa*>(&rooms[i]);
+	}
+	return rooms.size();
+}
 
-		if (normalr) {
-			string theAvailibility = to_string(rooms[i].getIsAvailable()) = "1" ? "available" : "is not available";
-			cout << "The room number is: " + to_string(rooms[i].getRoomNum()) + " and the room is " + theAvailibility + ".\n";
-		} else if(vipr){
-			string theAvailibility = to_string(rooms[i].getIsAvailable()) = "1" ? "available" : "is not available";
-			cout << "The room number is: " + to_string(rooms[i].getRoomNum()) + " and the room is " + theAvailibility + ".\n";
-		} else if(spar){
-			string theAvailibility = to_string(rooms[i].getIsAvailable()) = "1" ? "available" : "is not available";
-			cout << "The room number is: " + to_string(rooms[i].getRoomNum()) + " and the room is " + theAvailibility + ".\n";
-		} */
+int Hotel::showOptions(int roomId) {
+	NormalRoom* normalr = dynamic_cast<NormalRoom*>(rooms[roomId].get());
+	VipRoom* vipr = dynamic_cast<VipRoom*>(rooms[roomId].get());
+
+	if (normalr) {
+		normalr->showMinibarContent();
+	} else if (vipr) {
+		vipr->showMeals();
 	}
 
+	return 0;
 }
 
 void Hotel::showGuests() const {

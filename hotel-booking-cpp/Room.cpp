@@ -5,10 +5,10 @@ Room::Room() {
     this->number = 0;
     this->number = number;
     this->size = size;
-    this->isAvailable = isAvailable;
+    this->type = type;
 }
 
-Room::Room(int id, int number, int size, bool isAvailable): id(id), number(number), size(size), isAvailable(isAvailable) {
+Room::Room(int id, int number, int floor, int size, string type): id(id), number(number), size(size), type(type) {
 }
 
 Room::~Room() {
@@ -26,12 +26,13 @@ void Room::setFloor(int floor) {
     this->floor = floor;
 }
 
-void Room::setIsAvailable(bool isAvailable) {
-    this->isAvailable = isAvailable;
-}
 
 void Room::setSize(int size) {
     this->size = size;
+}
+
+void Room::setType(string type) {
+    this->type = type;
 }
 
 int Room::getId() {
@@ -50,6 +51,7 @@ int Room::getSize() {
     return this->size;
 }
 
-bool Room::getIsAvailable() {
-    return this->isAvailable;
+string Room::getType() {
+    return this->type;
 }
+

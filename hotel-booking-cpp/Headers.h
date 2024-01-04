@@ -13,6 +13,6 @@ using namespace std;
 
 // strcuts
 struct Reservation {
-	int id, roomId;
+	int id = 0, roomId = 0;
 	string dateIn, dateOut, options;
 };

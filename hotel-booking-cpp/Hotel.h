@@ -11,28 +11,31 @@ class Guest;
 
 class Hotel {
 private:
-	string name, city, country;
-	int nrOfRooms;
-	//vector<Room*> rooms;
-	//vector<Guest*> guests;
+	string name, city, country, address;
+	int hotelId = 0;
 	vector<unique_ptr<Room>> rooms;
 	vector<unique_ptr<Guest>> guests;
 
 public:
 	Hotel(string name, string city, string country);
-	Hotel();
+	Hotel(int id);
 	~Hotel();
+	void setHotelId(int id);
 	void setName(string name);
 	void setCity(string city);
 	void setCountry(string country);
-	void addGuest(Guest guest);
+	void setAddress(string address);
+	int getHotelId();
 	string getName();
 	string getCity();
 	string getCountry();
+	string getAddress();
 	vector<unique_ptr<Guest>> getGuests();
-	void addNormalRoom(int roomNum, int size, bool isAvailable);
-	void addVipRoom(int roomNum, int size, bool isAvailable);
-	void showRooms();
+	void addGuest(Guest guest);
+	void addNormalRoom(int id, int roomNum, int floor, int size);
+	void addVipRoom(int id, int roomNum, int floor, int size);
+	int showRooms();
+	int showOptions(int roomId);
 	void showGuests() const;
 	bool removeGuest(int id);
 

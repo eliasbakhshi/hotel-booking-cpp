@@ -12,10 +12,10 @@ int main() {
 
 	Guest guest;
 	menu(guest);
-	VipRoom viproom;
+	/*VipRoom viproom;
 	viproom.whatMeals(2);
-	cout << viproom.showMeals() << endl;
-	Hotel hotel;
+	cout << viproom.showMeals() << endl;*/
+	//Hotel hotel;
 	/*FileManager fm;
 	ManageString ms;
 	fm.setFilename("hotels.txt");

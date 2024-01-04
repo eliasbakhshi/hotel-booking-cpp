@@ -4,6 +4,6 @@
 
 string bookingNumGenerator();
 void registerGuest(Guest& guest);
-void showHotels();
+int showHotels();
 void showRooms(int hotelId);
 void menu(Guest& guest);
