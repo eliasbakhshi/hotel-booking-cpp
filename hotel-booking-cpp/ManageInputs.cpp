@@ -5,6 +5,7 @@ ManageInputs::ManageInputs() {}
 
 ManageInputs::~ManageInputs() {}
 
+// Get the input as a string.
 string ManageInputs::get_string(string message, bool acceptEmptyString) {
 	string theInput;
 	cout << message;
@@ -19,6 +20,7 @@ string ManageInputs::get_string(string message, bool acceptEmptyString) {
 	return theInput;
 }
 
+// Get the input as an integer.
 int ManageInputs::get_int(string message, int minRange, int maxRange) {
 	string theInput;
 	cout << message;
@@ -29,7 +31,7 @@ int ManageInputs::get_int(string message, int minRange, int maxRange) {
 			cout << message;
 			getline(cin, theInput);
 		}
-	} else {
+	} else { // IF the range is given.
 		while (!(is_number(theInput) && stoi(theInput) >= minRange && stoi(theInput) <= maxRange)) {
 			cout << "Please enter a valid number.\n";
 			cout << message;
@@ -38,9 +40,9 @@ int ManageInputs::get_int(string message, int minRange, int maxRange) {
 	}
 
 	return stoi(theInput);
-
 }
 
+// Get the input as a string.
 float ManageInputs::get_float(string message) {
 	string theInput;
 	cout << message;

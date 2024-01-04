@@ -7,7 +7,7 @@ class NormalRoom : public Room{
 private:
 	string minibar[3];
 public:
-	NormalRoom(int id, int number, int size, bool isAvailable = true);
+	NormalRoom(int id, int number, int floor, int size);
 	NormalRoom();
 	void enterMinibarContent();
 

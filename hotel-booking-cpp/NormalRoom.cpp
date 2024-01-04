@@ -1,10 +1,8 @@
 #pragma once
 #include "NormalRoom.h"
 
-NormalRoom::NormalRoom(int id, int roomNum, int size, bool isAvailable)
-	:Room(id, roomNum, size, isAvailable)
-{
-}
+NormalRoom::NormalRoom(int id, int number, int floor, int size)
+    :Room(id, number, floor, size, "normal"){}
 
 NormalRoom::NormalRoom() {
 }
@@ -28,13 +26,7 @@ void NormalRoom::enterMinibarContent() {
     }
 }
 
+// Prints out the room information(used in Hotel class)
 string NormalRoom::getRoomInfo() {
-    return to_string(this->getId()) + ") Type: Normal, Number: " + to_string(this->getNumber()) + ", Size: " + to_string(this->getSize()) + "sqm";
-    //string minibarString = "";
-	//for (int i = 0; i < 3; i++) {
-	//	minibarString += minibar[i] + " ";
-	//}
-	//return "The number of this normal room is: " + to_string(getRoomNum()) +
-	//	"The size of the room is: " + to_string(getRoomSize()) + 
-	//	"The items in the minibar are: " + minibarString;
+    return to_string(this->getId()) + ") Type: Normal, Number: " + to_string(this->getNumber()) + " floor: " + to_string(this->getFloor()) + ", Size: " + to_string(this->getSize()) + "sqm";
 }
