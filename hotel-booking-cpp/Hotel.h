@@ -40,5 +40,6 @@ public:
 	void showGuests() const;
 	bool removeGuest(int id);
 
+	void updateGuest(int id, string firstName, string lastName, string email, string phone, string password);
 
 };

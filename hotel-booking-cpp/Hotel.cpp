@@ -136,3 +136,16 @@ bool Hotel::removeGuest(int id) {
 	}
 	return isDeleted;
 }
+
+void Hotel::updateGuest(int id, string firstName, string lastName, string email, string phone, string password) {
+	for (const auto& guestPtr : this->guests) {
+		if (email == guestPtr->getEmail()) {
+			guestPtr->setId(id);
+			guestPtr->setFirstName(firstName);
+			guestPtr->setLastName(lastName);
+			guestPtr->setEmail(email);
+			guestPtr->setPhone(phone);
+			guestPtr->setPassword(password);
+		}
+	}
+}

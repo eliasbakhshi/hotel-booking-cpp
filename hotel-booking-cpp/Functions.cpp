@@ -78,7 +78,8 @@ void menu(Guest& guest) {
 		cout << "1) Book hotel" << endl;
 		cout << "2) Register" << endl;
 		cout << "3) Login" << endl;
-		if (guest.getEmail() != "")
+		//if (guest.getEmail() != "")
+		if (isLoggedIn == true)
 			cout << "4) logout" << endl;
 		cout << "q) Quit" << endl;
 		menuOption = miFunc.get_string("\n--> ");
@@ -153,6 +154,8 @@ void menu(Guest& guest) {
 		}
 
 		else if (menuOption == "2") {
+
+			// if email already exists, deny it !! read from text file
 			Guest guest;
 			registerGuest(guest);
 			isLoggedIn = true;
@@ -163,49 +166,71 @@ void menu(Guest& guest) {
 
 		else if (menuOption == "3") {
 			string email, password;
-			vector<string> theGuest = { "false" };
+			vector<string> theGuest;
 			int tried = 0, tryTimes = 3;
+
 			while (tried < tryTimes) {
 				email = miFunc.get_string("Please enter your email: ");
 				password = miFunc.get_string("Please enter your password: ");
-
 				theGuest = fmFunc.selectByIndex(email, 3, "guests.txt");
-				if (theGuest.size() > 2 && email == theGuest[3] && theGuest[5] == password) {
+				if (theGuest.size() > 2 && email == theGuest[3] && theGuest[4] == password) {
+					isLoggedIn = true;
+					guest.setFirstName(theGuest[1]);
+					hotel.updateGuest(stoi(theGuest[0]), theGuest[1], theGuest[2], theGuest[3], theGuest[4], theGuest[5]);
+					cout << "You are logged in. You are going to be redirected to the menu.\nPlease wait...";
+					Sleep(3000);
+					system("cls");
+					menu(guest);
 					break;
-				} else if (tried < tryTimes) {
+				}
+				else {
 					system("cls");
 					tried++;
-					cout << "This email and password is not correct. Please try it again. You have " << tryTimes - tried << " try remains. \n\n";
+					cout << "Incorrect email or password. You have " << tryTimes - tried << " tries remaining. Please try again.\n\n";
 				}
 			}
-			// Update the info
-			if (theGuest.size() > 2 && theGuest[0] != "false") {
-				isLoggedIn = true;
-				guest.setId(stoi(theGuest[0]));
-				guest.setFirstName(theGuest[1]);
-				guest.setLastName(theGuest[2]);
-				guest.setEmail(theGuest[3]);
-				guest.setPhone(theGuest[4]);
-				cout << "You are logged in. You are going to be redirected to the menu.\nPlease wait...";
-				Sleep(3000);
-			} else {
-				cout << "You could not log in. You are going to be redirected to the menu.\nPlease wait...";
-				Sleep(3000);
-			}
+			cout << "You could not log in. You are going to be redirected to the menu.\nPlease wait...";
+			Sleep(3000);
 			system("cls");
 			menu(guest);
-		} else if (menuOption == "4" && guest.getEmail() != "") {
+		}
+		//// Update the info
+		//if (theGuest.size() > 2 && theGuest[0] != "false") {
+		//	isLoggedIn = true;
+		//	guest.setId(stoi(theGuest[0]));
+		//	guest.setFirstName(theGuest[1]);
+		//	guest.setLastName(theGuest[2]);
+		//	guest.setEmail(theGuest[3]);
+		//	guest.setPhone(theGuest[4]);
+		//	cout << "You are logged in. You are going to be redirected to the menu.\nPlease wait...";
+		//	Sleep(3000);
+		//}
+		//else {
+		//	cout << "You could not log in. You are going to be redirected to the menu.\nPlease wait...";
+		//	Sleep(3000);
+		//}
+		//system("cls");
+		//menu(guest);
+
+		else if (menuOption == "4") {
 			if (isLoggedIn == true) {
 				//Hotel hotel;
 				/*hotel.getGuests()
 				int id = guest.getId();
 				hotel.removeGuest(id);*/
 				isLoggedIn = false;
-			} else { cout << "You're not logged in!"; }
-		} else if (menuOption == "q") {
+				guest.setFirstName("Guest user");
+				cout << "\nLogged out successfully. See you later!" << endl;
+				Sleep(3000);
+				system("cls");
+			} 
+			else { cout << "You're not logged in!"; }
+		} 
+		else if (menuOption == "q") {
 			MessageBoxW(NULL, L"Welcome back later!", L"Fine!", MB_OK | MB_ICONINFORMATION);
 			break;
-		} else {
+		} 
+		else {
 			MessageBoxW(NULL, L"Please double check your input", L"Error!", MB_OK | MB_ICONERROR);
 		}
 	}
