@@ -1,6 +1,8 @@
 #pragma once
 #include "ManageInputs.h"
 
+ManageString msInputs;
+
 ManageInputs::ManageInputs() {}
 
 ManageInputs::~ManageInputs() {}
@@ -21,18 +23,18 @@ string ManageInputs::get_string(string message, bool acceptEmptyString) {
 }
 
 // Get the input as an integer.
-int ManageInputs::get_int(string message, int minRange, int maxRange) {
+int ManageInputs::get_int(string message, size_t minRange, size_t maxRange) {
 	string theInput;
 	cout << message;
 	getline(cin, theInput);
 	if (minRange == 0 && maxRange == 0) {
-		while (!is_number(theInput)) {
+		while (!msInputs.is_number(theInput)) {
 			cout << "Please enter a valid number.\n";
 			cout << message;
 			getline(cin, theInput);
 		}
 	} else { // IF the range is given.
-		while (!(is_number(theInput) && stoi(theInput) >= minRange && stoi(theInput) <= maxRange)) {
+		while (!(msInputs.is_number(theInput) && stoi(theInput) >= minRange && stoi(theInput) <= maxRange)) {
 			cout << "Please enter a valid number.\n";
 			cout << message;
 			getline(cin, theInput);
@@ -48,7 +50,7 @@ float ManageInputs::get_float(string message) {
 	cout << message;
 	getline(cin, theInput);
 
-	while (!is_number(theInput)) {
+	while (!msInputs.is_number(theInput)) {
 		cout << "Please enter a valid number.\n";
 		cout << message;
 		getline(cin, theInput);

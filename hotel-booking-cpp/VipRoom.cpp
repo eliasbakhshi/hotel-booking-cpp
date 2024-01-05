@@ -1,6 +1,8 @@
 #pragma once
 #include "VipRoom.h"
 
+ManageInputs miVIP;
+
 VipRoom::VipRoom(int id, int number, int floor, int size)
 	:Room(id, number, floor, size, "vip") {}
 
@@ -17,8 +19,8 @@ VipRoom::VipRoom() {
 //	return content;
 //}
 
-void VipRoom::addMeals() {
-	int itemsChosen = 0;
+string VipRoom::getMeals() {
+	/*int itemsChosen = 0;
 	string mealsPresent[3] = { "Breakfast", "Lunch", "Dinner" };
 	for (int i = 0; i < 3; i++) {
 		cout << i + 1 << ") " << mealsPresent[i] << "\n";
@@ -28,13 +30,57 @@ void VipRoom::addMeals() {
 		cout << "\nChoose three items to include in your minibar. Item " + to_string(itemsChosen + 1) + ": "; cin >> itemNum;
 		this->meals[itemsChosen] = mealsPresent[itemNum - 1];
 		itemsChosen++;
+	}*/
+
+
+
+	vector<int> selectedOptions;
+	vector<string> options = { "Breakfast", "Lunch", "Dinner" };
+	string optionNums, comma;
+	int optionNum;
+
+	while (true) {
+		system("cls");
+		if (selectedOptions.size()) { // Show the list of selected option
+			cout << "Your selected options: \n\n";
+			for (int option : selectedOptions) {
+				cout << options[option - 1] << endl;
+			}
+			cout << endl << endl;
+		}
+		cout << "0) None" << ".\n";
+		for (int i = 0; i < options.size(); i++) {
+			cout << i + 1 << ") " << options[i] << ".\n";
+		}
+		cout << options.size() + 1 << ") Next step.\n";
+		optionNum = miVIP.get_int("\n\nChoose the addon option for the room: ", 0, options.size() + 1);
+		if ((optionNum != 0) && (optionNum <= options.size())) {
+			if (find(begin(selectedOptions), end(selectedOptions), optionNum) == end(selectedOptions)) {
+				// save id of the selected option as string
+				optionNums += comma + options[optionNum - 1];
+				selectedOptions.push_back(optionNum);
+			}
+			comma = ",";
+		} else if (optionNum == options.size() + 1) {
+			break;
+		} else if (!optionNum) {
+			optionNums = "";
+			break;
+		}
 	}
+	return optionNums;
 }
 
 void VipRoom::showMeals() {
+	Spa spa;
+	spa.setIsVip(true);
+
+	cout << "Meals included are: " << endl;
 	for (int i = 0; i < 3; i++) {
 		cout << this->meals[i] << endl;
 	}
+	cout << "Personal Spa entry code is: <" + to_string(spa.generateCustomEntryCode())
+		+ "> Do not lose it!\n";	
 }
 
 

@@ -2,6 +2,8 @@
 
 #include "Headers.h"
 #include "Room.h"
+#include "ManageString.h"
+#include "ManageInputs.h"
 
 class NormalRoom : public Room{
 private:
@@ -9,7 +11,7 @@ private:
 public:
 	NormalRoom(int id, int number, int floor, int size);
 	NormalRoom();
-	void addMinibarContent();
+	string getMinibarContent();
 	void showMinibarContent();
 
 	string getRoomInfo() override;

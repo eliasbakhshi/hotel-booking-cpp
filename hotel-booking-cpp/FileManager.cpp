@@ -1,7 +1,7 @@
 #pragma once
 #include "FileManager.h"
 
-ManageString ms;
+ManageString msFile;
 
 FileManager::FileManager(string filename) {
 	this->filename = filename;
@@ -39,7 +39,7 @@ vector<string> FileManager::select(string id, string filename) {
 	if (inStream.is_open()) {
 		while (getline(inStream, rowContent)) {
 			if (!rowContent.empty()) {// the the row with the given id
-				if (ms.split(rowContent, "|")[0] == id) {
+				if (msFile.split(rowContent, "|")[0] == id) {
 					inStream.close();
 					tempArray.push_back(rowContent);
 					return tempArray;
@@ -63,7 +63,7 @@ vector<string> FileManager::selectByIndex(string value, int index, string filena
 	if (inStream.is_open()) {
 		while (getline(inStream, rowContent)) {
 			if (!rowContent.empty()) {// the the row with the given value
-				tempArray = ms.split(rowContent, "|");
+				tempArray = msFile.split(rowContent, "|");
 				if (tempArray[index] == value) {
 					inStream.close();
 					return tempArray;
@@ -108,7 +108,7 @@ vector<string> FileManager::selectAllByIndex(string value, int index, string fil
 	if (inStream.is_open()) {
 		while (getline(inStream, rowContent)) {
 			if (!rowContent.empty()) {// the the row with the given value
-				tempArray = ms.split(rowContent, "|");
+				tempArray = msFile.split(rowContent, "|");
 				if (tempArray[index] == value) {
 					theArray.push_back(rowContent);
 				}
@@ -142,7 +142,7 @@ bool FileManager::update(int id, string infoRow, string filename) {
 	ofstream oFile(this->filename);
 	if (oFile.is_open()) {
 		for (int i = 0; i < lines.size(); i++) {
-			if (stoi(ms.split(lines[i], "|")[0]) != id) {
+			if (stoi(msFile.split(lines[i], "|")[0]) != id) {
 				oFile << lines[i] << endl;
 			} else { // Update the row with the given id in the file.
 				oFile << infoRow;
@@ -173,7 +173,7 @@ bool FileManager::remove(int id, string filename) {
 	ofstream oFile(this->filename);
 	if (oFile.is_open()) {
 		for (int i = 0; i < lines.size(); i++) {
-			if (stoi(ms.split(lines[i], "|")[0]) != id) {
+			if (stoi(msFile.split(lines[i], "|")[0]) != id) {
 				oFile << lines[i] << endl;
 			} else {
 				deleted = true;
@@ -211,7 +211,7 @@ int FileManager::getLastId(string filename) {
 	if (theFile.is_open()) {
 		while (getline(theFile, tempInput)) {
 			if (tempInput != "") {
-				tempList = ms.split(tempInput, "|");
+				tempList = msFile.split(tempInput, "|");
 			}
 		}
 		theFile.close();

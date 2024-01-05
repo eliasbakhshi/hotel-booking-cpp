@@ -93,16 +93,15 @@ int Hotel::showRooms() {
 	for (int i = 0; i < rooms.size(); i++) {
 		cout << rooms[i]->getRoomInfo() << endl;
 	}
-	return rooms.size();
+	return static_cast<int>(rooms.size());
 }
 
 int Hotel::showOptions(int roomId) {
 	NormalRoom* normalr = dynamic_cast<NormalRoom*>(rooms[roomId].get());
 	VipRoom* vipr = dynamic_cast<VipRoom*>(rooms[roomId].get());
-
 	if (normalr) {
 		normalr->showMinibarContent();
-	} else if (vipr) {
+	} else {
 		vipr->showMeals();
 	}
 

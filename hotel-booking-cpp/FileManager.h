@@ -17,7 +17,6 @@ public:
 	vector<string> selectAllByIndex(string value, int index, string filename = "");
 	bool update(int id, string info, string filename = "");
 	bool remove(int id, string filename = "");
-	//int countRows(string filename = "");
 	int getLastId(string filename = "");
 };
 

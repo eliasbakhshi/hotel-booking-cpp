@@ -49,7 +49,7 @@ int showHotels() {
 		vector<string> line = msFunc.split(hotels[i], "|");
 		cout << line[0] << ") " << line[1] << " - " << line[2] << ", " << line[3] << "\n";
 	}
-	return hotels.size();
+	return static_cast<int>(hotels.size());
 }
 
 void showRooms(int hotelId) {
@@ -82,13 +82,12 @@ void menu(Guest& guest) {
 
 		if (menuOption == "1") {
 			Reservation reservation;
-			vector<string> theHotel, theRoom, options, theOption;
-			vector<int> selectedOptions;
-			vector<vector<string>> allOptions;
+			vector<string> theHotel, theRoom, theOption;
 			VipRoom viproom;
-			string optionNums, comma;
 			NormalRoom normalroom;
-			int hotelNum, roomNum, optionNum, totalHotels, totalRooms;
+			int hotelNum = 0, roomNum = 0, totalHotels = 0, totalRooms = 0;
+			string roomType;
+
 			cout << "Welcome " + guest.getFirstName() << "!\n" << endl;
 
 			totalHotels = showHotels();
@@ -98,49 +97,15 @@ void menu(Guest& guest) {
 			totalRooms = hotel.showRooms();
 			roomNum = miFunc.get_int("\n\nChoose the rooms that you want: ", 1, totalRooms);
 			reservation.roomId = roomNum;
-			system("cls");
+			// show options according to rooms type
 			if (roomNum == 1) {
-				normalroom.addMinibarContent();
+				reservation.options = normalroom.getMinibarContent();
+				roomType = "Normal";
 			}
 			else if (roomNum == 2) {
-				viproom.addMeals();
+				reservation.options = viproom.getMeals();
+				roomType = "VIP";
 			}
-			//hotel.showOptions(roomNum);
-			//// show options according to rooms type
-			//theRoom = fmFunc.selectByIndex(to_string(roomNum), 0, "rooms.txt");
-			//if (theRoom[5] == "normal") {
-			//	options = fmFunc.selectAllByIndex("normal", 1, "roomOptions.txt");
-			//} else if (theRoom[5] == "vip") {
-			//	options = fmFunc.selectAllByIndex("vip", 1, "roomOptions.txt");
-			//}
-			//while (true) {
-			//	system("cls");
-			//	if (selectedOptions.size()) { // Show the list of selected option
-			//		cout << "Your selected options: \n\n";
-			//		for (int option : selectedOptions) {
-			//			cout << allOptions[option - 1][2] << endl;
-			//		}
-			//		cout << endl << endl;
-			//	}
-			//	cout << "0) None" << ".\n";
-			//	for (int i = 0; i < options.size(); i++) {
-			//		allOptions.push_back(msFunc.split(options[i], "|"));
-			//		cout << i + 1 << ") " << allOptions[i][2] << ".\n";
-			//	}
-			//	cout << options.size() + 1 << ") Next step.\n";
-			//	optionNum = miFunc.get_int("\n\nChoose the addon option for the room: ", 1, options.size() + 1);
-			//	if ((optionNum != 0) && (optionNum <= options.size())) {
-			//		if (find(begin(selectedOptions), end(selectedOptions), optionNum) == end(selectedOptions)) {
-			//			// save id of the selected option as string
-			//			optionNums += comma + allOptions[optionNum - 1][0];
-			//			selectedOptions.push_back(optionNum);
-			//		}
-			//		comma = ",";
-			//	} else if (optionNum == options.size() + 1) {
-			//		break;
-			//	}
-			//}
-			//reservation.options = optionNums;
 			// Get the dates
 			theRoom = fmFunc.selectByIndex(to_string(roomNum), 0, "rooms.txt");
 			system("cls");
@@ -149,14 +114,14 @@ void menu(Guest& guest) {
 			// Guest will be navigated to the registration if guest is not registered.
 			if (guest.getEmail() == "") {
 				cout << "Perfect! You will be redirected to the sign-up page in no time.\nPlease be patient...";
-				Sleep(1000);
+				Sleep(3000);
 				system("cls");
 				registerGuest(guest);
 			}
 			// Redirect to reservation page
 			system("cls");
 			cout << "Perfect! You will be redirected to the confirmation page in no time.\nPlease be patient...";
-			Sleep(1000);
+			Sleep(3000);
 			reservation.id = fmFunc.getLastId("reservations.txt") + 1;
 			// Save to reservation table
 			string theReservation = "\n" + to_string(reservation.id) + "|" + to_string(guest.getId()) + "|" + to_string(reservation.roomId) + "|" + reservation.options + "|" + reservation.dateIn + "|" + reservation.dateOut;
@@ -167,26 +132,17 @@ void menu(Guest& guest) {
 
 			// Show the reservation info in the confirmation page.
 			cout << "<--- Your booking information --->\n";
-			cout << "Type: " << theRoom[5] << " room\n";
+			cout << "Type: " << roomType << " room\n";
 			cout << "Hotel: " << theHotel[1] << " in " << theHotel[2] << ", " << theHotel[3] << theHotel[4] << endl;
-			//cout << "Addons: " << viproom.showMeals() << endl;
-			//cout << "Addons: " << allOptions[optionNum - 1][2] << " on your booking.\n";
-			if (theRoom[5] == "vip") {
-				cout << "Meals included are: " << endl;
+			if (roomType == "VIP" && reservation.options != "") {
 				viproom.showMeals();
-				Spa spa;
-				spa.setIsVip(true);
-				cout << "Personal Spa entry code is: <" + to_string(spa.generateCustomEntryCode())
-					+ "> Do not lose it!\n";
-			}
-			else {
-				cout << "Addons are: " << endl;
+			} else if (roomType == "VIP" && reservation.options != "") {
 				normalroom.showMinibarContent();
 			}
 			guest.setBookingNum(bookingNumGenerator());
 			cout << "Booking number is: " + guest.getBookingNum() + ". Do not lose it!\n";
 
-			cout << "\nPress enter to continue...\n";
+			cout << "\nPress enter to go to the menu...\n";
 			getchar();
 			system("cls");
 		}
@@ -195,7 +151,7 @@ void menu(Guest& guest) {
 			Guest guest;
 			registerGuest(guest);
 			isLoggedIn = true;
-			cout << "\nYou have been registered";
+			cout << "\nYou have been registered.\ You will be redirected to the menu soon.";
 			Sleep(3000);
 			system("cls");
 		}
@@ -226,10 +182,10 @@ void menu(Guest& guest) {
 				guest.setEmail(theGuest[3]);
 				guest.setPhone(theGuest[4]);
 				cout << "You are logged in. You are going to be redirected to the menu.\nPlease wait...";
-				Sleep(1000);
+				Sleep(3000);
 			} else {
 				cout << "You could not log in. You are going to be redirected to the menu.\nPlease wait...";
-				Sleep(1000);
+				Sleep(3000);
 			}
 			system("cls");
 			menu(guest);
