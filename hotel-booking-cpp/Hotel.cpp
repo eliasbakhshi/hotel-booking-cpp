@@ -9,7 +9,7 @@ Hotel::Hotel(string name, string city, string country) {
 	this->country = country;
 }
 
-Hotel::Hotel(int hotelId) {
+void Hotel::update(int hotelId) {
 	this->hotelId = hotelId;
 	vector<string> theHotel = fmHotel.selectByIndex(to_string(hotelId), 0, "hotels.txt");
 
@@ -27,6 +27,15 @@ Hotel::Hotel(int hotelId) {
 			this->addVipRoom(stoi(line[0]), stoi(line[1]), stoi(line[2]), stoi(line[3]));
 		}
 	}
+}
+
+Hotel::Hotel() {
+	this->hotelId = 0;
+
+	this->name = "";
+	this->country = "";
+	this->city = "";
+	this->address = "";
 }
 
 Hotel::~Hotel() {}

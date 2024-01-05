@@ -13,3 +13,6 @@ id|userId|roomId|optionId|dateIn|dateOut
 12|21|1||2|233333333
 13|10|2|Breakfast,Lunch,Dinner|1|2
 14|10|2|Dinner,Lunch,Breakfast|1|2
+15|23|1|Festis hallon|1|2
+16|23|2|Dinner|f|g
+17|26|1||1|2

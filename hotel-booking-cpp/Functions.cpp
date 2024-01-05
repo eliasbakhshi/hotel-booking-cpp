@@ -65,7 +65,11 @@ void menu(Guest& guest) {
 	while (true) {
 		// Outside of the numbers
 		string menuOption = "";
+		Hotel hotel;
+		// Set guest
+		hotel.addGuest(guest);
 
+		// Show menu.
 		cout << "------------------------" << endl;
 		cout << "Welcome to Hotel Booker!" << endl;
 		cout << "------------------------\n" << endl;
@@ -75,7 +79,7 @@ void menu(Guest& guest) {
 		cout << "2) Register" << endl;
 		cout << "3) Login" << endl;
 		if (guest.getEmail() != "")
-			cout << "3) logout" << endl;
+			cout << "4) logout" << endl;
 		cout << "q) Quit" << endl;
 		menuOption = miFunc.get_string("\n--> ");
 		system("cls");
@@ -93,7 +97,7 @@ void menu(Guest& guest) {
 			totalHotels = showHotels();
 			hotelNum = miFunc.get_int("\n\nPlease choose the hotel of your choice: ", 1, totalHotels);
 			system("cls");
-			Hotel hotel(hotelNum);
+			hotel.update(hotelNum);
 			totalRooms = hotel.showRooms();
 			roomNum = miFunc.get_int("\n\nChoose the rooms that you want: ", 1, totalRooms);
 			reservation.roomId = roomNum;
@@ -117,6 +121,7 @@ void menu(Guest& guest) {
 				Sleep(3000);
 				system("cls");
 				registerGuest(guest);
+				hotel.addGuest(guest);
 			}
 			// Redirect to reservation page
 			system("cls");
@@ -190,12 +195,13 @@ void menu(Guest& guest) {
 			system("cls");
 			menu(guest);
 		} else if (menuOption == "4" && guest.getEmail() != "") {
-			//if (isLoggedIn == true) {
-			//	//Hotel hotel;
-			//	int id = guest.getId();
-			//	hotel.removeGuest(id);
-			//	isLoggedIn = false;
-			//} else { cout << "You're not logged in!"; }
+			if (isLoggedIn == true) {
+				//Hotel hotel;
+				/*hotel.getGuests()
+				int id = guest.getId();
+				hotel.removeGuest(id);*/
+				isLoggedIn = false;
+			} else { cout << "You're not logged in!"; }
 		} else if (menuOption == "q") {
 			MessageBoxW(NULL, L"Welcome back later!", L"Fine!", MB_OK | MB_ICONINFORMATION);
 			break;

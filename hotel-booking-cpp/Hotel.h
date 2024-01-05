@@ -18,7 +18,7 @@ private:
 
 public:
 	Hotel(string name, string city, string country);
-	Hotel(int id);
+	Hotel();
 	~Hotel();
 	void setHotelId(int id);
 	void setName(string name);
@@ -31,6 +31,7 @@ public:
 	string getCountry();
 	string getAddress();
 	vector<unique_ptr<Guest>> getGuests();
+	void update(int id);
 	void addGuest(Guest guest);
 	void addNormalRoom(int id, int roomNum, int floor, int size);
 	void addVipRoom(int id, int roomNum, int floor, int size);
