@@ -173,7 +173,7 @@ void menu(Guest& guest) {
 				email = miFunc.get_string("Please enter your email: ");
 				password = miFunc.get_string("Please enter your password: ");
 				theGuest = fmFunc.selectByIndex(email, 3, "guests.txt");
-				if (theGuest.size() > 2 && email == theGuest[3] && theGuest[4] == password) {
+				if (theGuest.size() > 2 && email == theGuest[3] && theGuest[5] == password) {
 					isLoggedIn = true;
 					guest.setFirstName(theGuest[1]);
 					hotel.updateGuest(stoi(theGuest[0]), theGuest[1], theGuest[2], theGuest[3], theGuest[4], theGuest[5]);
