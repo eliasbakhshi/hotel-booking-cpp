@@ -10,6 +10,7 @@ bool isLoggedIn = false;
 FileManager fmFunc;
 ManageString msFunc;
 ManageInputs miFunc;
+Hotel hotel;
 
 string bookingNumGenerator() {
 	// Generates a booking number of 8 characters including letters and numbers
@@ -36,6 +37,7 @@ void registerGuest(Guest& guest) {
 	guest.setEmail(miFunc.get_string("Email address: "));
 	guest.setPassword(miFunc.get_string("Password: "));
 	guest.setPhone(miFunc.get_string("Phone number: "));
+	hotel.addGuest(guest);
 	// Save it in the database.
 	string info = "\n" + to_string(guest.getId()) + "|" + guest.getFirstName() + "|" +
 		guest.getLastName() + "|" + guest.getEmail() + "|" + guest.getPassword() + "|" + guest.getPhone();
@@ -65,7 +67,7 @@ void menu(Guest& guest) {
 	while (true) {
 		// Outside of the numbers
 		string menuOption = "";
-		Hotel hotel;
+		//Hotel hotel;
 		// Set guest
 		hotel.addGuest(guest);
 
@@ -77,8 +79,8 @@ void menu(Guest& guest) {
 		cout << "Please choose an option: " << endl;
 		cout << "1) Book hotel" << endl;
 		cout << "2) Register" << endl;
-		cout << "3) Login" << endl;
-		//if (guest.getEmail() != "")
+		if(isLoggedIn == false)
+			cout << "3) Login" << endl;
 		if (isLoggedIn == true)
 			cout << "4) logout" << endl;
 		cout << "q) Quit" << endl;
@@ -117,7 +119,7 @@ void menu(Guest& guest) {
 			reservation.dateIn = miFunc.get_string("Check in date (yyyy/mm/dd): ");
 			reservation.dateOut = miFunc.get_string("Check out date (yyyy/mm/dd): ");
 			// Guest will be navigated to the registration if guest is not registered.
-			if (guest.getEmail() == "") {
+			if (isLoggedIn == false) {
 				cout << "Perfect! You will be redirected to the sign-up page in no time.\nPlease be patient...";
 				Sleep(3000);
 				system("cls");
@@ -142,7 +144,7 @@ void menu(Guest& guest) {
 			cout << "Hotel: " << theHotel[1] << " in " << theHotel[2] << ", " << theHotel[3] << theHotel[4] << endl;
 			if (roomType == "VIP" && reservation.options != "") {
 				viproom.showMeals();
-			} else if (roomType == "VIP" && reservation.options != "") {
+			} else if (roomType == "Normal" && reservation.options != "") {
 				normalroom.showMinibarContent();
 			}
 			guest.setBookingNum(bookingNumGenerator());
@@ -159,7 +161,7 @@ void menu(Guest& guest) {
 			Guest guest;
 			registerGuest(guest);
 			isLoggedIn = true;
-			cout << "\nYou have been registered.\ You will be redirected to the menu soon.";
+			cout << "\nYou have been registered.\nYou will be redirected to the menu soon.";
 			Sleep(3000);
 			system("cls");
 		}
@@ -194,30 +196,8 @@ void menu(Guest& guest) {
 			system("cls");
 			menu(guest);
 		}
-		//// Update the info
-		//if (theGuest.size() > 2 && theGuest[0] != "false") {
-		//	isLoggedIn = true;
-		//	guest.setId(stoi(theGuest[0]));
-		//	guest.setFirstName(theGuest[1]);
-		//	guest.setLastName(theGuest[2]);
-		//	guest.setEmail(theGuest[3]);
-		//	guest.setPhone(theGuest[4]);
-		//	cout << "You are logged in. You are going to be redirected to the menu.\nPlease wait...";
-		//	Sleep(3000);
-		//}
-		//else {
-		//	cout << "You could not log in. You are going to be redirected to the menu.\nPlease wait...";
-		//	Sleep(3000);
-		//}
-		//system("cls");
-		//menu(guest);
-
 		else if (menuOption == "4") {
 			if (isLoggedIn == true) {
-				//Hotel hotel;
-				/*hotel.getGuests()
-				int id = guest.getId();
-				hotel.removeGuest(id);*/
 				isLoggedIn = false;
 				guest.setFirstName("Guest user");
 				cout << "\nLogged out successfully. See you later!" << endl;
