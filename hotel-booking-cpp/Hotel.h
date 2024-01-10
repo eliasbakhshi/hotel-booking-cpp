@@ -31,15 +31,17 @@ public:
 	string getCountry();
 	string getAddress();
 	vector<unique_ptr<Guest>> getGuests();
+	int showHotels();
 	void update(int id);
-	void addGuest(Guest guest);
 	void addNormalRoom(int id, int roomNum, int floor, int size);
 	void addVipRoom(int id, int roomNum, int floor, int size);
 	int showRooms();
 	int showOptions(int roomId);
+	void addGuest(Guest guest);
+	void registerGuest(Guest& guest);
 	void showGuests() const;
 	bool removeGuest(int id);
+	string bookingNumGenerator();
 
 	void updateGuest(int id, string firstName, string lastName, string email, string phone, string password);
-
 };

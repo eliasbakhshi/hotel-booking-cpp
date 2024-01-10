@@ -2,6 +2,7 @@
 
 FileManager fmHotel;
 ManageString msHotel;
+ManageInputs miHotel;
 
 Hotel::Hotel(string name, string city, string country) {
 	this->name = name;
@@ -89,6 +90,16 @@ vector<unique_ptr<Guest>> Hotel::getGuests() {
 	return move(this->guests);
 }
 
+int Hotel::showHotels() {
+	fmHotel.setFilename("hotels.txt");
+	vector<string> hotels = fmHotel.selectAll();
+	for (int i = 0; i < hotels.size(); i++) {
+		vector<string> line = msHotel.split(hotels[i], "|");
+		cout << line[0] << ") " << line[1] << " - " << line[2] << ", " << line[3] << "\n";
+	}
+	return static_cast<int>(hotels.size());
+}
+
 void Hotel::addNormalRoom(int id, int roomNum, int floor, int size) {
 	rooms.push_back(make_unique<NormalRoom>(id, roomNum, floor, size));
 }
@@ -137,6 +148,38 @@ bool Hotel::removeGuest(int id) {
 	return isDeleted;
 }
 
+void Hotel::registerGuest(Guest& guest) {
+	fmHotel.setFilename("guests.txt");
+	guest.setId(fmHotel.getLastId() + 1);
+	guest.setFirstName(miHotel.get_string("First name: "));
+	guest.setLastName(miHotel.get_string("Last name: "));
+	guest.setEmail(miHotel.get_string("Email address: "));
+	guest.setPassword(miHotel.get_string("Password: "));
+	guest.setPhone(miHotel.get_string("Phone number: "));
+	this->addGuest(guest);
+	// Save it in the database.
+	string info = "\n" + to_string(guest.getId()) + "|" + guest.getFirstName() + "|" +
+		guest.getLastName() + "|" + guest.getEmail() + "|" + guest.getPassword() + "|" + guest.getPhone();
+	fmHotel.insert(info);
+}
+
+string Hotel::bookingNumGenerator() {
+	// Generates a booking number of 8 characters including letters and numbers
+	random_device rd;
+	mt19937 gen(rd());
+	const string characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+	auto randomChar = [&]() -> char {
+		uniform_int_distribution<size_t> dis(0, characters.size() - 1);
+		return characters[dis(gen)];
+		};
+
+	string randomString;
+	generate_n(back_inserter(randomString), 8, randomChar);
+
+	return randomString;
+}
+
 void Hotel::updateGuest(int id, string firstName, string lastName, string email, string phone, string password) {
 	for (const auto& guestPtr : this->guests) {
 		if ("Guest user" == guestPtr->getFirstName()) {
@@ -146,8 +189,7 @@ void Hotel::updateGuest(int id, string firstName, string lastName, string email,
 			guestPtr->setEmail(email);
 			guestPtr->setPhone(phone);
 			guestPtr->setPassword(password);
-		}
-		else if (email == guestPtr->getEmail()) {
+		} else if (email == guestPtr->getEmail()) {
 			guestPtr->setId(id);
 			guestPtr->setFirstName(firstName);
 			guestPtr->setLastName(lastName);

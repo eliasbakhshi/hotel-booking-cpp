@@ -31,3 +31,8 @@ vector<string> ManageString::split(string str, string seperator) {
 	splited.push_back(str.substr(pos_start));
 	return splited;
 }
+
+string ManageString::toLower(string str) {
+	transform(str.begin(), str.end(), str.begin(), ::tolower); //lowercase
+	return str;
+}

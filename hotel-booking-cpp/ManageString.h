@@ -9,6 +9,6 @@ public:
 	ManageString();
 	~ManageString();
 	vector<string> split(string str, string seperator = " ");
-
+	string toLower(string str);
 };
 
