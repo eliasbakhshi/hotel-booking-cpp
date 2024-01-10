@@ -40,7 +40,7 @@ public:
 	void addGuest(Guest guest);
 	void registerGuest(Guest& guest);
 	void showGuests() const;
-	bool removeGuest(int id);
+	bool clearGuestVector();
 	string bookingNumGenerator();
 
 	void updateGuest(int id, string firstName, string lastName, string email, string phone, string password);

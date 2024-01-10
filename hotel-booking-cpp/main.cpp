@@ -154,6 +154,7 @@ int main() {
 		else if (menuOption == "lo" && isLoggedIn) {
 			if (isLoggedIn == true) {
 				isLoggedIn = false;
+				hotel.clearGuestVector();
 				guest.setFirstName("Guest user");
 				cout << "\nLogged out successfully. See you later!" << endl;
 				Sleep(3000);
