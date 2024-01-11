@@ -72,7 +72,7 @@ int main() {
 				system("cls");
 				hotel.registerGuest(guest);
 				hotel.addGuest(guest);
-				isLoggedIn == true;
+				isLoggedIn = true;
 			}
 			// Redirect to reservation page
 			system("cls");
