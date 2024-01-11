@@ -93,7 +93,11 @@ vector<unique_ptr<Guest>> Hotel::getGuests() {
 int Hotel::showHotels() {
 	fmHotel.setFilename("hotels.txt");
 	vector<string> hotels = fmHotel.selectAll();
+	if (!hotels.empty()) {
+		hotels.erase(hotels.begin());
+	}
 	for (int i = 0; i < hotels.size(); i++) {
+
 		vector<string> line = msHotel.split(hotels[i], "|");
 		cout << line[0] << ") " << line[1] << " - " << line[2] << ", " << line[3] << "\n";
 	}

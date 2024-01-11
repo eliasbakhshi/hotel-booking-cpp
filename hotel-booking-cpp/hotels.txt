@@ -1,3 +1,4 @@
+id|name|country|city|address
 1|Grand Hotel|Sweden|Stockholm|, 45 Kungsmarksvagen
 2|Hotel California|Switzerland|Zurich|, 18 Schifflande
 3|Four Seasons Hotel|Malaysia|Kuala Lumpur|, 472 Shah Bujang street
