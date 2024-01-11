@@ -1,4 +1,3 @@
-#pragma once
 #include "VipRoom.h"
 
 ManageInputs miVIP;
@@ -10,32 +9,7 @@ VipRoom::VipRoom() {
 	this->setSize(46);
 }
 
-//string VipRoom::showMeals() {
-//	// shows all the meals chosen by the VIP user
-//	string content = "";
-//	for (int i = 0; i < this->numOfMeals; i++) {
-//		content += this->meals[i] + " ";
-//	}
-//	return content;
-//}
-
 string VipRoom::getMeals() {
-	/*int itemsChosen = 0;
-	string mealsPresent[3] = { "Breakfast", "Lunch", "Dinner" };
-	for (int i = 0; i < 3; i++) {
-		cout << i + 1 << ") " << mealsPresent[i] << "\n";
-	}
-	while (itemsChosen < 3) {
-		int itemNum = 0;
-		cout << "\nChoose three items to include in your minibar. Item " + to_string(itemsChosen + 1) + ": "; cin >> itemNum;
-		this->meals[itemsChosen] = mealsPresent[itemNum - 1];
-		itemsChosen++;
-	}*/
-
-
-
-	vector<int> selectedOptions;
-	vector<string> options = { "Breakfast", "Lunch", "Dinner" };
 	string optionNums, comma;
 	int optionNum;
 
@@ -75,10 +49,13 @@ void VipRoom::showMeals() {
 	Spa spa;
 	spa.setIsVip(true);
 
+	cout << "--------------------" << endl;
 	cout << "Meals included are: " << endl;
-	for (int i = 0; i < 3; i++) {
-		cout << this->meals[i] << endl;
+	for (int option : this->selectedOptions) {
+		cout << options[option - 1] << endl;
 	}
+	cout << "--------------------" << endl;
+	
 	cout << "Personal Spa entry code is: <" + to_string(spa.generateCustomEntryCode())
 		+ "> Do not lose it!\n";	
 }

@@ -1,4 +1,3 @@
-#pragma once
 #include "ManageInputs.h"
 
 ManageString msInputs;

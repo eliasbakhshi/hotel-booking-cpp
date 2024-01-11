@@ -7,7 +7,8 @@
 
 class NormalRoom : public Room{
 private:
-	string minibar[3];
+	vector<int> selectedOptions;
+	vector<string> options = { "Irish whiskey", "Festis hallon", "Peanuts", "Chips", "Absolut vodka" };
 public:
 	NormalRoom(int id, int number, int floor, int size);
 	NormalRoom();

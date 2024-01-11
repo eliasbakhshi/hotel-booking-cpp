@@ -1,4 +1,3 @@
-#pragma once
 #include "FileManager.h"
 
 ManageString msFile;
@@ -182,23 +181,6 @@ bool FileManager::remove(int id, string filename) {
 	}
 	return deleted;
 }
-
-//int FileManager::countRows(string filename) {
-//	if (filename != "")
-//		this->filename = filename;
-//	int rowNums = 0;
-//	string tempInput;
-//	ifstream theFile(this->filename);
-//	if (theFile.is_open()) {
-//		while (getline(theFile, tempInput)) {
-//			if (!tempInput.empty())
-//				rowNums = rowNums + 1;
-//		}
-//		theFile.close();
-//		return rowNums;
-//	}
-//	return 0;
-//}
 
 // Get the last ID in the file.
 int FileManager::getLastId(string filename) {

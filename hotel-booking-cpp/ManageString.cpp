@@ -1,4 +1,3 @@
-#pragma once
 #include "ManageString.h"
 
 ManageString::ManageString() {}

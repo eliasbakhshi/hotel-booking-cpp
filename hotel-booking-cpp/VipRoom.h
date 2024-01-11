@@ -6,7 +6,8 @@
 
 class VipRoom : public Room {
 private:
-	string meals[3];
+	vector<int> selectedOptions;
+	vector<string> options = { "Breakfast", "Lunch", "Dinner" };
 public:
 	VipRoom(int id, int number, int floor, int size);
 	VipRoom();

@@ -1,4 +1,3 @@
-#pragma once
 #include "NormalRoom.h"
 
 ManageInputs miNormal;
@@ -10,8 +9,6 @@ NormalRoom::NormalRoom(int id, int number, int floor, int size)
 NormalRoom::NormalRoom() {}
 
 string NormalRoom::getMinibarContent() {
-	vector<int> selectedOptions;
-	vector<string> options = { "Irish whiskey", "Festis hallon", "Peanuts", "Chips", "Absolut vodka" };
 	string optionNums, comma;
 	int optionNum;
 
@@ -48,11 +45,12 @@ string NormalRoom::getMinibarContent() {
 }
 
 void NormalRoom::showMinibarContent() {
-	cout << "Addons are: " << endl;
-
-	for (int i = 0; i < 3; i++) {
-		cout << this->minibar[i] << endl;
+	cout << "-------------------" << endl;
+	cout << "Addon options are: " << endl;
+	for (int option : this->selectedOptions) {
+		cout << options[option - 1] << endl;
 	}
+	cout << "-------------------" << endl;
 }
 
 // Prints out the room information(used in Hotel class)

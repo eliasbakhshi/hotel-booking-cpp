@@ -1,4 +1,3 @@
-#pragma once
 #include "Guest.h"
 
 FileManager fmGuest;
@@ -7,7 +6,6 @@ void Guest::expand() {}
 
 
 Guest::Guest(string email, string firstName, string lastName, string phone, string bookingNum) : email(email), firstName(firstName), lastName(lastName), phone(phone), bookingNum(bookingNum) {
-	//this->id = fm.getLastId("guests.txt");
 }
 
 Guest::Guest(const Guest& other) : id(other.id), email(other.email), firstName(other.firstName),
