@@ -49,12 +49,14 @@ void VipRoom::showMeals() {
 	Spa spa;
 	spa.setIsVip(true);
 
-	cout << "--------------------" << endl;
-	cout << "Meals included are: " << endl;
-	for (int option : this->selectedOptions) {
-		cout << options[option - 1] << endl;
+	if (this->selectedOptions.size() != 0) {
+		cout << "--------------------" << endl;
+		cout << "Meals included are: " << endl;
+		for (int option : this->selectedOptions) {
+			cout << options[option - 1] << endl;
+		}
+		cout << "--------------------" << endl;
 	}
-	cout << "--------------------" << endl;
 	
 	cout << "Personal Spa entry code is: <" + to_string(spa.generateCustomEntryCode())
 		+ "> Do not lose it!\n";	

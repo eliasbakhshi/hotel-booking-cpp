@@ -3,11 +3,18 @@
 Room::Room() {
     this->number = 0;
     this->number = number;
+    this->floor = 0;
+    this->floor = floor;
     this->size = size;
     this->type = type;
 }
 
-Room::Room(int id, int number, int floor, int size, string type): id(id), number(number), size(size), type(type) {
+Room::Room(int id, int number, int floor, int size, string type) {
+    this->id = id;
+    this->number = number;
+    this->size = size;
+    this->floor = floor;
+    this->type = type;
 }
 
 Room::~Room() {

@@ -21,3 +21,6 @@ id|userId|roomId|optionId|dateIn|dateOut
 20|25|1|Irish whiskey|1|1
 21|26|1|Irish whiskey,Festis hallon|1|1
 22|1|2|Breakfast,Dinner|1|1
+23|1|1||1|1
+24|1|2||1|1
+25|1|2|Breakfast|1|1

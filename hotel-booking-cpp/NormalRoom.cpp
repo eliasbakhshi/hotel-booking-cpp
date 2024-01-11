@@ -45,12 +45,14 @@ string NormalRoom::getMinibarContent() {
 }
 
 void NormalRoom::showMinibarContent() {
-	cout << "-------------------" << endl;
-	cout << "Addon options are: " << endl;
-	for (int option : this->selectedOptions) {
-		cout << options[option - 1] << endl;
+	if (this->selectedOptions.size() != 0) {
+		cout << "--------------------" << endl;
+		cout << "Meals included are: " << endl;
+		for (int option : this->selectedOptions) {
+			cout << options[option - 1] << endl;
+		}
+		cout << "--------------------" << endl;
 	}
-	cout << "-------------------" << endl;
 }
 
 // Prints out the room information(used in Hotel class)
