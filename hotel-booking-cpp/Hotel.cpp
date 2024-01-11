@@ -149,13 +149,24 @@ bool Hotel::removeGuest(int id) {
 }
 
 void Hotel::registerGuest(Guest& guest) {
-	fmHotel.setFilename("guests.txt");
-	guest.setId(fmHotel.getLastId() + 1);
+	bool emailExists = false;
+	vector<string> checkEmail;
+	guest.setId(fmHotel.getLastId("guests.txt") + 1);
 	guest.setFirstName(miHotel.get_string("First name: "));
 	guest.setLastName(miHotel.get_string("Last name: "));
-	guest.setEmail(miHotel.get_string("Email address: "));
+	// Search if the email exist in the table.
+	do {
+		guest.setEmail(miHotel.get_string("Email address: "));
+		checkEmail = fmHotel.selectByIndex(guest.getEmail(), 3, "guests.txt");
+		if (checkEmail.size() > 2 && checkEmail[0] != "")
+			cout << "Email exist in the system. Please enter another email.\n";
+			emailExists = true;
+		else
+			emailExists = false;
+	} while (emailExists);
 	guest.setPassword(miHotel.get_string("Password: "));
 	guest.setPhone(miHotel.get_string("Phone number: "));
+	// Added to the guest list in hotel.
 	this->addGuest(guest);
 	// Save it in the database.
 	string info = "\n" + to_string(guest.getId()) + "|" + guest.getFirstName() + "|" +

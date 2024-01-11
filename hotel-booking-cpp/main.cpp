@@ -12,23 +12,14 @@ int main() {
 	Hotel hotel;
 	Guest guest;
 	bool isLoggedIn = false;
+	string menuOption = "";
+	hotel.addGuest(guest);
 
 	FileManager fmFunc;
 	ManageInputs miFunc;
 	ManageString msFunc;
 
-	string s = "Viet Nam";
-	transform(s.begin(), s.end(), s.begin(), ::tolower); //lowercase
-	cout << s << endl;
-
-
 	while (true) {
-		// Outside of the numbers
-		string menuOption = "";
-		//Hotel hotel;
-		// Set guest
-		hotel.addGuest(guest);
-
 		// Show menu.
 		cout << "------------------------" << endl;
 		cout << "Welcome to Hotel Booker!" << endl;
@@ -113,6 +104,7 @@ int main() {
 
 		else if (menuOption == "r" && !isLoggedIn) { // Register
 			// if email already exists, deny it !! read from text file
+			// get info
 			Guest guest;
 			hotel.registerGuest(guest);
 			isLoggedIn = true;
@@ -152,13 +144,12 @@ int main() {
 			}
 		} 
 		else if (menuOption == "lo" && isLoggedIn) {
-			if (isLoggedIn == true) {
-				isLoggedIn = false;
-				guest.setFirstName("Guest user");
-				cout << "\nLogged out successfully. See you later!" << endl;
-				Sleep(3000);
-				system("cls");
-			} else { cout << "You're not logged in!"; }
+			isLoggedIn = false;
+			guest.setFirstName("Guest user");
+			hotel.removeGuest(guest.getId());
+			cout << "\nLogged out successfully. See you later!" << endl;
+			Sleep(3000);
+			system("cls");
 		} else if (menuOption == "q") {
 			MessageBoxW(NULL, L"Welcome back later!", L"Fine!", MB_OK | MB_ICONINFORMATION);
 			break;
