@@ -166,7 +166,7 @@ void Hotel::registerGuest(Guest& guest) {
 	this->addGuest(guest);
 	// Save it in the database.
 	string info = "\n" + to_string(guest.getId()) + "|" + guest.getFirstName() + "|" +
-		guest.getLastName() + "|" + guest.getEmail() + "|" + guest.getPassword() + "|" + guest.getPhone();
+		guest.getLastName() + "|" + guest.getEmail() + "|" + guest.getPhone() + "|" + guest.getPassword();
 	fmHotel.insert(info);
 }
 
