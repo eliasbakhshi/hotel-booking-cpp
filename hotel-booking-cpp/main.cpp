@@ -103,8 +103,6 @@ int main() {
 		}
 
 		else if (menuOption == "r" && !isLoggedIn) { // Register
-			// if email already exists, deny it !! read from text file
-			// get info
 			Guest guest;
 			hotel.registerGuest(guest);
 			isLoggedIn = true;
@@ -144,12 +142,14 @@ int main() {
 			}
 		} 
 		else if (menuOption == "lo" && isLoggedIn) {
-			isLoggedIn = false;
-			guest.setFirstName("Guest user");
-			hotel.removeGuest(guest.getId());
-			cout << "\nLogged out successfully. See you later!" << endl;
-			Sleep(3000);
-			system("cls");
+			if (isLoggedIn == true) {
+				isLoggedIn = false;
+				hotel.clearGuestVector();
+				guest.setFirstName("Guest user");
+				cout << "\nLogged out successfully. See you later!" << endl;
+				Sleep(3000);
+				system("cls");
+			} else { cout << "You're not logged in!"; }
 		} else if (menuOption == "q") {
 			MessageBoxW(NULL, L"Welcome back later!", L"Fine!", MB_OK | MB_ICONINFORMATION);
 			break;

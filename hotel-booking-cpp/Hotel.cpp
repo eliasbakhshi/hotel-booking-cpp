@@ -134,17 +134,12 @@ void Hotel::showGuests() const {
 	}
 }
 
-bool Hotel::removeGuest(int id) {
+bool Hotel::clearGuestVector() {
 	bool isDeleted = false;
 
-	for (auto it = guests.begin(); it != guests.end(); ++it) {
-		if (id == (*it)->getId()) {
-			it = guests.erase(it);
-			isDeleted = true;
-			--it;
-			break;
-		}
-	}
+	this->guests.clear();
+	isDeleted = true;
+
 	return isDeleted;
 }
 
