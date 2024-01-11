@@ -158,11 +158,12 @@ void Hotel::registerGuest(Guest& guest) {
 	do {
 		guest.setEmail(miHotel.get_string("Email address: "));
 		checkEmail = fmHotel.selectByIndex(guest.getEmail(), 3, "guests.txt");
-		if (checkEmail.size() > 2 && checkEmail[0] != "")
+		if (checkEmail.size() > 2 && checkEmail[0] != "") {
 			cout << "Email exist in the system. Please enter another email.\n";
 			emailExists = true;
-		else
+		} else {
 			emailExists = false;
+		}
 	} while (emailExists);
 	guest.setPassword(miHotel.get_string("Password: "));
 	guest.setPhone(miHotel.get_string("Phone number: "));
