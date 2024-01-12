@@ -97,7 +97,7 @@ int main() {
 			}
 			guest.setBookingNum(hotel.bookingNumGenerator());
 			cout << "Booking number is: " + guest.getBookingNum() + ". Do not lose it!\n";
-
+			hotel.clearRoomVector();
 			cout << "\nPress enter to go to the menu...\n";
 			char returned = getchar();
 			system("cls");

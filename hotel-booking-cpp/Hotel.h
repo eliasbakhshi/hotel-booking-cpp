@@ -41,6 +41,7 @@ public:
 	void registerGuest(Guest& guest);
 	void showGuests() const;
 	bool clearGuestVector();
+	bool clearRoomVector();
 	string bookingNumGenerator();
 
 	void updateGuest(int id, string firstName, string lastName, string email, string phone, string password);

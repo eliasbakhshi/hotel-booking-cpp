@@ -115,8 +115,8 @@ void Hotel::addVipRoom(int id, int roomNum, int floor, int size) {
 
 int Hotel::showRooms() {
 	for (int i = 0; i < rooms.size(); i++) {
-		cout << rooms[i]->getRoomInfo() << endl;
-	}
+			cout << rooms[i]->getRoomInfo() << endl;
+		}
 	return static_cast<int>(rooms.size());
 }
 
@@ -142,6 +142,15 @@ bool Hotel::clearGuestVector() {
 	bool isDeleted = false;
 
 	this->guests.clear();
+	isDeleted = true;
+
+	return isDeleted;
+}
+
+bool Hotel::clearRoomVector() {
+	bool isDeleted = false;
+
+	this->rooms.clear();
 	isDeleted = true;
 
 	return isDeleted;
