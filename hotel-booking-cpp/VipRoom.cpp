@@ -48,6 +48,8 @@ string VipRoom::getMeals() {
 void VipRoom::showMeals() {
 	Spa spa;
 	spa.setIsVip(true);
+	cout << "Personal Spa entry code is: <" + to_string(spa.generateCustomEntryCode())
+		+ "> Do not lose it!\n";
 
 	if (this->selectedOptions.size() != 0) {
 		cout << "--------------------" << endl;
@@ -56,10 +58,7 @@ void VipRoom::showMeals() {
 			cout << options[option - 1] << endl;
 		}
 		cout << "--------------------" << endl;
-	}
-	
-	cout << "Personal Spa entry code is: <" + to_string(spa.generateCustomEntryCode())
-		+ "> Do not lose it!\n";	
+	}	
 }
 
 

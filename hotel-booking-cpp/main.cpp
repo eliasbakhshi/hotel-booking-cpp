@@ -90,7 +90,7 @@ int main() {
 			cout << "<--- Your booking information --->\n";
 			cout << "Type: " << roomType << " room\n";
 			cout << "Hotel: " << theHotel[1] << " in " << theHotel[2] << ", " << theHotel[3] << theHotel[4] << endl;
-			if (roomType == "VIP" && reservation.options != "") {
+			if (roomType == "VIP") {
 				viproom.showMeals();
 			} else if (roomType == "Normal" && reservation.options != "") {
 				normalroom.showMinibarContent();
