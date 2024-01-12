@@ -15,7 +15,7 @@ int Spa::generateCustomEntryCode() {
 	// Generates a custom entry code for the VIP users
 	int entryCode;
 	if (this->isVip == true) {
-		srand(time(0));
+		srand(static_cast<unsigned int>(time(0)));
 		entryCode = rand() % 10000;
 	}
 	else {
