@@ -35,11 +35,9 @@ int main() {
 		menuOption = msFunc.toLower(miFunc.get_string("\n--> "));
 		system("cls");
 
-		if (menuOption == "b") {
+		if (menuOption == "b") { // Booking is selected.
 			Reservation reservation;
 			vector<string> theHotel, theRoom, theOption;
-			VipRoom viproom;
-			NormalRoom normalroom;
 			int hotelNum = 0, roomNum = 0, totalHotels = 0, totalRooms = 0;
 			string roomType;
 
@@ -48,16 +46,21 @@ int main() {
 			totalHotels = hotel.showHotels();
 			hotelNum = miFunc.get_int("\n\nPlease choose the hotel of your choice: ", 1, totalHotels);
 			system("cls");
+			// Update selected hotel and show available rooms.
 			hotel.update(hotelNum);
 			totalRooms = hotel.showRooms();
 			roomNum = miFunc.get_int("\n\nChoose the rooms that you want: ", 1, totalRooms);
 			reservation.roomId = roomNum;
+			// Show different options for the room according to rooms type.
+			Room* roomPtr = hotel.getRoomByIndex(roomNum - 1);
+			VipRoom* isVIPRoom = dynamic_cast<VipRoom*>(roomPtr);
+			NormalRoom* isNormalRoom= dynamic_cast<NormalRoom*>(roomPtr);
 			// show options according to rooms type
-			if (roomNum == 1) {
-				reservation.options = normalroom.getMinibarContent();
+			if (isNormalRoom) {
+				reservation.options = isNormalRoom->getMinibarContent();
 				roomType = "Normal";
-			} else if (roomNum == 2) {
-				reservation.options = viproom.getMeals();
+			} else if (isVIPRoom) {
+				reservation.options = isVIPRoom->getMeals();
 				roomType = "VIP";
 			}
 			// Get the dates
@@ -90,10 +93,10 @@ int main() {
 			cout << "<--- Your booking information --->\n";
 			cout << "Type: " << roomType << " room\n";
 			cout << "Hotel: " << theHotel[1] << " in " << theHotel[2] << ", " << theHotel[3] << theHotel[4] << endl;
-			if (roomType == "VIP") {
-				viproom.showMeals();
-			} else if (roomType == "Normal" && reservation.options != "") {
-				normalroom.showMinibarContent();
+			if (isVIPRoom && reservation.options != "") {
+				isVIPRoom->showMeals();
+			} else if (isNormalRoom && reservation.options != "") {
+				isNormalRoom->showMinibarContent();
 			}
 			guest.setBookingNum(hotel.bookingNumGenerator());
 			cout << "Booking number is: " + guest.getBookingNum() + ". Do not lose it!\n";
@@ -141,8 +144,7 @@ int main() {
 				system("cls");
 				continue;
 			}
-		} 
-		else if (menuOption == "lo" && isLoggedIn) {
+		} else if (menuOption == "lo" && isLoggedIn) {
 			if (isLoggedIn == true) {
 				isLoggedIn = false;
 				hotel.clearGuestVector();

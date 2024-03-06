@@ -115,9 +115,16 @@ void Hotel::addVipRoom(int id, int roomNum, int floor, int size) {
 
 int Hotel::showRooms() {
 	for (int i = 0; i < rooms.size(); i++) {
-			cout << rooms[i]->getRoomInfo() << endl;
-		}
+		cout << rooms[i]->getRoomInfo() << endl;
+	}
 	return static_cast<int>(rooms.size());
+}
+
+Room* Hotel::getRoomByIndex(int index) {
+	if (index > 0 || index <= guests.size()) {
+		return this->rooms[index].get();
+	}
+	return nullptr;
 }
 
 int Hotel::showOptions(int roomId) {

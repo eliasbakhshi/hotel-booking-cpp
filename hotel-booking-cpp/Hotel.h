@@ -36,6 +36,7 @@ public:
 	void addNormalRoom(int id, int roomNum, int floor, int size);
 	void addVipRoom(int id, int roomNum, int floor, int size);
 	int showRooms();
+	Room* getRoomByIndex(int index);
 	int showOptions(int roomId);
 	void addGuest(Guest guest);
 	void registerGuest(Guest& guest);
