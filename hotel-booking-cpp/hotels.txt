@@ -1,0 +1,11 @@
+id|name|country|city|address
+1|Grand Hotel|Sweden|Stockholm|, 45 Kungsmarksvagen
+2|Hotel California|Switzerland|Zurich|, 18 Schifflande
+3|Four Seasons Hotel|Malaysia|Kuala Lumpur|, 472 Shah Bujang street
+4|Boston Harbor|USA|Boston, Massachussets|, 321 Oak lane
+5|Espinas Palace|Iran|Tehran|, 51 Pasdaran street
+6|Burj al-Arab Jumeirah|UAE|Dubai|, 111 Share' Adamiyah
+7|Hilton Kyiv|Ukraine|Kyiv|, 372 Zakhaevgorod
+8|Four Seasons Hotel|Russia|Moscow|, 12 Babushka street
+9|Capella|Singapore|Singapore|, 146 cing jao-town
+10|Aman|Japan|Tokyo|, 124 Onichan street

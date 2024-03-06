@@ -366,6 +366,7 @@ FodyWeavers.xsd
 
 # Build results icecream
 hotel-booking-cpp/[Dd]ebug/
+hotel-booking-cpp/enc_temp_folder/*
 hotel-booking-cpp/[Dd]ebugPublic/
 hotel-booking-cpp/[Rr]elease/
 hotel-booking-cpp/[Rr]eleases/
@@ -379,3 +380,6 @@ hotel-booking-cpp/[Bb]in/
 hotel-booking-cpp/[Oo]bj/
 hotel-booking-cpp/[Ll]og/
 hotel-booking-cpp/[Ll]ogs/
+hotel-booking-cpp/enc_temp_folder/
+enc_temp_folder/*
+enc_temp_folder/
